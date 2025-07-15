@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the backend API endpoints to ensure the server is running properly and responding correctly. The application is a full-stack app with FastAPI backend and React frontend."
+user_problem_statement: "Change skills design to 3D animation footballs stuck in a 3D football parking with mapping between each other. Requirements: 1) Traditional parking lot with marked spaces, 2) Continuous rotation/spinning animations, 3) Footballs moving toward each other when selected, 4) 3D perspective with rotation controls, 5) Maintain click functionality for skill details."
 
 backend:
   - task: "Health Check Endpoint"
