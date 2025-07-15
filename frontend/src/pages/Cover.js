@@ -118,6 +118,7 @@ const Cover = () => {
                     size="lg" 
                     variant="outline"
                     className="group px-8 py-6 text-lg font-semibold rounded-full border-2 border-purple-500/30 hover:border-purple-500 hover:bg-purple-500/10 transition-all duration-300 hover:scale-105"
+                    onClick={() => window.open(personalInfo.resume, '_blank')}
                   >
                     <div className="flex items-center space-x-3">
                       <FileText className="w-5 h-5 group-hover:rotate-12 transition-transform" />
