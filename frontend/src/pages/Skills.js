@@ -8,7 +8,7 @@ import { skills } from '../data/mockData';
 import { 
   Code, 
   Server, 
-  Tool, 
+  Settings, 
   Star,
   TrendingUp,
   Award,
