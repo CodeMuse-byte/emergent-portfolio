@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, Text, Box, Plane, useGLTF, Sphere } from '@react-three/drei';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
@@ -17,81 +19,342 @@ import {
   Target,
   Trophy
 } from 'lucide-react';
+import * as THREE from 'three';
 
 const Skills = () => {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [hoveredSkill, setHoveredSkill] = useState(null);
+  const [footballPositions, setFootballPositions] = useState({});
   
-  // Reorganize skills into football positions
+  // Reorganize skills into football positions with 3D coordinates
   const footballFormation = {
     goalkeeper: {
       position: "Goalkeeper",
       skills: [
-        { name: "Problem Solving", level: 95, icon: "🥅", description: "Last line of defense against bugs" },
+        { 
+          name: "Problem Solving", 
+          level: 95, 
+          icon: "🥅", 
+          description: "Last line of defense against bugs",
+          position: [0, 0.5, 2],
+          color: "#FFD700"
+        },
       ]
     },
     defenders: {
-      position: "Defenders",
+      position: "Defenders", 
       skills: [
-        { name: "Git", level: 90, icon: "🛡️", description: "Version control specialist" },
-        { name: "Jest", level: 80, icon: "⚔️", description: "Testing warrior" },
-        { name: "Docker", level: 75, icon: "🏰", description: "Container fortress builder" },
-        { name: "Linux", level: 85, icon: "🛡️", description: "System security expert" }
+        { 
+          name: "Git", 
+          level: 90, 
+          icon: "🛡️", 
+          description: "Version control specialist",
+          position: [-3, 0.5, 1],
+          color: "#FF6B6B"
+        },
+        { 
+          name: "Jest", 
+          level: 80, 
+          icon: "⚔️", 
+          description: "Testing warrior",
+          position: [-1, 0.5, 1],
+          color: "#4ECDC4"
+        },
+        { 
+          name: "Docker", 
+          level: 75, 
+          icon: "🏰", 
+          description: "Container fortress builder",
+          position: [1, 0.5, 1],
+          color: "#45B7D1"
+        },
+        { 
+          name: "Linux", 
+          level: 85, 
+          icon: "🛡️", 
+          description: "System security expert",
+          position: [3, 0.5, 1],
+          color: "#96CEB4"
+        }
       ]
     },
     midfielders: {
       position: "Midfielders",
       skills: [
-        { name: "JavaScript", level: 95, icon: "⚡", description: "Core playmaker" },
-        { name: "React", level: 90, icon: "⚛️", description: "Frontend orchestrator" },
-        { name: "Node.js", level: 85, icon: "🟢", description: "Backend conductor" },
-        { name: "TypeScript", level: 85, icon: "🔷", description: "Type safety midfielder" },
-        { name: "Python", level: 80, icon: "🐍", description: "Versatile midfielder" }
+        { 
+          name: "JavaScript", 
+          level: 95, 
+          icon: "⚡", 
+          description: "Core playmaker",
+          position: [-2, 0.5, 0],
+          color: "#F7DC6F"
+        },
+        { 
+          name: "React", 
+          level: 90, 
+          icon: "⚛️", 
+          description: "Frontend orchestrator",
+          position: [0, 0.5, 0],
+          color: "#61DAFB"
+        },
+        { 
+          name: "Node.js", 
+          level: 85, 
+          icon: "🟢", 
+          description: "Backend conductor",
+          position: [2, 0.5, 0],
+          color: "#68A063"
+        },
+        { 
+          name: "TypeScript", 
+          level: 85, 
+          icon: "🔷", 
+          description: "Type safety midfielder",
+          position: [-1, 0.5, -0.5],
+          color: "#3178C6"
+        },
+        { 
+          name: "Python", 
+          level: 80, 
+          icon: "🐍", 
+          description: "Versatile midfielder",
+          position: [1, 0.5, -0.5],
+          color: "#3776AB"
+        }
       ]
     },
     forwards: {
       position: "Forwards",
       skills: [
-        { name: "Next.js", level: 80, icon: "▲", description: "Goal scorer" },
-        { name: "FastAPI", level: 75, icon: "⚡", description: "Speed striker" },
-        { name: "MongoDB", level: 85, icon: "🍃", description: "Database finisher" }
+        { 
+          name: "Next.js", 
+          level: 80, 
+          icon: "▲", 
+          description: "Goal scorer",
+          position: [-1, 0.5, -1.5],
+          color: "#000000"
+        },
+        { 
+          name: "FastAPI", 
+          level: 75, 
+          icon: "⚡", 
+          description: "Speed striker",
+          position: [0, 0.5, -1.5],
+          color: "#009688"
+        },
+        { 
+          name: "MongoDB", 
+          level: 85, 
+          icon: "🍃", 
+          description: "Database finisher",
+          position: [1, 0.5, -1.5],
+          color: "#47A248"
+        }
       ]
     }
   };
 
-  const SkillPlayer = ({ skill, position, index, total }) => {
-    const isSelected = selectedPlayer === skill.name;
+  // Animated Football Component
+  const AnimatedFootball = ({ skill, position, isSelected, isHovered, onClick }) => {
+    const meshRef = useRef();
+    const [targetPosition, setTargetPosition] = useState(position);
     
+    useEffect(() => {
+      if (isSelected) {
+        // Move towards center when selected
+        setTargetPosition([0, 0.5, 0]);
+      } else {
+        // Return to original position
+        setTargetPosition(position);
+      }
+    }, [isSelected, position]);
+
+    useEffect(() => {
+      if (meshRef.current) {
+        // Animate position
+        const currentPos = meshRef.current.position;
+        const targetPos = new THREE.Vector3(...targetPosition);
+        
+        const animate = () => {
+          currentPos.lerp(targetPos, 0.1);
+          if (currentPos.distanceTo(targetPos) > 0.01) {
+            requestAnimationFrame(animate);
+          }
+        };
+        animate();
+      }
+    }, [targetPosition]);
+
+    // Animation loop for continuous rotation
+    useEffect(() => {
+      const animate = () => {
+        if (meshRef.current) {
+          meshRef.current.rotation.x += 0.01;
+          meshRef.current.rotation.y += 0.01;
+          
+          // Add bounce effect when selected
+          if (isSelected) {
+            meshRef.current.position.y = 0.5 + Math.sin(Date.now() * 0.005) * 0.2;
+          }
+        }
+        requestAnimationFrame(animate);
+      };
+      animate();
+    }, [isSelected]);
+
     return (
-      <div
-        className={`relative cursor-pointer transition-all duration-300 ${
-          isSelected ? 'scale-110 z-10' : 'hover:scale-105'
-        }`}
-        onClick={() => setSelectedPlayer(isSelected ? null : skill.name)}
-      >
-        <div className={`w-16 h-16 rounded-full border-4 flex items-center justify-center font-bold text-2xl transition-all duration-300 ${
-          isSelected 
-            ? 'bg-yellow-400 border-yellow-600 shadow-lg' 
-            : 'bg-white border-gray-300 hover:border-blue-500 shadow-md'
-        }`}>
-          {skill.icon}
-        </div>
+      <group>
+        {/* Parking Space */}
+        <Plane 
+          args={[0.8, 0.8]} 
+          rotation={[-Math.PI / 2, 0, 0]} 
+          position={[position[0], 0.01, position[2]]}
+        >
+          <meshLambertMaterial color="#ffffff" opacity={0.3} transparent />
+        </Plane>
         
-        {/* Player name badge */}
-        <div className={`absolute -bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-300 ${
-          isSelected ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
-        }`}>
-          <Badge className="bg-blue-600 text-white text-xs whitespace-nowrap">
-            {skill.name}
-          </Badge>
-        </div>
-        
-        {/* Skill level indicator */}
-        <div className={`absolute -top-2 -right-2 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-white text-xs font-bold ${
-          skill.level >= 90 ? 'bg-green-500' : skill.level >= 80 ? 'bg-yellow-500' : 'bg-orange-500'
-        }`}>
-          {Math.round(skill.level / 20)}
-        </div>
-      </div>
+        {/* Football */}
+        <Sphere
+          ref={meshRef}
+          args={[0.2, 32, 32]}
+          position={position}
+          onClick={onClick}
+          onPointerOver={() => setHoveredSkill(skill.name)}
+          onPointerOut={() => setHoveredSkill(null)}
+          scale={isHovered ? 1.2 : 1}
+        >
+          <meshLambertMaterial 
+            color={skill.color} 
+            emissive={isSelected ? skill.color : "#000000"} 
+            emissiveIntensity={isSelected ? 0.3 : 0}
+          />
+        </Sphere>
+
+        {/* Skill Label */}
+        <Text
+          position={[position[0], position[1] + 0.5, position[2]]}
+          fontSize={0.15}
+          color="#ffffff"
+          anchorX="center"
+          anchorY="middle"
+          outlineWidth={0.02}
+          outlineColor="#000000"
+        >
+          {skill.name}
+        </Text>
+
+        {/* Skill Level Indicator */}
+        <Text
+          position={[position[0], position[1] - 0.4, position[2]]}
+          fontSize={0.1}
+          color="#ffffff"
+          anchorX="center"
+          anchorY="middle"
+          outlineWidth={0.01}
+          outlineColor="#000000"
+        >
+          {skill.level}%
+        </Text>
+
+        {/* Connection Lines to Center when Selected */}
+        {isSelected && (
+          <mesh>
+            <cylinderGeometry args={[0.01, 0.01, 3, 8]} />
+            <meshBasicMaterial color="#ffffff" opacity={0.5} transparent />
+          </mesh>
+        )}
+      </group>
+    );
+  };
+
+  // Parking Lot Environment
+  const ParkingLot = () => {
+    return (
+      <group>
+        {/* Ground */}
+        <Plane args={[20, 20]} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
+          <meshLambertMaterial color="#2C3E50" />
+        </Plane>
+
+        {/* Parking Lines */}
+        {[-3, -1, 1, 3].map((x, i) => (
+          <group key={i}>
+            <Box args={[0.05, 0.02, 1]} position={[x, 0.01, 1]}>
+              <meshBasicMaterial color="#ffffff" />
+            </Box>
+            <Box args={[0.05, 0.02, 1]} position={[x, 0.01, 0]}>
+              <meshBasicMaterial color="#ffffff" />
+            </Box>
+            <Box args={[0.05, 0.02, 1]} position={[x, 0.01, -1]}>
+              <meshBasicMaterial color="#ffffff" />
+            </Box>
+          </group>
+        ))}
+
+        {/* Additional parking lines */}
+        {[-2, 0, 2].map((x, i) => (
+          <group key={`mid-${i}`}>
+            <Box args={[0.05, 0.02, 1]} position={[x, 0.01, 0]}>
+              <meshBasicMaterial color="#ffffff" />
+            </Box>
+            <Box args={[0.05, 0.02, 1]} position={[x, 0.01, -0.5]}>
+              <meshBasicMaterial color="#ffffff" />
+            </Box>
+          </group>
+        ))}
+
+        {/* Goalkeeper area */}
+        <Box args={[0.05, 0.02, 1]} position={[0, 0.01, 2]}>
+          <meshBasicMaterial color="#FFD700" />
+        </Box>
+
+        {/* Forward area */}
+        {[-1, 0, 1].map((x, i) => (
+          <Box key={`forward-${i}`} args={[0.05, 0.02, 1]} position={[x, 0.01, -1.5]}>
+            <meshBasicMaterial color="#ffffff" />
+          </Box>
+        ))}
+      </group>
+    );
+  };
+
+  // 3D Scene Component
+  const SkillsScene = () => {
+    const getAllSkills = () => {
+      return Object.values(footballFormation).flatMap(position => position.skills);
+    };
+
+    const handleFootballClick = (skill) => {
+      setSelectedPlayer(selectedPlayer === skill.name ? null : skill.name);
+    };
+
+    return (
+      <Canvas camera={{ position: [8, 8, 8], fov: 50 }}>
+        <ambientLight intensity={0.6} />
+        <directionalLight position={[10, 10, 5]} intensity={1} />
+        <pointLight position={[0, 10, 0]} intensity={0.5} />
+
+        <ParkingLot />
+
+        {getAllSkills().map((skill) => (
+          <AnimatedFootball
+            key={skill.name}
+            skill={skill}
+            position={skill.position}
+            isSelected={selectedPlayer === skill.name}
+            isHovered={hoveredSkill === skill.name}
+            onClick={() => handleFootballClick(skill)}
+          />
+        ))}
+
+        <OrbitControls
+          enablePan={true}
+          enableZoom={true}
+          enableRotate={true}
+          minDistance={5}
+          maxDistance={20}
+        />
+      </Canvas>
     );
   };
 
@@ -103,140 +366,39 @@ const Skills = () => {
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium bg-gradient-to-r from-green-500/10 to-blue-500/10 border-green-500/20">
               <Trophy className="w-4 h-4 mr-2" />
-              Technical Skills Formation
+              3D Skills Parking Lot
             </Badge>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-600 via-blue-600 to-green-600 bg-clip-text text-transparent">
-              My Tech Team
+              My Tech Arsenal
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Like a well-organized football team, each technology plays a specific role in building amazing applications.
+              Welcome to my 3D skills parking lot! Each spinning football represents a technology in my arsenal. Click on any football to see it come to life and move to the center.
             </p>
           </div>
         </section>
       </AnimatedBackground>
 
-      {/* Football Field */}
-      <section className="py-20 bg-gradient-to-b from-green-400 to-green-600 relative overflow-hidden">
+      {/* 3D Skills Parking Lot */}
+      <section className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            {/* Field Container */}
-            <div className="relative bg-green-500 rounded-lg p-8 shadow-2xl" style={{
-              backgroundImage: `
-                repeating-linear-gradient(
-                  90deg,
-                  transparent,
-                  transparent 40px,
-                  rgba(255,255,255,0.1) 40px,
-                  rgba(255,255,255,0.1) 80px
-                ),
-                repeating-linear-gradient(
-                  0deg,
-                  transparent,
-                  transparent 40px,
-                  rgba(255,255,255,0.1) 40px,
-                  rgba(255,255,255,0.1) 80px
-                )
-              `,
-              minHeight: '600px'
-            }}>
-              {/* Field Lines */}
-              <div className="absolute inset-4 border-4 border-white rounded-lg">
-                {/* Center Line */}
-                <div className="absolute top-0 bottom-0 left-1/2 w-1 bg-white transform -translate-x-1/2"></div>
-                {/* Center Circle */}
-                <div className="absolute top-1/2 left-1/2 w-32 h-32 border-4 border-white rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
-                
-                {/* Goal Areas */}
-                <div className="absolute top-1/2 left-0 w-16 h-24 border-4 border-white border-l-0 transform -translate-y-1/2"></div>
-                <div className="absolute top-1/2 right-0 w-16 h-24 border-4 border-white border-r-0 transform -translate-y-1/2"></div>
-                
-                {/* Penalty Areas */}
-                <div className="absolute top-1/2 left-0 w-24 h-40 border-4 border-white border-l-0 transform -translate-y-1/2"></div>
-                <div className="absolute top-1/2 right-0 w-24 h-40 border-4 border-white border-r-0 transform -translate-y-1/2"></div>
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+                Interactive 3D Skills Parking
+              </h2>
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
+                Rotate around the scene and click on any football to see the magic happen! Each football is positioned according to its role in development.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-400">
+                <span>🎮 Drag to rotate</span>
+                <span>🔍 Scroll to zoom</span>
+                <span>⚽ Click footballs to select</span>
               </div>
-
-              {/* Team Formation */}
-              <div className="relative h-full flex flex-col justify-between py-8">
-                {/* Goalkeeper */}
-                <div className="flex justify-center mb-8">
-                  <div className="text-center">
-                    <h3 className="text-white font-bold mb-4 bg-black/20 px-3 py-1 rounded">
-                      {footballFormation.goalkeeper.position}
-                    </h3>
-                    <div className="flex space-x-6">
-                      {footballFormation.goalkeeper.skills.map((skill, index) => (
-                        <SkillPlayer 
-                          key={skill.name} 
-                          skill={skill} 
-                          position="goalkeeper"
-                          index={index}
-                          total={footballFormation.goalkeeper.skills.length}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Defenders */}
-                <div className="flex justify-center mb-8">
-                  <div className="text-center">
-                    <h3 className="text-white font-bold mb-4 bg-black/20 px-3 py-1 rounded">
-                      {footballFormation.defenders.position}
-                    </h3>
-                    <div className="flex space-x-8">
-                      {footballFormation.defenders.skills.map((skill, index) => (
-                        <SkillPlayer 
-                          key={skill.name} 
-                          skill={skill} 
-                          position="defenders"
-                          index={index}
-                          total={footballFormation.defenders.skills.length}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Midfielders */}
-                <div className="flex justify-center mb-8">
-                  <div className="text-center">
-                    <h3 className="text-white font-bold mb-4 bg-black/20 px-3 py-1 rounded">
-                      {footballFormation.midfielders.position}
-                    </h3>
-                    <div className="flex flex-wrap justify-center gap-6">
-                      {footballFormation.midfielders.skills.map((skill, index) => (
-                        <SkillPlayer 
-                          key={skill.name} 
-                          skill={skill} 
-                          position="midfielders"
-                          index={index}
-                          total={footballFormation.midfielders.skills.length}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Forwards */}
-                <div className="flex justify-center">
-                  <div className="text-center">
-                    <h3 className="text-white font-bold mb-4 bg-black/20 px-3 py-1 rounded">
-                      {footballFormation.forwards.position}
-                    </h3>
-                    <div className="flex space-x-8">
-                      {footballFormation.forwards.skills.map((skill, index) => (
-                        <SkillPlayer 
-                          key={skill.name} 
-                          skill={skill} 
-                          position="forwards"
-                          index={index}
-                          total={footballFormation.forwards.skills.length}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+            </div>
+            
+            {/* 3D Canvas Container */}
+            <div className="relative bg-gray-900 rounded-lg shadow-2xl overflow-hidden" style={{ height: '600px' }}>
+              <SkillsScene />
             </div>
           </div>
         </div>
@@ -251,10 +413,15 @@ const Skills = () => {
                 position.skills.map(skill => {
                   if (skill.name === selectedPlayer) {
                     return (
-                      <Card key={skill.name} className="hover:shadow-lg transition-shadow">
+                      <Card key={skill.name} className="hover:shadow-lg transition-shadow border-2 border-primary/20">
                         <CardHeader>
                           <CardTitle className="flex items-center space-x-3">
-                            <span className="text-3xl">{skill.icon}</span>
+                            <div 
+                              className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold"
+                              style={{ backgroundColor: skill.color }}
+                            >
+                              ⚽
+                            </div>
                             <div>
                               <h3 className="text-2xl font-bold">{skill.name}</h3>
                               <p className="text-muted-foreground">{skill.description}</p>
@@ -302,10 +469,10 @@ const Skills = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-              Team Statistics
+              Parking Statistics
             </h2>
             <p className="text-lg text-muted-foreground mb-12">
-              Overall performance metrics of my technical skills
+              Overview of the footballs parked in my 3D skills lot
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -315,7 +482,7 @@ const Skills = () => {
                     <Target className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-3xl font-bold mb-2 text-primary">15+</h3>
-                  <p className="text-muted-foreground">Technologies Mastered</p>
+                  <p className="text-muted-foreground">Footballs Parked</p>
                 </CardContent>
               </Card>
               
@@ -334,8 +501,8 @@ const Skills = () => {
                   <div className="bg-gradient-to-r from-purple-500 to-green-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Trophy className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-3xl font-bold mb-2 text-primary">5+</h3>
-                  <p className="text-muted-foreground">Years Experience</p>
+                  <h3 className="text-3xl font-bold mb-2 text-primary">3D</h3>
+                  <p className="text-muted-foreground">Interactive Experience</p>
                 </CardContent>
               </Card>
             </div>
@@ -348,17 +515,17 @@ const Skills = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-              How to Play
+              How to Navigate
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Card className="hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="bg-green-500 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold">1</div>
-                    <h3 className="font-semibold">Click on Any Player</h3>
+                    <h3 className="font-semibold">Click on Any Football</h3>
                   </div>
                   <p className="text-muted-foreground">
-                    Click on any skill icon on the football field to see detailed information about that technology.
+                    Click on any spinning football to see it move to the center and get detailed information about that skill.
                   </p>
                 </CardContent>
               </Card>
@@ -367,10 +534,10 @@ const Skills = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="bg-blue-500 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold">2</div>
-                    <h3 className="font-semibold">Formation Strategy</h3>
+                    <h3 className="font-semibold">Explore in 3D</h3>
                   </div>
                   <p className="text-muted-foreground">
-                    Each position represents the role of technology in development: Defense (Security), Midfield (Core), Forward (Performance).
+                    Drag to rotate the camera around the parking lot, scroll to zoom, and explore from different angles.
                   </p>
                 </CardContent>
               </Card>
