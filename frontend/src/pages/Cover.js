@@ -13,11 +13,13 @@ import {
   ChevronDown,
   Sparkles,
   Code,
-  Zap
+  Zap,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 const Cover = () => {
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const [isVisible, setIsVisible] = useState(false);
   const [textIndex, setTextIndex] = useState(0);
 
@@ -46,6 +48,18 @@ const Cover = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
+      {/* Theme Toggle Button */}
+      <div className="absolute top-6 right-6 z-20">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={toggleTheme}
+          className="rounded-full bg-background/20 backdrop-blur-sm hover:bg-background/30 hover:scale-110 transition-all duration-300"
+        >
+          {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+        </Button>
+      </div>
+
       <AnimatedBackground className="absolute inset-0">
         <div className="relative z-10 min-h-screen flex items-center justify-center">
           <div className="container mx-auto px-4">
