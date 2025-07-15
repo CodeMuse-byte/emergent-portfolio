@@ -1,20 +1,12 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, Text, Box, Plane, Sphere } from '@react-three/drei';
+import React, { useState, useRef, useEffect } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Text, Box, Plane, Sphere } from '@react-three/drei';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
-import { Button } from '../components/ui/button';
 import { Progress } from '../components/ui/progress';
 import AnimatedBackground from '../components/AnimatedBackground';
-import { skills } from '../data/mockData';
 import { 
-  Code, 
-  Server, 
-  Settings, 
   Star,
-  TrendingUp,
-  Award,
-  BookOpen,
   Zap,
   Target,
   Trophy
@@ -24,22 +16,6 @@ import * as THREE from 'three';
 const Skills = () => {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [hoveredSkill, setHoveredSkill] = useState(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  
-  // Throttle mouse movement to prevent excessive re-renders
-  const handleMouseMove = useCallback((event) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const newMousePos = {
-      x: ((event.clientX - rect.left) / rect.width) * 2 - 1,
-      y: -((event.clientY - rect.top) / rect.height) * 2 + 1
-    };
-    
-    // Only update if significant movement to reduce blinking
-    if (Math.abs(newMousePos.x - mousePosition.x) > 0.05 || 
-        Math.abs(newMousePos.y - mousePosition.y) > 0.05) {
-      setMousePosition(newMousePos);
-    }
-  }, [mousePosition]);
 
   // Skills positioned across the green field
   const footballFormation = {
@@ -156,16 +132,14 @@ const Skills = () => {
     }
   };
 
-  // Animated Football with smooth rotation
-  const AnimatedFootball = ({ skill, position, isSelected, isHovered, onClick }) => {
+  // Simple Football with basic rotation
+  const SimpleFootball = ({ skill, position, isSelected, isHovered, onClick }) => {
     const meshRef = useRef();
     
-    // Smooth continuous rotation
+    // Simple rotation animation
     useFrame((state, delta) => {
       if (meshRef.current) {
-        meshRef.current.rotation.x += delta * 0.5;
-        meshRef.current.rotation.y += delta * 0.4;
-        meshRef.current.rotation.z += delta * 0.3;
+        meshRef.current.rotation.y += delta * 0.5;
       }
     });
 
@@ -174,7 +148,7 @@ const Skills = () => {
         {/* Football */}
         <Sphere
           ref={meshRef}
-          args={[0.6, 32, 32]}
+          args={[0.6, 16, 16]}
           position={position}
           onClick={(e) => {
             e.stopPropagation();
@@ -183,19 +157,14 @@ const Skills = () => {
           onPointerOver={(e) => {
             e.stopPropagation();
             setHoveredSkill(skill.name);
-            document.body.style.cursor = 'pointer';
           }}
           onPointerOut={(e) => {
             e.stopPropagation();
             setHoveredSkill(null);
-            document.body.style.cursor = 'default';
           }}
-          scale={isHovered ? 1.15 : 1}
         >
           <meshStandardMaterial 
             color={skill.color}
-            metalness={0.2}
-            roughness={0.3}
             emissive={isSelected ? skill.color : "#000000"} 
             emissiveIntensity={isSelected ? 0.2 : 0}
           />
@@ -208,8 +177,6 @@ const Skills = () => {
           color="#000000"
           anchorX="center"
           anchorY="middle"
-          outlineWidth={0.05}
-          outlineColor="#ffffff"
         >
           {skill.name}
         </Text>
@@ -221,8 +188,6 @@ const Skills = () => {
           color="#000000"
           anchorX="center"
           anchorY="middle"
-          outlineWidth={0.03}
-          outlineColor="#ffffff"
         >
           {skill.level}%
         </Text>
@@ -230,35 +195,16 @@ const Skills = () => {
     );
   };
 
-  // Smooth 3D Grass with gentle wind effect
-  const SmoothGrass = ({ mousePosition }) => {
-    const grassRef = useRef();
-    
-    useFrame((state) => {
-      if (grassRef.current) {
-        // Very gentle wind effect to avoid blinking
-        const time = state.clock.getElapsedTime();
-        const windStrength = 0.01; // Reduced from 0.1
-        const windSpeed = 1; // Reduced from 2
-        
-        // Gentle swaying motion
-        grassRef.current.rotation.x = Math.sin(time * windSpeed) * windStrength;
-        grassRef.current.rotation.z = Math.cos(time * windSpeed * 0.7) * windStrength;
-        
-        // Very subtle mouse influence
-        grassRef.current.rotation.x += mousePosition.y * 0.005; // Reduced from 0.02
-        grassRef.current.rotation.z += mousePosition.x * 0.005; // Reduced from 0.02
-      }
-    });
-
+  // Static Green Grass Field
+  const StaticGrassField = () => {
     return (
-      <group ref={grassRef}>
+      <group>
         {/* Main grass ground */}
         <Plane args={[20, 20]} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
           <meshLambertMaterial color="#4A7C59" />
         </Plane>
 
-        {/* Grass texture layers */}
+        {/* Grass texture layer */}
         <Plane args={[20, 20]} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.005, 0]}>
           <meshLambertMaterial 
             color="#5A8A67" 
@@ -266,60 +212,12 @@ const Skills = () => {
             opacity={0.7}
           />
         </Plane>
-
-        <Plane args={[20, 20]} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]}>
-          <meshLambertMaterial 
-            color="#6B9477" 
-            transparent
-            opacity={0.5}
-          />
-        </Plane>
-
-        {/* Reduced grass blades for better performance */}
-        {Array.from({ length: 100 }, (_, i) => { // Reduced from 200
-          const x = (Math.random() - 0.5) * 18;
-          const z = (Math.random() - 0.5) * 18;
-          const height = 0.05 + Math.random() * 0.1; // Reduced height
-          
-          return (
-            <Box
-              key={i}
-              args={[0.015, height, 0.015]} // Smaller size
-              position={[x, height / 2, z]}
-              rotation={[0, Math.random() * Math.PI, 0]}
-            >
-              <meshLambertMaterial color="#3A6B47" />
-            </Box>
-          );
-        })}
-
-        {/* Reduced grass patches */}
-        {Array.from({ length: 30 }, (_, i) => { // Reduced from 50
-          const x = (Math.random() - 0.5) * 18;
-          const z = (Math.random() - 0.5) * 18;
-          const scale = 0.3 + Math.random() * 0.4; // Smaller patches
-          
-          return (
-            <Plane
-              key={`patch-${i}`}
-              args={[scale, scale]}
-              rotation={[-Math.PI / 2, 0, Math.random() * Math.PI]}
-              position={[x, 0.015, z]}
-            >
-              <meshLambertMaterial 
-                color="#6B9477" 
-                transparent
-                opacity={0.4}
-              />
-            </Plane>
-          );
-        })}
       </group>
     );
   };
 
   // 3D Scene Component
-  const SkillsScene = () => {
+  const SkillsScene = React.memo(() => {
     const getAllSkills = () => {
       return Object.values(footballFormation).flatMap(position => position.skills);
     };
@@ -331,21 +229,18 @@ const Skills = () => {
     return (
       <Canvas 
         camera={{ position: [0, 8, 6], fov: 75 }}
-        gl={{ antialias: true, alpha: false }}
-        dpr={[1, 1.5]} // Reduced from [1, 2]
-        frameloop="demand" // Only render when needed
+        gl={{ antialias: false }}
       >
-        {/* Stable lighting */}
-        <ambientLight intensity={0.7} />
+        {/* Simple lighting */}
+        <ambientLight intensity={0.8} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
-        <pointLight position={[0, 8, 0]} intensity={0.4} />
 
-        {/* Smooth animated grass */}
-        <SmoothGrass mousePosition={mousePosition} />
+        {/* Static grass field */}
+        <StaticGrassField />
 
         {/* Skills footballs */}
         {getAllSkills().map((skill) => (
-          <AnimatedFootball
+          <SimpleFootball
             key={skill.name}
             skill={skill}
             position={skill.position}
@@ -356,7 +251,7 @@ const Skills = () => {
         ))}
       </Canvas>
     );
-  };
+  });
 
   return (
     <div className="min-h-screen">
@@ -372,7 +267,7 @@ const Skills = () => {
               My Tech Arsenal
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Welcome to my 3D football skills field! Each colorful football represents a technology and rotates continuously. Move your cursor to feel the gentle wind effect on the grass.
+              Welcome to my 3D football skills field! Each colorful football represents a technology and rotates continuously on the green grass field.
             </p>
           </div>
         </section>
@@ -387,12 +282,12 @@ const Skills = () => {
                 Interactive 3D Football Skills Field
               </h2>
               <p className="text-lg text-green-700 max-w-2xl mx-auto mb-8">
-                Click on any colorful football to see detailed information! Watch the grass move gently with the wind as you move your cursor around.
+                Click on any colorful football to see detailed information! All footballs rotate continuously on a stable green grass field.
               </p>
               <div className="flex flex-wrap justify-center gap-4 text-sm text-green-600">
                 <span>⚽ Click footballs to see details</span>
-                <span>🌱 Move cursor for gentle wind</span>
-                <span>🔄 Balls rotate continuously</span>
+                <span>🌱 Stable green grass field</span>
+                <span>🔄 Smooth ball rotation</span>
               </div>
             </div>
             
@@ -400,7 +295,6 @@ const Skills = () => {
             <div 
               className="relative bg-gradient-to-b from-green-50 to-green-100 rounded-lg shadow-2xl overflow-hidden border-2 border-green-300" 
               style={{ height: '650px' }}
-              onMouseMove={handleMouseMove}
             >
               <SkillsScene />
             </div>
@@ -506,7 +400,7 @@ const Skills = () => {
                     <Trophy className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-3xl font-bold mb-2 text-primary">3D</h3>
-                  <p className="text-muted-foreground">Smooth Experience</p>
+                  <p className="text-muted-foreground">Stable Experience</p>
                 </CardContent>
               </Card>
             </div>
@@ -538,10 +432,10 @@ const Skills = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="bg-blue-500 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold">2</div>
-                    <h3 className="font-semibold">Gentle Wind Effect</h3>
+                    <h3 className="font-semibold">Stable Performance</h3>
                   </div>
                   <p className="text-muted-foreground">
-                    Move your cursor around the field to create a gentle wind effect on the 3D grass. Smooth and non-intrusive animation.
+                    Enjoy a smooth, stable 3D experience with no blinking or flickering. Just clean, continuous football rotations.
                   </p>
                 </CardContent>
               </Card>
