@@ -36,12 +36,21 @@ const Navigation = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link 
-            to="/portfolio" 
-            className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
-          >
-            Alex Johnson
-          </Link>
+          <div className="flex items-center space-x-4">
+            <Link 
+              to="/portfolio" 
+              className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
+            >
+              Alex Johnson
+            </Link>
+            <span className="text-xs text-muted-foreground">•</span>
+            <Link 
+              to="/" 
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+            >
+              Cover
+            </Link>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
