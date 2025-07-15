@@ -21,7 +21,7 @@ const Navigation = () => {
   const location = useLocation();
 
   const navItems = [
-    { path: '/', label: 'Home', icon: Home },
+    { path: '/portfolio', label: 'Home', icon: Home },
     { path: '/about', label: 'About', icon: User },
     { path: '/skills', label: 'Skills', icon: Code },
     { path: '/projects', label: 'Projects', icon: FolderOpen },
