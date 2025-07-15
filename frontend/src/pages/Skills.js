@@ -24,8 +24,9 @@ import * as THREE from 'three';
 const Skills = () => {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [hoveredSkill, setHoveredSkill] = useState(null);
+  const [stoppedBalls, setStoppedBalls] = useState(new Set());
   
-  // Reorganize skills into football positions with 3D coordinates
+  // Reorganize skills into football positions with better spread
   const footballFormation = {
     goalkeeper: {
       position: "Goalkeeper",
@@ -35,7 +36,7 @@ const Skills = () => {
           level: 95, 
           icon: "🥅", 
           description: "Last line of defense against bugs",
-          position: [0, 0, 2],
+          position: [0, 0, 3],
           color: "#FFD700"
         },
       ]
@@ -48,7 +49,7 @@ const Skills = () => {
           level: 90, 
           icon: "🛡️", 
           description: "Version control specialist",
-          position: [-3, 0, 1],
+          position: [-4, 0, 1.5],
           color: "#FF6B6B"
         },
         { 
@@ -56,7 +57,7 @@ const Skills = () => {
           level: 80, 
           icon: "⚔️", 
           description: "Testing warrior",
-          position: [-1, 0, 1],
+          position: [-1.5, 0, 1.5],
           color: "#4ECDC4"
         },
         { 
@@ -64,7 +65,7 @@ const Skills = () => {
           level: 75, 
           icon: "🏰", 
           description: "Container fortress builder",
-          position: [1, 0, 1],
+          position: [1.5, 0, 1.5],
           color: "#45B7D1"
         },
         { 
@@ -72,7 +73,7 @@ const Skills = () => {
           level: 85, 
           icon: "🛡️", 
           description: "System security expert",
-          position: [3, 0, 1],
+          position: [4, 0, 1.5],
           color: "#96CEB4"
         }
       ]
@@ -85,7 +86,7 @@ const Skills = () => {
           level: 95, 
           icon: "⚡", 
           description: "Core playmaker",
-          position: [-2, 0, 0],
+          position: [-3, 0, 0],
           color: "#F7DC6F"
         },
         { 
@@ -101,7 +102,7 @@ const Skills = () => {
           level: 85, 
           icon: "🟢", 
           description: "Backend conductor",
-          position: [2, 0, 0],
+          position: [3, 0, 0],
           color: "#68A063"
         },
         { 
@@ -109,7 +110,7 @@ const Skills = () => {
           level: 85, 
           icon: "🔷", 
           description: "Type safety midfielder",
-          position: [-1, 0, -0.5],
+          position: [-1.5, 0, -0.8],
           color: "#3178C6"
         },
         { 
@@ -117,7 +118,7 @@ const Skills = () => {
           level: 80, 
           icon: "🐍", 
           description: "Versatile midfielder",
-          position: [1, 0, -0.5],
+          position: [1.5, 0, -0.8],
           color: "#3776AB"
         }
       ]
@@ -130,7 +131,7 @@ const Skills = () => {
           level: 80, 
           icon: "▲", 
           description: "Goal scorer",
-          position: [-1, 0, -1.5],
+          position: [-2, 0, -2.5],
           color: "#000000"
         },
         { 
@@ -138,7 +139,7 @@ const Skills = () => {
           level: 75, 
           icon: "⚡", 
           description: "Speed striker",
-          position: [0, 0, -1.5],
+          position: [0, 0, -2.5],
           color: "#009688"
         },
         { 
@@ -146,19 +147,20 @@ const Skills = () => {
           level: 85, 
           icon: "🍃", 
           description: "Database finisher",
-          position: [1, 0, -1.5],
+          position: [2, 0, -2.5],
           color: "#47A248"
         }
       ]
     }
   };
 
-  // 3D Football Component with Soccer Ball Pattern
+  // 3D Football Component with Proper Soccer Ball Texture
   const SoccerBallFootball = ({ skill, position, isSelected, isHovered, onClick }) => {
     const meshRef = useRef();
+    const [isStopped, setIsStopped] = useState(false);
     
-    // Create soccer ball geometry with hexagonal pattern
-    const createSoccerBallTexture = () => {
+    // Create proper soccer ball texture with pentagons and hexagons
+    const createProperFootballTexture = () => {
       const canvas = document.createElement('canvas');
       canvas.width = 512;
       canvas.height = 512;
@@ -168,49 +170,95 @@ const Skills = () => {
       ctx.fillStyle = '#FFFFFF';
       ctx.fillRect(0, 0, 512, 512);
       
-      // Draw hexagonal pattern
-      const hexSize = 40;
-      const cols = 8;
-      const rows = 8;
+      // Draw proper soccer ball pattern with pentagons and hexagons
+      const centerX = 256;
+      const centerY = 256;
       
-      for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-          const x = col * hexSize * 1.5;
-          const y = row * hexSize * 1.3 + (col % 2) * hexSize * 0.65;
-          
-          if ((row + col) % 3 === 0) {
-            ctx.fillStyle = '#000000';
-            ctx.beginPath();
-            for (let i = 0; i < 6; i++) {
-              const angle = (i * Math.PI) / 3;
-              const hexX = x + Math.cos(angle) * hexSize * 0.5;
-              const hexY = y + Math.sin(angle) * hexSize * 0.5;
-              if (i === 0) {
-                ctx.moveTo(hexX, hexY);
-              } else {
-                ctx.lineTo(hexX, hexY);
-              }
-            }
-            ctx.closePath();
-            ctx.fill();
+      // Draw black pentagons
+      const pentagons = [
+        { x: centerX, y: centerY - 80 },
+        { x: centerX - 60, y: centerY - 30 },
+        { x: centerX + 60, y: centerY - 30 },
+        { x: centerX - 40, y: centerY + 40 },
+        { x: centerX + 40, y: centerY + 40 },
+        { x: centerX, y: centerY + 80 }
+      ];
+      
+      pentagons.forEach(pentagon => {
+        ctx.fillStyle = '#000000';
+        ctx.beginPath();
+        for (let i = 0; i < 5; i++) {
+          const angle = (i * 2 * Math.PI) / 5 - Math.PI / 2;
+          const x = pentagon.x + Math.cos(angle) * 25;
+          const y = pentagon.y + Math.sin(angle) * 25;
+          if (i === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
           }
         }
-      }
+        ctx.closePath();
+        ctx.fill();
+      });
+      
+      // Draw connecting lines between pentagons
+      ctx.strokeStyle = '#000000';
+      ctx.lineWidth = 3;
+      
+      // Curved lines connecting pentagons
+      const connections = [
+        [pentagons[0], pentagons[1]],
+        [pentagons[0], pentagons[2]],
+        [pentagons[1], pentagons[3]],
+        [pentagons[2], pentagons[4]],
+        [pentagons[3], pentagons[5]],
+        [pentagons[4], pentagons[5]]
+      ];
+      
+      connections.forEach(([start, end]) => {
+        ctx.beginPath();
+        ctx.moveTo(start.x, start.y);
+        
+        // Create curved line
+        const midX = (start.x + end.x) / 2;
+        const midY = (start.y + end.y) / 2;
+        const controlX = midX + (Math.random() - 0.5) * 20;
+        const controlY = midY + (Math.random() - 0.5) * 20;
+        
+        ctx.quadraticCurveTo(controlX, controlY, end.x, end.y);
+        ctx.stroke();
+      });
       
       return new THREE.CanvasTexture(canvas);
     };
 
-    const soccerTexture = createSoccerBallTexture();
+    const footballTexture = createProperFootballTexture();
 
-    // Animation loop for continuous rotation
+    // Handle click to stop/start rotation
+    const handleClick = (e) => {
+      e.stopPropagation();
+      setIsStopped(!isStopped);
+      setStoppedBalls(prev => {
+        const newSet = new Set(prev);
+        if (isStopped) {
+          newSet.delete(skill.name);
+        } else {
+          newSet.add(skill.name);
+        }
+        return newSet;
+      });
+      onClick();
+    };
+
+    // Animation loop - only rotate if not stopped
     useFrame((state, delta) => {
-      if (meshRef.current) {
-        meshRef.current.rotation.x += delta * 0.5;
+      if (meshRef.current && !isStopped) {
+        meshRef.current.rotation.x += delta * 0.4;
         meshRef.current.rotation.y += delta * 0.3;
         meshRef.current.rotation.z += delta * 0.2;
         
         // Add subtle floating animation
-        meshRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 2) * 0.1;
+        meshRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 1.5) * 0.08;
       }
     });
 
@@ -219,46 +267,62 @@ const Skills = () => {
         {/* Soccer Ball Football */}
         <Sphere
           ref={meshRef}
-          args={[0.6, 32, 32]}  // Increased size from 0.2 to 0.6
+          args={[0.8, 32, 32]}  // Increased size even more for better visibility
           position={position}
-          onClick={onClick}
+          onClick={handleClick}
           onPointerOver={() => setHoveredSkill(skill.name)}
           onPointerOut={() => setHoveredSkill(null)}
-          scale={isHovered ? 1.2 : 1}
+          scale={isHovered ? 1.1 : 1}
         >
           <meshLambertMaterial 
-            map={soccerTexture}
+            map={footballTexture}
             color={skill.color}
-            emissive={isSelected ? skill.color : "#000000"} 
-            emissiveIntensity={isSelected ? 0.2 : 0}
+            emissive={isSelected ? skill.color : isStopped ? "#333333" : "#000000"} 
+            emissiveIntensity={isSelected ? 0.2 : isStopped ? 0.1 : 0}
           />
         </Sphere>
 
         {/* Skill Label */}
         <Text
-          position={[position[0], position[1] + 1, position[2]]}
-          fontSize={0.25}  // Increased font size
+          position={[position[0], position[1] + 1.2, position[2]]}
+          fontSize={0.3}
           color="#000000"
           anchorX="center"
           anchorY="middle"
-          outlineWidth={0.02}
+          outlineWidth={0.03}
           outlineColor="#ffffff"
+          font="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap"
         >
           {skill.name}
         </Text>
 
         {/* Skill Level Indicator */}
         <Text
-          position={[position[0], position[1] - 1, position[2]]}
-          fontSize={0.15}  // Increased font size
+          position={[position[0], position[1] - 1.2, position[2]]}
+          fontSize={0.2}
           color="#000000"
           anchorX="center"
           anchorY="middle"
-          outlineWidth={0.01}
+          outlineWidth={0.02}
           outlineColor="#ffffff"
         >
           {skill.level}%
         </Text>
+
+        {/* Stop indicator */}
+        {isStopped && (
+          <Text
+            position={[position[0], position[1] - 1.6, position[2]]}
+            fontSize={0.15}
+            color="#FF0000"
+            anchorX="center"
+            anchorY="middle"
+            outlineWidth={0.01}
+            outlineColor="#ffffff"
+          >
+            STOPPED
+          </Text>
+        )}
       </group>
     );
   };
@@ -276,10 +340,10 @@ const Skills = () => {
       ctx.fillRect(0, 0, 512, 512);
       
       // Draw net pattern
-      ctx.strokeStyle = '#E0E0E0';
+      ctx.strokeStyle = '#DDDDDD';
       ctx.lineWidth = 2;
       
-      const gridSize = 20;
+      const gridSize = 25;
       
       // Vertical lines
       for (let x = 0; x <= 512; x += gridSize) {
@@ -303,31 +367,31 @@ const Skills = () => {
     const netTexture = createNetTexture();
     netTexture.wrapS = THREE.RepeatWrapping;
     netTexture.wrapT = THREE.RepeatWrapping;
-    netTexture.repeat.set(4, 4);
+    netTexture.repeat.set(6, 6);
 
     return (
       <group>
         {/* Main Net Background */}
-        <Plane args={[20, 20]} rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
+        <Plane args={[25, 25]} rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
           <meshLambertMaterial map={netTexture} />
         </Plane>
 
         {/* Net Border */}
         <group>
           {/* Top border */}
-          <Box args={[20, 0.1, 0.1]} position={[0, -0.4, 10]}>
+          <Box args={[25, 0.1, 0.1]} position={[0, -0.4, 12.5]}>
             <meshBasicMaterial color="#CCCCCC" />
           </Box>
           {/* Bottom border */}
-          <Box args={[20, 0.1, 0.1]} position={[0, -0.4, -10]}>
+          <Box args={[25, 0.1, 0.1]} position={[0, -0.4, -12.5]}>
             <meshBasicMaterial color="#CCCCCC" />
           </Box>
           {/* Left border */}
-          <Box args={[0.1, 0.1, 20]} position={[-10, -0.4, 0]}>
+          <Box args={[0.1, 0.1, 25]} position={[-12.5, -0.4, 0]}>
             <meshBasicMaterial color="#CCCCCC" />
           </Box>
           {/* Right border */}
-          <Box args={[0.1, 0.1, 20]} position={[10, -0.4, 0]}>
+          <Box args={[0.1, 0.1, 25]} position={[12.5, -0.4, 0]}>
             <meshBasicMaterial color="#CCCCCC" />
           </Box>
         </group>
@@ -346,11 +410,11 @@ const Skills = () => {
     };
 
     return (
-      <Canvas camera={{ position: [8, 8, 8], fov: 60 }}>
-        <ambientLight intensity={0.8} />
-        <directionalLight position={[10, 10, 5]} intensity={1.2} />
-        <pointLight position={[0, 10, 0]} intensity={0.8} />
-        <spotLight position={[0, 15, 0]} angle={0.3} penumbra={0.1} intensity={1} />
+      <Canvas camera={{ position: [0, 12, 8], fov: 50 }}>
+        <ambientLight intensity={0.9} />
+        <directionalLight position={[10, 10, 5]} intensity={1.5} />
+        <pointLight position={[0, 10, 0]} intensity={1} />
+        <spotLight position={[0, 15, 0]} angle={0.3} penumbra={0.1} intensity={1.2} />
 
         <WhiteNet />
 
@@ -365,13 +429,7 @@ const Skills = () => {
           />
         ))}
 
-        <OrbitControls
-          enablePan={true}
-          enableZoom={true}
-          enableRotate={true}
-          minDistance={5}
-          maxDistance={20}
-        />
+        {/* Removed OrbitControls completely - no drag, no zoom */}
       </Canvas>
     );
   };
@@ -390,7 +448,7 @@ const Skills = () => {
               My Tech Arsenal
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Welcome to my 3D football skills net! Each colorful spinning football represents a technology in my arsenal, stuck on a white net and rotating in their own position.
+              Welcome to my 3D football skills net! Each colorful football represents a technology in my arsenal. Click on any football to stop its rotation and see details.
             </p>
           </div>
         </section>
@@ -405,17 +463,17 @@ const Skills = () => {
                 Interactive 3D Football Skills Net
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-                Rotate around the scene and click on any colorful football to see detailed information! Each football spins continuously in its own position on the white net.
+                Click on any colorful football to stop its rotation and see detailed information! Each football spins continuously on the white net until you touch it.
               </p>
               <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-500">
-                <span>🎮 Drag to rotate</span>
-                <span>🔍 Scroll to zoom</span>
-                <span>⚽ Click footballs to select</span>
+                <span>⚽ Click footballs to stop/start rotation</span>
+                <span>📋 Click again to see skill details</span>
+                <span>🎯 Simple static view - no zooming or dragging</span>
               </div>
             </div>
             
             {/* 3D Canvas Container */}
-            <div className="relative bg-gradient-to-b from-blue-50 to-white rounded-lg shadow-2xl overflow-hidden border-2 border-gray-200" style={{ height: '600px' }}>
+            <div className="relative bg-gradient-to-b from-blue-50 to-white rounded-lg shadow-2xl overflow-hidden border-2 border-gray-200" style={{ height: '700px' }}>
               <SkillsScene />
             </div>
           </div>
@@ -520,7 +578,7 @@ const Skills = () => {
                     <Trophy className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-3xl font-bold mb-2 text-primary">3D</h3>
-                  <p className="text-muted-foreground">Spinning Experience</p>
+                  <p className="text-muted-foreground">Simple View</p>
                 </CardContent>
               </Card>
             </div>
@@ -533,17 +591,17 @@ const Skills = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-              How to Explore
+              How to Interact
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Card className="hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="bg-green-500 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold">1</div>
-                    <h3 className="font-semibold">Click on Any Football</h3>
+                    <h3 className="font-semibold">Click to Stop/Start</h3>
                   </div>
                   <p className="text-muted-foreground">
-                    Click on any colorful spinning football to see detailed information about that skill. Each football stays in its position.
+                    Click on any spinning football to stop its rotation. Click again to restart the spinning animation.
                   </p>
                 </CardContent>
               </Card>
@@ -552,10 +610,10 @@ const Skills = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="bg-blue-500 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold">2</div>
-                    <h3 className="font-semibold">Explore in 3D</h3>
+                    <h3 className="font-semibold">Simple Static View</h3>
                   </div>
                   <p className="text-muted-foreground">
-                    Drag to rotate the camera around the white net, scroll to zoom, and watch the colorful footballs spin continuously.
+                    No zooming or dragging - just a clear, simple view of all your skills. Click footballs to see detailed information.
                   </p>
                 </CardContent>
               </Card>
