@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { OrbitControls, Text, Box, Plane, Sphere, useTexture } from '@react-three/drei';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, Text, Box, Plane, Sphere } from '@react-three/drei';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
@@ -36,7 +36,7 @@ const Skills = () => {
           level: 95, 
           icon: "🥅", 
           description: "Last line of defense against bugs",
-          position: [0, 0, 3],
+          position: [0, 1, 2],
           color: "#FFD700"
         },
       ]
@@ -49,7 +49,7 @@ const Skills = () => {
           level: 90, 
           icon: "🛡️", 
           description: "Version control specialist",
-          position: [-4, 0, 1.5],
+          position: [-3, 1, 1],
           color: "#FF6B6B"
         },
         { 
@@ -57,7 +57,7 @@ const Skills = () => {
           level: 80, 
           icon: "⚔️", 
           description: "Testing warrior",
-          position: [-1.5, 0, 1.5],
+          position: [-1, 1, 1],
           color: "#4ECDC4"
         },
         { 
@@ -65,7 +65,7 @@ const Skills = () => {
           level: 75, 
           icon: "🏰", 
           description: "Container fortress builder",
-          position: [1.5, 0, 1.5],
+          position: [1, 1, 1],
           color: "#45B7D1"
         },
         { 
@@ -73,7 +73,7 @@ const Skills = () => {
           level: 85, 
           icon: "🛡️", 
           description: "System security expert",
-          position: [4, 0, 1.5],
+          position: [3, 1, 1],
           color: "#96CEB4"
         }
       ]
@@ -86,7 +86,7 @@ const Skills = () => {
           level: 95, 
           icon: "⚡", 
           description: "Core playmaker",
-          position: [-3, 0, 0],
+          position: [-2, 1, 0],
           color: "#F7DC6F"
         },
         { 
@@ -94,7 +94,7 @@ const Skills = () => {
           level: 90, 
           icon: "⚛️", 
           description: "Frontend orchestrator",
-          position: [0, 0, 0],
+          position: [0, 1, 0],
           color: "#61DAFB"
         },
         { 
@@ -102,7 +102,7 @@ const Skills = () => {
           level: 85, 
           icon: "🟢", 
           description: "Backend conductor",
-          position: [3, 0, 0],
+          position: [2, 1, 0],
           color: "#68A063"
         },
         { 
@@ -110,7 +110,7 @@ const Skills = () => {
           level: 85, 
           icon: "🔷", 
           description: "Type safety midfielder",
-          position: [-1.5, 0, -0.8],
+          position: [-1, 1, -0.5],
           color: "#3178C6"
         },
         { 
@@ -118,7 +118,7 @@ const Skills = () => {
           level: 80, 
           icon: "🐍", 
           description: "Versatile midfielder",
-          position: [1.5, 0, -0.8],
+          position: [1, 1, -0.5],
           color: "#3776AB"
         }
       ]
@@ -131,7 +131,7 @@ const Skills = () => {
           level: 80, 
           icon: "▲", 
           description: "Goal scorer",
-          position: [-2, 0, -2.5],
+          position: [-1.5, 1, -2],
           color: "#000000"
         },
         { 
@@ -139,7 +139,7 @@ const Skills = () => {
           level: 75, 
           icon: "⚡", 
           description: "Speed striker",
-          position: [0, 0, -2.5],
+          position: [0, 1, -2],
           color: "#009688"
         },
         { 
@@ -147,164 +147,73 @@ const Skills = () => {
           level: 85, 
           icon: "🍃", 
           description: "Database finisher",
-          position: [2, 0, -2.5],
+          position: [1.5, 1, -2],
           color: "#47A248"
         }
       ]
     }
   };
 
-  // 3D Football Component with Proper Soccer Ball Texture
-  const SoccerBallFootball = ({ skill, position, isSelected, isHovered, onClick }) => {
+  // Simple 3D Football Component
+  const SimpleFootball = ({ skill, position, isSelected, isHovered, onClick }) => {
     const meshRef = useRef();
     const [isStopped, setIsStopped] = useState(false);
     
-    // Create proper soccer ball texture with pentagons and hexagons
-    const createProperFootballTexture = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = 512;
-      canvas.height = 512;
-      const ctx = canvas.getContext('2d');
-      
-      // White background
-      ctx.fillStyle = '#FFFFFF';
-      ctx.fillRect(0, 0, 512, 512);
-      
-      // Draw proper soccer ball pattern with pentagons and hexagons
-      const centerX = 256;
-      const centerY = 256;
-      
-      // Draw black pentagons
-      const pentagons = [
-        { x: centerX, y: centerY - 80 },
-        { x: centerX - 60, y: centerY - 30 },
-        { x: centerX + 60, y: centerY - 30 },
-        { x: centerX - 40, y: centerY + 40 },
-        { x: centerX + 40, y: centerY + 40 },
-        { x: centerX, y: centerY + 80 }
-      ];
-      
-      pentagons.forEach(pentagon => {
-        ctx.fillStyle = '#000000';
-        ctx.beginPath();
-        for (let i = 0; i < 5; i++) {
-          const angle = (i * 2 * Math.PI) / 5 - Math.PI / 2;
-          const x = pentagon.x + Math.cos(angle) * 25;
-          const y = pentagon.y + Math.sin(angle) * 25;
-          if (i === 0) {
-            ctx.moveTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
-          }
-        }
-        ctx.closePath();
-        ctx.fill();
-      });
-      
-      // Draw connecting lines between pentagons
-      ctx.strokeStyle = '#000000';
-      ctx.lineWidth = 3;
-      
-      // Curved lines connecting pentagons
-      const connections = [
-        [pentagons[0], pentagons[1]],
-        [pentagons[0], pentagons[2]],
-        [pentagons[1], pentagons[3]],
-        [pentagons[2], pentagons[4]],
-        [pentagons[3], pentagons[5]],
-        [pentagons[4], pentagons[5]]
-      ];
-      
-      connections.forEach(([start, end]) => {
-        ctx.beginPath();
-        ctx.moveTo(start.x, start.y);
-        
-        // Create curved line
-        const midX = (start.x + end.x) / 2;
-        const midY = (start.y + end.y) / 2;
-        const controlX = midX + (Math.random() - 0.5) * 20;
-        const controlY = midY + (Math.random() - 0.5) * 20;
-        
-        ctx.quadraticCurveTo(controlX, controlY, end.x, end.y);
-        ctx.stroke();
-      });
-      
-      return new THREE.CanvasTexture(canvas);
-    };
-
-    const footballTexture = createProperFootballTexture();
-
     // Handle click to stop/start rotation
     const handleClick = (e) => {
       e.stopPropagation();
       setIsStopped(!isStopped);
-      setStoppedBalls(prev => {
-        const newSet = new Set(prev);
-        if (isStopped) {
-          newSet.delete(skill.name);
-        } else {
-          newSet.add(skill.name);
-        }
-        return newSet;
-      });
       onClick();
     };
 
     // Animation loop - only rotate if not stopped
     useFrame((state, delta) => {
       if (meshRef.current && !isStopped) {
-        meshRef.current.rotation.x += delta * 0.4;
+        meshRef.current.rotation.x += delta * 0.5;
         meshRef.current.rotation.y += delta * 0.3;
         meshRef.current.rotation.z += delta * 0.2;
-        
-        // Add subtle floating animation
-        meshRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 1.5) * 0.08;
       }
     });
 
     return (
       <group>
-        {/* Soccer Ball Football */}
+        {/* Simple Football Sphere */}
         <Sphere
           ref={meshRef}
-          args={[0.8, 32, 32]}  // Increased size even more for better visibility
+          args={[0.5, 16, 16]}
           position={position}
           onClick={handleClick}
           onPointerOver={() => setHoveredSkill(skill.name)}
           onPointerOut={() => setHoveredSkill(null)}
-          scale={isHovered ? 1.1 : 1}
+          scale={isHovered ? 1.2 : 1}
         >
-          <meshLambertMaterial 
-            map={footballTexture}
+          <meshStandardMaterial 
             color={skill.color}
+            metalness={0.1}
+            roughness={0.4}
             emissive={isSelected ? skill.color : isStopped ? "#333333" : "#000000"} 
-            emissiveIntensity={isSelected ? 0.2 : isStopped ? 0.1 : 0}
+            emissiveIntensity={isSelected ? 0.3 : isStopped ? 0.1 : 0}
           />
         </Sphere>
 
-        {/* Skill Label */}
+        {/* Skill Name */}
         <Text
-          position={[position[0], position[1] + 1.2, position[2]]}
-          fontSize={0.3}
-          color="#000000"
-          anchorX="center"
-          anchorY="middle"
-          outlineWidth={0.03}
-          outlineColor="#ffffff"
-          font="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap"
-        >
-          {skill.name}
-        </Text>
-
-        {/* Skill Level Indicator */}
-        <Text
-          position={[position[0], position[1] - 1.2, position[2]]}
+          position={[position[0], position[1] + 0.8, position[2]]}
           fontSize={0.2}
           color="#000000"
           anchorX="center"
           anchorY="middle"
-          outlineWidth={0.02}
-          outlineColor="#ffffff"
+        >
+          {skill.name}
+        </Text>
+
+        {/* Skill Level */}
+        <Text
+          position={[position[0], position[1] - 0.8, position[2]]}
+          fontSize={0.15}
+          color="#000000"
+          anchorX="center"
+          anchorY="middle"
         >
           {skill.level}%
         </Text>
@@ -312,13 +221,11 @@ const Skills = () => {
         {/* Stop indicator */}
         {isStopped && (
           <Text
-            position={[position[0], position[1] - 1.6, position[2]]}
-            fontSize={0.15}
+            position={[position[0], position[1] - 1.1, position[2]]}
+            fontSize={0.12}
             color="#FF0000"
             anchorX="center"
             anchorY="middle"
-            outlineWidth={0.01}
-            outlineColor="#ffffff"
           >
             STOPPED
           </Text>
@@ -327,74 +234,41 @@ const Skills = () => {
     );
   };
 
-  // White Net Background
-  const WhiteNet = () => {
-    const createNetTexture = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = 512;
-      canvas.height = 512;
-      const ctx = canvas.getContext('2d');
-      
-      // White background
-      ctx.fillStyle = '#FFFFFF';
-      ctx.fillRect(0, 0, 512, 512);
-      
-      // Draw net pattern
-      ctx.strokeStyle = '#DDDDDD';
-      ctx.lineWidth = 2;
-      
-      const gridSize = 25;
-      
-      // Vertical lines
-      for (let x = 0; x <= 512; x += gridSize) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, 512);
-        ctx.stroke();
-      }
-      
-      // Horizontal lines
-      for (let y = 0; y <= 512; y += gridSize) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(512, y);
-        ctx.stroke();
-      }
-      
-      return new THREE.CanvasTexture(canvas);
-    };
-
-    const netTexture = createNetTexture();
-    netTexture.wrapS = THREE.RepeatWrapping;
-    netTexture.wrapT = THREE.RepeatWrapping;
-    netTexture.repeat.set(6, 6);
-
+  // Simple Net Background
+  const SimpleNet = () => {
     return (
       <group>
-        {/* Main Net Background */}
-        <Plane args={[25, 25]} rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
-          <meshLambertMaterial map={netTexture} />
+        {/* Ground Plane */}
+        <Plane args={[12, 12]} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
+          <meshStandardMaterial color="#ffffff" />
         </Plane>
 
-        {/* Net Border */}
-        <group>
-          {/* Top border */}
-          <Box args={[25, 0.1, 0.1]} position={[0, -0.4, 12.5]}>
-            <meshBasicMaterial color="#CCCCCC" />
+        {/* Net Grid Lines */}
+        {Array.from({ length: 13 }, (_, i) => (
+          <Box key={`h-${i}`} args={[12, 0.02, 0.02]} position={[0, 0.01, -6 + i]}>
+            <meshStandardMaterial color="#cccccc" />
           </Box>
-          {/* Bottom border */}
-          <Box args={[25, 0.1, 0.1]} position={[0, -0.4, -12.5]}>
-            <meshBasicMaterial color="#CCCCCC" />
+        ))}
+        
+        {Array.from({ length: 13 }, (_, i) => (
+          <Box key={`v-${i}`} args={[0.02, 0.02, 12]} position={[-6 + i, 0.01, 0]}>
+            <meshStandardMaterial color="#cccccc" />
           </Box>
-          {/* Left border */}
-          <Box args={[0.1, 0.1, 25]} position={[-12.5, -0.4, 0]}>
-            <meshBasicMaterial color="#CCCCCC" />
-          </Box>
-          {/* Right border */}
-          <Box args={[0.1, 0.1, 25]} position={[12.5, -0.4, 0]}>
-            <meshBasicMaterial color="#CCCCCC" />
-          </Box>
-        </group>
+        ))}
+
+        {/* Border */}
+        <Box args={[12, 0.05, 0.05]} position={[0, 0.025, 6]}>
+          <meshStandardMaterial color="#666666" />
+        </Box>
+        <Box args={[12, 0.05, 0.05]} position={[0, 0.025, -6]}>
+          <meshStandardMaterial color="#666666" />
+        </Box>
+        <Box args={[0.05, 0.05, 12]} position={[6, 0.025, 0]}>
+          <meshStandardMaterial color="#666666" />
+        </Box>
+        <Box args={[0.05, 0.05, 12]} position={[-6, 0.025, 0]}>
+          <meshStandardMaterial color="#666666" />
+        </Box>
       </group>
     );
   };
@@ -410,16 +284,21 @@ const Skills = () => {
     };
 
     return (
-      <Canvas camera={{ position: [0, 12, 8], fov: 50 }}>
-        <ambientLight intensity={0.9} />
-        <directionalLight position={[10, 10, 5]} intensity={1.5} />
-        <pointLight position={[0, 10, 0]} intensity={1} />
-        <spotLight position={[0, 15, 0]} angle={0.3} penumbra={0.1} intensity={1.2} />
+      <Canvas 
+        camera={{ position: [0, 8, 6], fov: 75 }}
+        gl={{ antialias: true, alpha: false }}
+        dpr={[1, 2]}
+      >
+        {/* Lighting */}
+        <ambientLight intensity={0.6} />
+        <directionalLight position={[10, 10, 5]} intensity={1} />
+        <pointLight position={[0, 5, 0]} intensity={0.5} />
 
-        <WhiteNet />
+        {/* Scene */}
+        <SimpleNet />
 
         {getAllSkills().map((skill) => (
-          <SoccerBallFootball
+          <SimpleFootball
             key={skill.name}
             skill={skill}
             position={skill.position}
@@ -429,7 +308,7 @@ const Skills = () => {
           />
         ))}
 
-        {/* Removed OrbitControls completely - no drag, no zoom */}
+        {/* No controls - completely static */}
       </Canvas>
     );
   };
@@ -448,7 +327,7 @@ const Skills = () => {
               My Tech Arsenal
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Welcome to my 3D football skills net! Each colorful football represents a technology in my arsenal. Click on any football to stop its rotation and see details.
+              Welcome to my 3D football skills net! Each colorful football represents a technology. Click on any football to stop its rotation and see details.
             </p>
           </div>
         </section>
@@ -463,17 +342,17 @@ const Skills = () => {
                 Interactive 3D Football Skills Net
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-                Click on any colorful football to stop its rotation and see detailed information! Each football spins continuously on the white net until you touch it.
+                Click on any colorful football to stop its rotation and see detailed information! Each football spins continuously on the white net.
               </p>
               <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-500">
                 <span>⚽ Click footballs to stop/start rotation</span>
-                <span>📋 Click again to see skill details</span>
-                <span>🎯 Simple static view - no zooming or dragging</span>
+                <span>📋 See skill details when selected</span>
+                <span>🎯 Simple static view</span>
               </div>
             </div>
             
             {/* 3D Canvas Container */}
-            <div className="relative bg-gradient-to-b from-blue-50 to-white rounded-lg shadow-2xl overflow-hidden border-2 border-gray-200" style={{ height: '700px' }}>
+            <div className="relative bg-gradient-to-b from-blue-50 to-white rounded-lg shadow-2xl overflow-hidden border-2 border-gray-200" style={{ height: '600px' }}>
               <SkillsScene />
             </div>
           </div>
@@ -610,10 +489,10 @@ const Skills = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="bg-blue-500 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold">2</div>
-                    <h3 className="font-semibold">Simple Static View</h3>
+                    <h3 className="font-semibold">View Skill Details</h3>
                   </div>
                   <p className="text-muted-foreground">
-                    No zooming or dragging - just a clear, simple view of all your skills. Click footballs to see detailed information.
+                    Click on any football to see detailed information about that skill including level, description, and rating.
                   </p>
                 </CardContent>
               </Card>
