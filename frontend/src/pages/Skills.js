@@ -21,7 +21,7 @@ const Skills = () => {
   const categoryIcons = {
     'Frontend': Code,
     'Backend': Server,
-    'Tools & DevOps': Tool
+    'Tools & DevOps': Settings
   };
 
   const filteredSkills = selectedCategory === 'all' 
