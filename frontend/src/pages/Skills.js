@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Text, Box, Plane, Sphere } from '@react-three/drei';
+import { Text, Box, Plane, Sphere, Cylinder, Cone } from '@react-three/drei';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Progress } from '../components/ui/progress';
 import AnimatedBackground from '../components/AnimatedBackground';
 import { 
   Star,
-  Zap,
-  Target,
-  Trophy
+  Waves,
+  Fish,
+  Anchor
 } from 'lucide-react';
 import * as THREE from 'three';
 
