@@ -664,45 +664,45 @@ const Skills = () => {
         </section>
       )}
 
-      {/* Field Stats */}
-      <section className="py-20 bg-green-50">
+      {/* Ocean Stats */}
+      <section className="py-20 bg-gradient-to-b from-cyan-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-              Football Field Statistics
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+              Ocean Ecosystem Statistics
             </h2>
             <p className="text-lg text-muted-foreground mb-12">
-              Overview of the colorful footballs spinning on my 3D grass field
+              Overview of the sea creatures swimming in my underwater skills ocean
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105">
+              <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 border-blue-200">
                 <CardContent className="p-6 text-center">
-                  <div className="bg-gradient-to-r from-green-500 to-blue-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Target className="w-8 h-8 text-white" />
+                  <div className="bg-gradient-to-r from-blue-500 to-cyan-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Fish className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-3xl font-bold mb-2 text-primary">15+</h3>
-                  <p className="text-muted-foreground">Footballs on Field</p>
+                  <h3 className="text-3xl font-bold mb-2 text-blue-800">15+</h3>
+                  <p className="text-blue-600">Sea Creatures</p>
                 </CardContent>
               </Card>
               
-              <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105">
+              <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 border-blue-200">
                 <CardContent className="p-6 text-center">
-                  <div className="bg-gradient-to-r from-blue-500 to-purple-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Zap className="w-8 h-8 text-white" />
+                  <div className="bg-gradient-to-r from-cyan-500 to-teal-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Waves className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-3xl font-bold mb-2 text-primary">87%</h3>
-                  <p className="text-muted-foreground">Average Skill Level</p>
+                  <h3 className="text-3xl font-bold mb-2 text-blue-800">87%</h3>
+                  <p className="text-blue-600">Average Skill Level</p>
                 </CardContent>
               </Card>
               
-              <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105">
+              <Card className="hover:shadow-lg transition-all duration-300 hover:scale-105 border-blue-200">
                 <CardContent className="p-6 text-center">
-                  <div className="bg-gradient-to-r from-purple-500 to-green-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Trophy className="w-8 h-8 text-white" />
+                  <div className="bg-gradient-to-r from-teal-500 to-blue-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Anchor className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-3xl font-bold mb-2 text-primary">3D</h3>
-                  <p className="text-muted-foreground">Stable Experience</p>
+                  <h3 className="text-3xl font-bold mb-2 text-blue-800">4</h3>
+                  <p className="text-blue-600">Ocean Habitats</p>
                 </CardContent>
               </Card>
             </div>
