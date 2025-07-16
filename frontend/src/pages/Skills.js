@@ -17,116 +17,129 @@ const Skills = () => {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [hoveredSkill, setHoveredSkill] = useState(null);
 
-  // Skills positioned across the green field
-  const footballFormation = {
-    goalkeeper: {
-      position: "Goalkeeper",
+  // Skills positioned across the underwater ocean scene
+  const oceanEcosystem = {
+    coralReef: {
+      habitat: "Coral Reef",
       skills: [
         { 
           name: "Problem Solving", 
           level: 95, 
-          description: "Last line of defense against bugs",
-          position: [0, 0.5, 3],
-          color: "#FFD700"
+          description: "Master navigator of complex currents",
+          position: [0, 1, 3],
+          color: "#FF6B6B",
+          creature: "starfish"
         },
       ]
     },
-    defenders: {
-      position: "Defenders", 
+    deepSea: {
+      habitat: "Deep Sea", 
       skills: [
         { 
           name: "Git", 
           level: 90, 
-          description: "Version control specialist",
-          position: [-4, 0.5, 1.5],
-          color: "#FF6B6B"
+          description: "Version control like a wise octopus",
+          position: [-4, 2, 1.5],
+          color: "#9B59B6",
+          creature: "jellyfish"
         },
         { 
           name: "Jest", 
           level: 80, 
-          description: "Testing warrior",
-          position: [-1.5, 0.5, 1.5],
-          color: "#4ECDC4"
+          description: "Testing the waters with precision",
+          position: [-1.5, 1.5, 1.5],
+          color: "#3498DB",
+          creature: "fish"
         },
         { 
           name: "Docker", 
           level: 75, 
-          description: "Container fortress builder",
-          position: [1.5, 0.5, 1.5],
-          color: "#45B7D1"
+          description: "Container expert of the abyss",
+          position: [1.5, 3, 1.5],
+          color: "#2ECC71",
+          creature: "coral"
         },
         { 
           name: "Linux", 
           level: 85, 
-          description: "System security expert",
-          position: [4, 0.5, 1.5],
-          color: "#96CEB4"
+          description: "System guardian of the deep",
+          position: [4, 2.5, 1.5],
+          color: "#E74C3C",
+          creature: "anemone"
         }
       ]
     },
-    midfielders: {
-      position: "Midfielders",
+    midWater: {
+      habitat: "Mid Water",
       skills: [
         { 
           name: "JavaScript", 
           level: 95, 
-          description: "Core playmaker",
-          position: [-3, 0.5, 0],
-          color: "#F7DC6F"
+          description: "Swift predator of the code ocean",
+          position: [-3, 2, 0],
+          color: "#F39C12",
+          creature: "fish"
         },
         { 
           name: "React", 
           level: 90, 
-          description: "Frontend orchestrator",
-          position: [0, 0.5, 0],
-          color: "#61DAFB"
+          description: "Graceful swimmer through interfaces",
+          position: [0, 2.5, 0],
+          color: "#00CED1",
+          creature: "jellyfish"
         },
         { 
           name: "Node.js", 
           level: 85, 
-          description: "Backend conductor",
-          position: [3, 0.5, 0],
-          color: "#68A063"
+          description: "Backend whale of the server seas",
+          position: [3, 1.8, 0],
+          color: "#228B22",
+          creature: "whale"
         },
         { 
           name: "TypeScript", 
           level: 85, 
-          description: "Type safety midfielder",
-          position: [-1.5, 0.5, -0.8],
-          color: "#3178C6"
+          description: "Type-safe navigator of deep waters",
+          position: [-1.5, 1.2, -0.8],
+          color: "#4682B4",
+          creature: "fish"
         },
         { 
           name: "Python", 
           level: 80, 
-          description: "Versatile midfielder",
-          position: [1.5, 0.5, -0.8],
-          color: "#3776AB"
+          description: "Versatile serpent of the coding depths",
+          position: [1.5, 1.5, -0.8],
+          color: "#FFD700",
+          creature: "eel"
         }
       ]
     },
-    forwards: {
-      position: "Forwards",
+    seaFloor: {
+      habitat: "Sea Floor",
       skills: [
         { 
           name: "Next.js", 
           level: 80, 
-          description: "Goal scorer",
+          description: "Foundation builder of ocean floors",
           position: [-2, 0.5, -2.5],
-          color: "#000000"
+          color: "#FF1493",
+          creature: "coral"
         },
         { 
           name: "FastAPI", 
           level: 75, 
-          description: "Speed striker",
-          position: [0, 0.5, -2.5],
-          color: "#009688"
+          description: "Speed demon of the depths",
+          position: [0, 0.3, -2.5],
+          color: "#20B2AA",
+          creature: "fish"
         },
         { 
           name: "MongoDB", 
           level: 85, 
-          description: "Database finisher",
-          position: [2, 0.5, -2.5],
-          color: "#47A248"
+          description: "Data treasure guardian",
+          position: [2, 0.8, -2.5],
+          color: "#8A2BE2",
+          creature: "anemone"
         }
       ]
     }
