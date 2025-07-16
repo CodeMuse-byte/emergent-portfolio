@@ -592,27 +592,33 @@ const Skills = () => {
         </div>
       </section>
 
-      {/* Player Details */}
+      {/* Creature Details */}
       {selectedPlayer && (
-        <section className="py-20 bg-accent/5">
+        <section className="py-20 bg-gradient-to-b from-blue-50 to-cyan-50">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              {Object.values(footballFormation).map(position => 
-                position.skills.map(skill => {
+              {Object.values(oceanEcosystem).map(habitat => 
+                habitat.skills.map(skill => {
                   if (skill.name === selectedPlayer) {
                     return (
-                      <Card key={skill.name} className="hover:shadow-lg transition-shadow border-2 border-primary/20">
+                      <Card key={skill.name} className="hover:shadow-lg transition-shadow border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-cyan-50">
                         <CardHeader>
                           <CardTitle className="flex items-center space-x-3">
                             <div 
                               className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-xl"
                               style={{ backgroundColor: skill.color }}
                             >
-                              ⚽
+                              {skill.creature === 'fish' ? '🐟' : 
+                               skill.creature === 'jellyfish' ? '🪼' : 
+                               skill.creature === 'starfish' ? '⭐' : 
+                               skill.creature === 'coral' ? '🪸' : 
+                               skill.creature === 'anemone' ? '🌊' : 
+                               skill.creature === 'whale' ? '🐋' : 
+                               skill.creature === 'eel' ? '🐍' : '🌊'}
                             </div>
                             <div>
-                              <h3 className="text-2xl font-bold">{skill.name}</h3>
-                              <p className="text-muted-foreground">{skill.description}</p>
+                              <h3 className="text-2xl font-bold text-blue-800">{skill.name}</h3>
+                              <p className="text-blue-600">{skill.description}</p>
                             </div>
                           </CardTitle>
                         </CardHeader>
@@ -620,8 +626,8 @@ const Skills = () => {
                           <div className="space-y-4">
                             <div>
                               <div className="flex justify-between items-center mb-2">
-                                <span className="font-medium">Skill Level</span>
-                                <span className="text-sm font-bold">{skill.level}%</span>
+                                <span className="font-medium text-blue-700">Skill Level</span>
+                                <span className="text-sm font-bold text-blue-800">{skill.level}%</span>
                               </div>
                               <Progress value={skill.level} className="h-3" />
                             </div>
@@ -635,9 +641,15 @@ const Skills = () => {
                                   />
                                 ))}
                               </div>
-                              <Badge variant="outline" className="text-sm">
-                                {skill.level >= 90 ? 'Expert' : skill.level >= 80 ? 'Advanced' : 'Intermediate'}
+                              <Badge variant="outline" className="text-sm border-blue-300 text-blue-700">
+                                {skill.level >= 90 ? 'Ocean Master' : skill.level >= 80 ? 'Deep Sea Explorer' : 'Skilled Navigator'}
                               </Badge>
+                            </div>
+                            
+                            <div className="bg-blue-100 p-3 rounded-lg">
+                              <p className="text-sm text-blue-700">
+                                <strong>Habitat:</strong> {habitat.habitat} • <strong>Creature:</strong> {skill.creature.charAt(0).toUpperCase() + skill.creature.slice(1)}
+                              </p>
                             </div>
                           </div>
                         </CardContent>
