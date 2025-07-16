@@ -505,34 +505,38 @@ const Skills = () => {
   // 3D Scene Component
   const SkillsScene = React.memo(() => {
     const getAllSkills = () => {
-      return Object.values(footballFormation).flatMap(position => position.skills);
+      return Object.values(oceanEcosystem).flatMap(habitat => habitat.skills);
     };
 
-    const handleFootballClick = (skill) => {
+    const handleCreatureClick = (skill) => {
       setSelectedPlayer(selectedPlayer === skill.name ? null : skill.name);
     };
 
     return (
       <Canvas 
-        camera={{ position: [0, 8, 6], fov: 75 }}
-        gl={{ antialias: false }}
+        camera={{ position: [0, 6, 8], fov: 75 }}
+        gl={{ antialias: true }}
       >
-        {/* Simple lighting */}
-        <ambientLight intensity={0.8} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
+        {/* Underwater lighting */}
+        <ambientLight intensity={0.4} color="#4682B4" />
+        <directionalLight position={[10, 10, 5]} intensity={0.8} color="#87CEEB" />
+        <directionalLight position={[-10, 5, -5]} intensity={0.3} color="#4169E1" />
 
-        {/* Static grass field */}
-        <StaticGrassField />
+        {/* Ocean fog effect */}
+        <fog attach="fog" args={["#4682B4", 5, 15]} />
 
-        {/* Skills footballs */}
+        {/* Underwater ocean scene */}
+        <UnderwaterOcean />
+
+        {/* Skills sea creatures */}
         {getAllSkills().map((skill) => (
-          <SimpleFootball
+          <SeaCreature
             key={skill.name}
             skill={skill}
             position={skill.position}
             isSelected={selectedPlayer === skill.name}
             isHovered={hoveredSkill === skill.name}
-            onClick={() => handleFootballClick(skill)}
+            onClick={() => handleCreatureClick(skill)}
           />
         ))}
       </Canvas>
