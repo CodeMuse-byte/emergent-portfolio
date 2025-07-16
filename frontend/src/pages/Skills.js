@@ -549,41 +549,41 @@ const Skills = () => {
       <AnimatedBackground className="relative overflow-hidden">
         <section className="container mx-auto px-4 py-20 lg:py-32">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium bg-gradient-to-r from-green-500/10 to-blue-500/10 border-green-500/20">
-              <Trophy className="w-4 h-4 mr-2" />
-              3D Football Skills Field
+            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border-blue-500/20">
+              <Waves className="w-4 h-4 mr-2" />
+              Underwater Skills Ocean
             </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-600 via-blue-600 to-green-600 bg-clip-text text-transparent">
-              My Tech Arsenal
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 bg-clip-text text-transparent">
+              Deep Sea Tech Arsenal
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Welcome to my 3D football skills field! Each colorful football represents a technology and rotates continuously on the green grass field.
+              Dive into my underwater skills ocean! Each sea creature represents a technology swimming in the depths of my expertise.
             </p>
           </div>
         </section>
       </AnimatedBackground>
 
-      {/* 3D Skills Football Field */}
-      <section className="py-20 bg-gradient-to-b from-green-100 to-green-200 relative overflow-hidden">
+      {/* 3D Skills Ocean Scene */}
+      <section className="py-20 bg-gradient-to-b from-blue-100 to-cyan-200 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-green-800">
-                Interactive 3D Football Skills Field
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-blue-800">
+                Interactive Underwater Skills Ocean
               </h2>
-              <p className="text-lg text-green-700 max-w-2xl mx-auto mb-8">
-                Click on any colorful football to see detailed information! All footballs rotate continuously on a stable green grass field.
+              <p className="text-lg text-blue-700 max-w-2xl mx-auto mb-8">
+                Click on any sea creature to see detailed information! Watch them swim and float in their natural underwater habitat.
               </p>
-              <div className="flex flex-wrap justify-center gap-4 text-sm text-green-600">
-                <span>⚽ Click footballs to see details</span>
-                <span>🌱 Stable green grass field</span>
-                <span>🔄 Smooth ball rotation</span>
+              <div className="flex flex-wrap justify-center gap-4 text-sm text-blue-600">
+                <span>🐟 Click creatures to see details</span>
+                <span>🌊 Realistic ocean environment</span>
+                <span>🪸 Living coral reef ecosystem</span>
               </div>
             </div>
             
             {/* 3D Canvas Container */}
             <div 
-              className="relative bg-gradient-to-b from-green-50 to-green-100 rounded-lg shadow-2xl overflow-hidden border-2 border-green-300" 
+              className="relative bg-gradient-to-b from-blue-400 to-blue-600 rounded-lg shadow-2xl overflow-hidden border-2 border-blue-300" 
               style={{ height: '650px' }}
             >
               <SkillsScene />
