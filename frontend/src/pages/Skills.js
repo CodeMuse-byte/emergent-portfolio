@@ -145,49 +145,254 @@ const Skills = () => {
     }
   };
 
-  // Simple Football with basic rotation
-  const SimpleFootball = ({ skill, position, isSelected, isHovered, onClick }) => {
+  // Sea Creature Component - Different creatures for different skills
+  const SeaCreature = ({ skill, position, isSelected, isHovered, onClick }) => {
     const meshRef = useRef();
+    const groupRef = useRef();
     
-    // Simple rotation animation
+    // Different swimming animations based on creature type
     useFrame((state, delta) => {
-      if (meshRef.current) {
-        meshRef.current.rotation.y += delta * 0.5;
+      if (meshRef.current && groupRef.current) {
+        const time = state.clock.getElapsedTime();
+        
+        switch (skill.creature) {
+          case 'fish':
+            // Swimming motion
+            meshRef.current.rotation.y += delta * 0.5;
+            groupRef.current.position.y = position[1] + Math.sin(time * 2) * 0.1;
+            break;
+          case 'jellyfish':
+            // Pulsing motion
+            meshRef.current.rotation.y += delta * 0.3;
+            groupRef.current.position.y = position[1] + Math.sin(time * 1.5) * 0.2;
+            const scale = 1 + Math.sin(time * 3) * 0.1;
+            meshRef.current.scale.set(scale, scale, scale);
+            break;
+          case 'starfish':
+            // Gentle rotation
+            meshRef.current.rotation.z += delta * 0.2;
+            groupRef.current.position.y = position[1] + Math.sin(time * 1) * 0.05;
+            break;
+          case 'coral':
+            // Swaying motion
+            meshRef.current.rotation.x = Math.sin(time * 0.8) * 0.1;
+            meshRef.current.rotation.z = Math.cos(time * 0.6) * 0.1;
+            break;
+          case 'anemone':
+            // Waving tentacles
+            meshRef.current.rotation.y += delta * 0.1;
+            const wave = Math.sin(time * 2) * 0.05;
+            meshRef.current.rotation.x = wave;
+            meshRef.current.rotation.z = wave;
+            break;
+          case 'whale':
+            // Slow majestic movement
+            meshRef.current.rotation.y += delta * 0.2;
+            groupRef.current.position.y = position[1] + Math.sin(time * 0.5) * 0.15;
+            break;
+          case 'eel':
+            // Serpentine movement
+            meshRef.current.rotation.y += delta * 0.4;
+            groupRef.current.position.x = position[0] + Math.sin(time * 1.5) * 0.1;
+            groupRef.current.position.y = position[1] + Math.cos(time * 1.2) * 0.1;
+            break;
+          default:
+            meshRef.current.rotation.y += delta * 0.5;
+        }
       }
     });
 
+    const renderCreature = () => {
+      switch (skill.creature) {
+        case 'fish':
+          return (
+            <group>
+              <Sphere args={[0.4, 16, 16]}>
+                <meshStandardMaterial 
+                  color={skill.color}
+                  emissive={isSelected ? skill.color : "#000000"} 
+                  emissiveIntensity={isSelected ? 0.3 : 0}
+                />
+              </Sphere>
+              <Cone args={[0.2, 0.3, 8]} position={[0.4, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+                <meshStandardMaterial color={skill.color} />
+              </Cone>
+            </group>
+          );
+        case 'jellyfish':
+          return (
+            <group>
+              <Sphere args={[0.5, 16, 16]} scale={[1, 0.6, 1]}>
+                <meshStandardMaterial 
+                  color={skill.color}
+                  transparent
+                  opacity={0.7}
+                  emissive={isSelected ? skill.color : "#000000"} 
+                  emissiveIntensity={isSelected ? 0.3 : 0}
+                />
+              </Sphere>
+              {[...Array(6)].map((_, i) => (
+                <Cylinder 
+                  key={i} 
+                  args={[0.02, 0.02, 0.8, 8]} 
+                  position={[
+                    Math.cos(i * Math.PI / 3) * 0.3,
+                    -0.4,
+                    Math.sin(i * Math.PI / 3) * 0.3
+                  ]}
+                  rotation={[Math.random() * 0.2, 0, Math.random() * 0.2]}
+                >
+                  <meshStandardMaterial color={skill.color} transparent opacity={0.6} />
+                </Cylinder>
+              ))}
+            </group>
+          );
+        case 'starfish':
+          return (
+            <group>
+              <Sphere args={[0.3, 16, 16]} scale={[1, 0.3, 1]}>
+                <meshStandardMaterial 
+                  color={skill.color}
+                  emissive={isSelected ? skill.color : "#000000"} 
+                  emissiveIntensity={isSelected ? 0.3 : 0}
+                />
+              </Sphere>
+              {[...Array(5)].map((_, i) => (
+                <Cone 
+                  key={i} 
+                  args={[0.15, 0.4, 8]} 
+                  position={[
+                    Math.cos(i * Math.PI * 2 / 5) * 0.3,
+                    0,
+                    Math.sin(i * Math.PI * 2 / 5) * 0.3
+                  ]}
+                  rotation={[Math.PI / 2, 0, i * Math.PI * 2 / 5]}
+                >
+                  <meshStandardMaterial color={skill.color} />
+                </Cone>
+              ))}
+            </group>
+          );
+        case 'coral':
+          return (
+            <group>
+              <Cylinder args={[0.3, 0.4, 0.8, 8]}>
+                <meshStandardMaterial 
+                  color={skill.color}
+                  emissive={isSelected ? skill.color : "#000000"} 
+                  emissiveIntensity={isSelected ? 0.3 : 0}
+                />
+              </Cylinder>
+              {[...Array(4)].map((_, i) => (
+                <Cylinder 
+                  key={i} 
+                  args={[0.1, 0.15, 0.5, 8]} 
+                  position={[
+                    Math.cos(i * Math.PI / 2) * 0.2,
+                    0.3,
+                    Math.sin(i * Math.PI / 2) * 0.2
+                  ]}
+                >
+                  <meshStandardMaterial color={skill.color} />
+                </Cylinder>
+              ))}
+            </group>
+          );
+        case 'anemone':
+          return (
+            <group>
+              <Cylinder args={[0.3, 0.3, 0.2, 8]}>
+                <meshStandardMaterial 
+                  color={skill.color}
+                  emissive={isSelected ? skill.color : "#000000"} 
+                  emissiveIntensity={isSelected ? 0.3 : 0}
+                />
+              </Cylinder>
+              {[...Array(8)].map((_, i) => (
+                <Cylinder 
+                  key={i} 
+                  args={[0.05, 0.02, 0.6, 8]} 
+                  position={[
+                    Math.cos(i * Math.PI / 4) * 0.2,
+                    0.3,
+                    Math.sin(i * Math.PI / 4) * 0.2
+                  ]}
+                  rotation={[Math.PI / 6, 0, i * Math.PI / 4]}
+                >
+                  <meshStandardMaterial color={skill.color} />
+                </Cylinder>
+              ))}
+            </group>
+          );
+        case 'whale':
+          return (
+            <group>
+              <Sphere args={[0.6, 16, 16]} scale={[1.2, 0.8, 1]}>
+                <meshStandardMaterial 
+                  color={skill.color}
+                  emissive={isSelected ? skill.color : "#000000"} 
+                  emissiveIntensity={isSelected ? 0.3 : 0}
+                />
+              </Sphere>
+              <Cone args={[0.3, 0.4, 8]} position={[0.6, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+                <meshStandardMaterial color={skill.color} />
+              </Cone>
+            </group>
+          );
+        case 'eel':
+          return (
+            <group>
+              <Cylinder args={[0.1, 0.15, 1.2, 8]} rotation={[Math.PI / 2, 0, 0]}>
+                <meshStandardMaterial 
+                  color={skill.color}
+                  emissive={isSelected ? skill.color : "#000000"} 
+                  emissiveIntensity={isSelected ? 0.3 : 0}
+                />
+              </Cylinder>
+              <Sphere args={[0.2, 16, 16]} position={[0, 0, 0.6]}>
+                <meshStandardMaterial color={skill.color} />
+              </Sphere>
+            </group>
+          );
+        default:
+          return (
+            <Sphere args={[0.6, 16, 16]}>
+              <meshStandardMaterial 
+                color={skill.color}
+                emissive={isSelected ? skill.color : "#000000"} 
+                emissiveIntensity={isSelected ? 0.3 : 0}
+              />
+            </Sphere>
+          );
+      }
+    };
+
     return (
-      <group>
-        {/* Football */}
-        <Sphere
-          ref={meshRef}
-          args={[0.6, 16, 16]}
-          position={position}
-          onClick={(e) => {
-            e.stopPropagation();
-            onClick();
-          }}
-          onPointerOver={(e) => {
-            e.stopPropagation();
-            setHoveredSkill(skill.name);
-          }}
-          onPointerOut={(e) => {
-            e.stopPropagation();
-            setHoveredSkill(null);
-          }}
-        >
-          <meshStandardMaterial 
-            color={skill.color}
-            emissive={isSelected ? skill.color : "#000000"} 
-            emissiveIntensity={isSelected ? 0.2 : 0}
-          />
-        </Sphere>
+      <group 
+        ref={groupRef}
+        position={position}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick();
+        }}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          setHoveredSkill(skill.name);
+        }}
+        onPointerOut={(e) => {
+          e.stopPropagation();
+          setHoveredSkill(null);
+        }}
+      >
+        <group ref={meshRef}>
+          {renderCreature()}
+        </group>
 
         {/* Skill Name */}
         <Text
-          position={[position[0], position[1] + 1, position[2]]}
+          position={[0, 1.2, 0]}
           fontSize={0.25}
-          color="#000000"
+          color="#FFFFFF"
           anchorX="center"
           anchorY="middle"
         >
@@ -196,9 +401,9 @@ const Skills = () => {
 
         {/* Skill Level */}
         <Text
-          position={[position[0], position[1] - 1, position[2]]}
+          position={[0, -0.8, 0]}
           fontSize={0.18}
-          color="#000000"
+          color="#FFFFFF"
           anchorX="center"
           anchorY="middle"
         >
