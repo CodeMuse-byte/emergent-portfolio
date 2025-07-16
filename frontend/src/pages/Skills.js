@@ -413,23 +413,91 @@ const Skills = () => {
     );
   };
 
-  // Static Green Grass Field
-  const StaticGrassField = () => {
+  // Underwater Ocean Scene
+  const UnderwaterOcean = () => {
+    const bubblesRef = useRef();
+    
+    // Animate floating bubbles
+    useFrame((state, delta) => {
+      if (bubblesRef.current) {
+        bubblesRef.current.children.forEach((bubble, i) => {
+          bubble.position.y += delta * (0.5 + i * 0.1);
+          if (bubble.position.y > 8) {
+            bubble.position.y = -2;
+          }
+        });
+      }
+    });
+
     return (
       <group>
-        {/* Main grass ground */}
-        <Plane args={[20, 20]} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-          <meshLambertMaterial color="#4A7C59" />
+        {/* Ocean Floor */}
+        <Plane args={[20, 20]} rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]}>
+          <meshLambertMaterial color="#8B7355" />
         </Plane>
 
-        {/* Grass texture layer */}
-        <Plane args={[20, 20]} rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.005, 0]}>
+        {/* Sandy texture layer */}
+        <Plane args={[20, 20]} rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.99, 0]}>
           <meshLambertMaterial 
-            color="#5A8A67" 
+            color="#D2B48C" 
             transparent
             opacity={0.7}
           />
         </Plane>
+
+        {/* Coral formations */}
+        <Cylinder args={[0.5, 0.8, 2, 8]} position={[-5, 0, 2]} rotation={[0, 0, 0.1]}>
+          <meshStandardMaterial color="#FF7F50" />
+        </Cylinder>
+        <Cylinder args={[0.3, 0.5, 1.5, 8]} position={[5, -0.25, 1]} rotation={[0, 0, -0.1]}>
+          <meshStandardMaterial color="#FF69B4" />
+        </Cylinder>
+        <Cylinder args={[0.4, 0.6, 1.8, 8]} position={[2, -0.1, 3]} rotation={[0, 0, 0.15]}>
+          <meshStandardMaterial color="#FF1493" />
+        </Cylinder>
+
+        {/* Seaweed */}
+        <Plane args={[0.2, 3]} position={[-3, 0.5, -1]} rotation={[0, 0, 0.2]}>
+          <meshLambertMaterial color="#228B22" transparent opacity={0.8} />
+        </Plane>
+        <Plane args={[0.15, 2.5]} position={[3.5, 0.25, -2]} rotation={[0, 0, -0.15]}>
+          <meshLambertMaterial color="#32CD32" transparent opacity={0.8} />
+        </Plane>
+        <Plane args={[0.18, 2.8]} position={[-1, 0.4, 2.5]} rotation={[0, 0, 0.1]}>
+          <meshLambertMaterial color="#228B22" transparent opacity={0.8} />
+        </Plane>
+
+        {/* Floating bubbles */}
+        <group ref={bubblesRef}>
+          {[...Array(15)].map((_, i) => (
+            <Sphere 
+              key={i} 
+              args={[0.05 + Math.random() * 0.1, 8, 8]} 
+              position={[
+                (Math.random() - 0.5) * 15,
+                Math.random() * 6 - 2,
+                (Math.random() - 0.5) * 15
+              ]}
+            >
+              <meshStandardMaterial 
+                color="#87CEEB" 
+                transparent 
+                opacity={0.3}
+              />
+            </Sphere>
+          ))}
+        </group>
+
+        {/* Rocks */}
+        <Sphere args={[0.8, 16, 16]} position={[-4, -0.5, -2]} scale={[1, 0.5, 1]}>
+          <meshStandardMaterial color="#708090" />
+        </Sphere>
+        <Sphere args={[0.6, 16, 16]} position={[4, -0.7, -1]} scale={[1, 0.4, 1]}>
+          <meshStandardMaterial color="#2F4F4F" />
+        </Sphere>
+        <Sphere args={[0.5, 16, 16]} position={[1, -0.8, -3]} scale={[1, 0.3, 1]}>
+          <meshStandardMaterial color="#696969" />
+        </Sphere>
       </group>
     );
   };
