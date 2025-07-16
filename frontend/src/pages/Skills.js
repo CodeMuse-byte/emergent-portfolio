@@ -714,30 +714,30 @@ const Skills = () => {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-              How to Interact
+            <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+              How to Explore the Ocean
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Card className="hover:shadow-lg transition-shadow">
+              <Card className="hover:shadow-lg transition-shadow border-blue-200">
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-3 mb-4">
-                    <div className="bg-green-500 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold">1</div>
-                    <h3 className="font-semibold">Click on Footballs</h3>
+                    <div className="bg-blue-500 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                    <h3 className="font-semibold text-blue-800">Click on Sea Creatures</h3>
                   </div>
-                  <p className="text-muted-foreground">
-                    Click on any colorful spinning football to see detailed information about that skill. All footballs rotate continuously.
+                  <p className="text-blue-600">
+                    Click on any swimming sea creature to see detailed information about that skill. Watch them move naturally in their underwater habitat.
                   </p>
                 </CardContent>
               </Card>
               
-              <Card className="hover:shadow-lg transition-shadow">
+              <Card className="hover:shadow-lg transition-shadow border-blue-200">
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-3 mb-4">
-                    <div className="bg-blue-500 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold">2</div>
-                    <h3 className="font-semibold">Stable Performance</h3>
+                    <div className="bg-cyan-500 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                    <h3 className="font-semibold text-blue-800">Immersive Experience</h3>
                   </div>
-                  <p className="text-muted-foreground">
-                    Enjoy a smooth, stable 3D experience with no blinking or flickering. Just clean, continuous football rotations.
+                  <p className="text-blue-600">
+                    Enjoy a realistic underwater experience with floating bubbles, coral reefs, and sea creatures swimming naturally in their ocean habitat.
                   </p>
                 </CardContent>
               </Card>
