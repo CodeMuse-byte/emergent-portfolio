@@ -129,19 +129,29 @@ const Skills = () => {
 
     return (
       <svg className="absolute inset-0 w-full h-full pointer-events-none">
-        {connections.map(({ from, to, key }) => (
-          <line
-            key={key}
-            x1={`${from.x}%`}
-            y1={`${from.y}%`}
-            x2={`${to.x}%`}
-            y2={`${to.y}%`}
-            stroke="#444444"
-            strokeWidth="1"
-            strokeDasharray="3,3"
-            className="opacity-60"
-          />
-        ))}
+        {connections.map(({ from, to, key }) => {
+          const isRelatedToHovered = hoveredSkill && 
+            (from.name === hoveredSkill || to.name === hoveredSkill);
+          
+          return (
+            <line
+              key={key}
+              x1={`${from.x}%`}
+              y1={`${from.y}%`}
+              x2={`${to.x}%`}
+              y2={`${to.y}%`}
+              stroke={isRelatedToHovered ? "#ffffff" : "#444444"}
+              strokeWidth={isRelatedToHovered ? "2" : "1"}
+              strokeDasharray="3,3"
+              className={`transition-all duration-300 ${
+                isRelatedToHovered ? 'opacity-100 drop-shadow-lg' : 'opacity-60'
+              }`}
+              style={isRelatedToHovered ? {
+                filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.5))'
+              } : {}}
+            />
+          );
+        })}
       </svg>
     );
   };
