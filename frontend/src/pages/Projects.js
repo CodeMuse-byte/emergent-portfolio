@@ -405,7 +405,7 @@ const Projects = () => {
               </div>
 
               {/* Game Description */}
-              <div className="sprite-block bg-gray-900 p-6 rounded-lg border-2 border-green-400 shadow-lg shadow-green-400/50 mb-8">
+              <div className={`sprite-block bg-gray-900 p-6 rounded-lg border-2 border-green-400 shadow-lg shadow-green-400/50 mb-8 ${gameEnding ? 'fade-out' : ''}`}>
                 <h3 className="text-2xl font-bold pixel-font text-green-400 mb-4">
                   🎯 GAME DESCRIPTION
                 </h3>
@@ -415,7 +415,7 @@ const Projects = () => {
               </div>
 
               {/* Power-ups (Technologies) */}
-              <div className="sprite-block bg-gray-900 p-6 rounded-lg border-2 border-yellow-400 shadow-lg shadow-yellow-400/50 mb-8">
+              <div className={`sprite-block bg-gray-900 p-6 rounded-lg border-2 border-yellow-400 shadow-lg shadow-yellow-400/50 mb-8 ${gameEnding ? 'fade-out' : ''}`}>
                 <h3 className="text-2xl font-bold pixel-font text-yellow-400 mb-4">
                   ⚡ POWER-UPS COLLECTED
                 </h3>
@@ -423,7 +423,7 @@ const Projects = () => {
                   {project.technologies.map((tech, index) => (
                     <div 
                       key={index}
-                      className="bg-gradient-to-r from-green-600 to-green-500 p-3 rounded border-2 border-green-400 text-center power-up-block"
+                      className={`bg-gradient-to-r from-green-600 to-green-500 p-3 rounded border-2 border-green-400 text-center power-up-block ${gameEnding ? 'fade-out' : ''}`}
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
                       <div className="text-white pixel-font font-bold">{tech}</div>
@@ -433,12 +433,13 @@ const Projects = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="sprite-block text-center mb-12">
+              <div className={`sprite-block text-center mb-12 ${gameEnding ? 'fade-out' : ''}`}>
                 <div className="flex justify-center space-x-6">
                   <Button 
                     size="lg"
                     className="bg-red-600 hover:bg-red-500 text-white font-bold pixel-font text-xl px-8 py-4"
                     onClick={() => window.open(project.demo, '_blank')}
+                    disabled={gameEnding}
                   >
                     <Play className="w-6 h-6 mr-2" />
                     PLAY GAME
@@ -448,6 +449,7 @@ const Projects = () => {
                     size="lg"
                     className="bg-blue-600 hover:bg-blue-500 text-white font-bold pixel-font text-xl px-8 py-4"
                     onClick={() => window.open(project.github, '_blank')}
+                    disabled={gameEnding}
                   >
                     <Code className="w-6 h-6 mr-2" />
                     VIEW CODE
