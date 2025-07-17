@@ -273,6 +273,7 @@ test_plan:
     - "Remove Network Overview Section"
     - "Remove Progress Bars from Skills"
     - "Enhanced Hover Effect with Category Colors"
+    - "Update Navbar - Remove Cover Link and Make Name Clickable"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
