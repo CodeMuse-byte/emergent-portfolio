@@ -101,7 +101,12 @@ const Skills = () => {
           style={{ 
             backgroundColor: '#1a1a1a',
             borderColor: category.color,
-            minWidth: '120px'
+            minWidth: '120px',
+            ...(isHovered ? {
+              boxShadow: `0 0 20px ${category.color}`,
+              borderColor: category.color,
+              background: `linear-gradient(135deg, #1a1a1a 0%, ${category.color}15 100%)`
+            } : {})
           }}
         >
           <div className="text-white font-medium text-sm">{skill.name}</div>
