@@ -240,7 +240,7 @@ const Skills = () => {
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold text-white">{selectedSkill.name}</h3>
-                      <p className="text-gray-300">Skill Level: {selectedSkill.level}%</p>
+                      <p className="text-gray-300">Category: {getSkillCategory(selectedSkill.name)?.name}</p>
                     </div>
                   </CardTitle>
                 </CardHeader>
