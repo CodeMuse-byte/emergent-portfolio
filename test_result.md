@@ -270,7 +270,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Retro Arcade Game Theme for Projects"
+    - "Arcade Game Transition - Enter Game Details"
     - "Add Second Playground - Particle System"
     - "Interactive Playground with Physics-Based Elements"
   stuck_tasks: []
