@@ -24,10 +24,10 @@ const Playground = () => {
               Interactive Demo
             </Badge>
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
-              Physics Playground
+              Interactive Playgrounds
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Experience physics-based interactions with real-time collision detection, gravity simulation, and particle effects. Click, drag, and interact with the bouncing balls!
+              Experience multiple physics-based interactions with real-time simulations, particle effects, and interactive controls. Click, drag, and interact with the elements!
             </p>
           </div>
         </section>
