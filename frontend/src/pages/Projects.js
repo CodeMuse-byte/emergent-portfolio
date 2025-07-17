@@ -330,8 +330,8 @@ const Projects = () => {
               onClick={closeGameView}
               className="absolute top-4 right-4 z-50 bg-red-600 hover:bg-red-500 text-white pixel-font"
             >
-              <X className="w-4 h-4 mr-2" />
-              QUIT GAME
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              BACK TO ARCADE
             </Button>
 
             {/* Game Header */}
