@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Skills from './pages/Skills';
 import Projects from './pages/Projects';
+import Playground from './pages/Playground';
 import Testimonials from './pages/Testimonials';
 import Contact from './pages/Contact';
 import { Toaster } from './components/ui/toaster';
