@@ -762,52 +762,98 @@ const Projects = () => {
         @keyframes blockBuildUp {
           0% {
             opacity: 0;
-            transform: translateY(20px) scale(0.9);
+            transform: translateY(20px) scale(0.9) translateZ(0px);
           }
           100% {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0) scale(1) translateZ(10px);
           }
         }
         
         @keyframes blockFadeOut {
           0% {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0) scale(1) translateZ(10px);
           }
           100% {
             opacity: 0;
-            transform: translateY(-20px) scale(0.9);
+            transform: translateY(-20px) scale(0.9) translateZ(0px);
           }
         }
         
         @keyframes powerUpCollect {
           0% {
             opacity: 0;
-            transform: scale(0.8);
+            transform: scale(0.8) translateZ(0px);
           }
           50% {
-            transform: scale(1.1);
+            transform: scale(1.1) translateZ(5px);
           }
           100% {
             opacity: 1;
-            transform: scale(1);
+            transform: scale(1) translateZ(3px);
           }
         }
         
         @keyframes powerUpFadeOut {
           0% {
             opacity: 1;
-            transform: scale(1);
+            transform: scale(1) translateZ(3px);
           }
           50% {
-            transform: scale(0.8);
+            transform: scale(0.8) translateZ(1px);
           }
           100% {
             opacity: 0;
-            transform: scale(0.6);
+            transform: scale(0.6) translateZ(0px);
           }
         }
+        
+        @keyframes float-1 {
+          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+          25% { transform: translateY(-20px) translateX(10px) rotate(90deg); }
+          50% { transform: translateY(-10px) translateX(-5px) rotate(180deg); }
+          75% { transform: translateY(-15px) translateX(8px) rotate(270deg); }
+        }
+        
+        @keyframes float-2 {
+          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+          33% { transform: translateY(-15px) translateX(-8px) rotate(120deg); }
+          66% { transform: translateY(-25px) translateX(12px) rotate(240deg); }
+        }
+        
+        @keyframes float-3 {
+          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+          20% { transform: translateY(-10px) translateX(15px) rotate(72deg); }
+          40% { transform: translateY(-20px) translateX(-10px) rotate(144deg); }
+          60% { transform: translateY(-5px) translateX(20px) rotate(216deg); }
+          80% { transform: translateY(-18px) translateX(-15px) rotate(288deg); }
+        }
+        
+        @keyframes float-4 {
+          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+          50% { transform: translateY(-30px) translateX(15px) rotate(180deg); }
+        }
+        
+        @keyframes float-5 {
+          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+          25% { transform: translateY(-12px) translateX(-20px) rotate(90deg); }
+          50% { transform: translateY(-8px) translateX(5px) rotate(180deg); }
+          75% { transform: translateY(-22px) translateX(10px) rotate(270deg); }
+        }
+        
+        @keyframes float-6 {
+          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+          33% { transform: translateY(-18px) translateX(8px) rotate(120deg); }
+          66% { transform: translateY(-5px) translateX(-12px) rotate(240deg); }
+        }
+        
+        .animate-float-1 { animation: float-1 6s ease-in-out infinite; }
+        .animate-float-2 { animation: float-2 8s ease-in-out infinite; }
+        .animate-float-3 { animation: float-3 10s ease-in-out infinite; }
+        .animate-float-4 { animation: float-4 7s ease-in-out infinite; }
+        .animate-float-5 { animation: float-5 9s ease-in-out infinite; }
+        .animate-float-6 { animation: float-6 5s ease-in-out infinite; }
         
         @keyframes neon-glow {
           0%, 100% { text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor; }
