@@ -280,6 +280,42 @@ test_plan:
   test_all: false
   test_priority: "high_first"
 
+  - task: "Remove Network Overview Section"
+    implemented: true
+    working: true
+    file: "frontend/src/pages/Skills.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "Successfully removed the entire Network Overview section from the Skills page as requested. The section that showed category cards at the bottom has been completely removed."
+
+  - task: "Remove Progress Bars from Skills"
+    implemented: true
+    working: true
+    file: "frontend/src/pages/Skills.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "Successfully removed progress bars from all skill nodes in the network map. Also removed progress bars from the selected skill details section. Skills now show only the skill name in clean, simple card format."
+
+  - task: "Add Hover Effect to Connected Lines"
+    implemented: true
+    working: true
+    file: "frontend/src/pages/Skills.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "Successfully implemented hover effect for connected lines. When hovering over any skill node, the connection lines to related skills now shine with white color, increased thickness, and glowing effect. Non-related lines remain dimmed."
+
 agent_communication:
     - agent: "main"
-      message: "Successfully created network-style skills map exactly matching the user's photo. Dark background with colorful skill nodes displayed as floating cards with progress bars, percentages, and connection lines. Implemented full dark theme, interactive navigation, and constellation-style positioning. Skills organized by color-coded categories with legend. Perfect match to the provided reference photo."
+      message: "Successfully completed all requested changes: 1) Removed Network Overview section completely 2) Removed progress bars from skill nodes and detail section 3) Added interactive hover effects to connection lines that make them shine/glow when hovering over related skills. The skills network now has a cleaner look with enhanced interactivity."
