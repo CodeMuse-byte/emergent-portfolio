@@ -33,20 +33,38 @@ const Playground = () => {
         </section>
       </AnimatedBackground>
 
-      {/* Interactive Playground Section */}
+      {/* Physics Playground Section */}
       <section className="py-20 bg-slate-900">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                Interactive Physics Simulation
+                Physics Simulation
               </h2>
               <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                Built with HTML5 Canvas and JavaScript, featuring real-time physics calculations, collision detection, and interactive mouse controls.
+                Real-time physics with collision detection, gravity effects, and interactive mouse controls.
               </p>
             </div>
             
             <PhysicsPlayground />
+          </div>
+        </div>
+      </section>
+
+      {/* Particle Playground Section */}
+      <section className="py-20 bg-accent/5">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">
+                Particle Network
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                Interactive particle system with dynamic connections, attraction effects, and burst patterns.
+              </p>
+            </div>
+            
+            <ParticlePlayground />
           </div>
         </div>
       </section>
