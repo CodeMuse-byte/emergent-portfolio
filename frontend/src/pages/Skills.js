@@ -104,17 +104,7 @@ const Skills = () => {
             minWidth: '120px'
           }}
         >
-          <div className="text-white font-medium text-sm mb-1">{skill.name}</div>
-          <div className="w-full bg-gray-700 rounded-full h-1.5 mb-1">
-            <div 
-              className="h-1.5 rounded-full transition-all duration-300"
-              style={{ 
-                width: `${skill.level}%`,
-                backgroundColor: category.color
-              }}
-            ></div>
-          </div>
-          <div className="text-xs text-gray-400">{skill.level}%</div>
+          <div className="text-white font-medium text-sm">{skill.name}</div>
         </div>
       </div>
     );
