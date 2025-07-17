@@ -15,7 +15,6 @@ import {
 } from 'lucide-react';
 
 const Skills = () => {
-const Skills = () => {
   const [selectedSkill, setSelectedSkill] = useState(null);
 
   // Skills organized in categories
