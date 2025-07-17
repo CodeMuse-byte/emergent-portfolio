@@ -673,6 +673,17 @@ const Projects = () => {
           }
         }
         
+        @keyframes blockFadeOut {
+          0% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+          100% {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.9);
+          }
+        }
+        
         @keyframes powerUpCollect {
           0% {
             opacity: 0;
@@ -684,6 +695,20 @@ const Projects = () => {
           100% {
             opacity: 1;
             transform: scale(1);
+          }
+        }
+        
+        @keyframes powerUpFadeOut {
+          0% {
+            opacity: 1;
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(0.8);
+          }
+          100% {
+            opacity: 0;
+            transform: scale(0.6);
           }
         }
         
