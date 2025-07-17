@@ -864,6 +864,34 @@ const Projects = () => {
           animation: neon-glow 2s ease-in-out infinite;
         }
         
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+        
+        .rotate-x-75 {
+          transform: rotateX(75deg);
+        }
+        
+        .rotate-y-5 {
+          transform: rotateY(5deg);
+        }
+        
+        .translate-z-0 {
+          transform: translateZ(0);
+        }
+        
+        .preserve-3d {
+          transform-style: preserve-3d;
+        }
+        
+        .backface-hidden {
+          backface-visibility: hidden;
+        }
+        
+        .neon-glow {
+          animation: neon-glow 2s ease-in-out infinite;
+        }
+        
         .animate-fade-in {
           animation: fadeIn 1s ease-out forwards;
         }
@@ -873,13 +901,13 @@ const Projects = () => {
         }
         
         @keyframes fadeIn {
-          0% { opacity: 0; transform: translateY(30px); }
-          100% { opacity: 1; transform: translateY(0); }
+          0% { opacity: 0; transform: translateY(30px) translateZ(0px); }
+          100% { opacity: 1; transform: translateY(0) translateZ(5px); }
         }
 
         @keyframes fadeOut {
-          0% { opacity: 1; transform: translateY(0); }
-          100% { opacity: 0; transform: translateY(-30px); }
+          0% { opacity: 1; transform: translateY(0) translateZ(5px); }
+          100% { opacity: 0; transform: translateY(-30px) translateZ(0px); }
         }
       `}</style>
     </div>
