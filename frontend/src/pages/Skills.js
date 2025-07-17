@@ -133,6 +133,11 @@ const Skills = () => {
           const isRelatedToHovered = hoveredSkill && 
             (from.name === hoveredSkill || to.name === hoveredSkill);
           
+          // Get the color of the target skill (the skill being connected to)
+          const targetSkill = from.name === hoveredSkill ? to : from;
+          const targetCategory = getSkillCategory(targetSkill.name);
+          const lineColor = isRelatedToHovered ? targetCategory.color : "#444444";
+          
           return (
             <line
               key={key}
@@ -140,14 +145,14 @@ const Skills = () => {
               y1={`${from.y}%`}
               x2={`${to.x}%`}
               y2={`${to.y}%`}
-              stroke={isRelatedToHovered ? "#ffffff" : "#444444"}
-              strokeWidth={isRelatedToHovered ? "2" : "1"}
+              stroke={lineColor}
+              strokeWidth={isRelatedToHovered ? "3" : "1"}
               strokeDasharray="3,3"
               className={`transition-all duration-300 ${
-                isRelatedToHovered ? 'opacity-100 drop-shadow-lg' : 'opacity-60'
+                isRelatedToHovered ? 'opacity-100' : 'opacity-60'
               }`}
               style={isRelatedToHovered ? {
-                filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.5))'
+                filter: `drop-shadow(0 0 6px ${targetCategory.color})`
               } : {}}
             />
           );
