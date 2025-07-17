@@ -12,7 +12,8 @@ import {
   Code, 
   FolderOpen, 
   MessageSquare, 
-  Mail 
+  Mail,
+  Gamepad2
 } from 'lucide-react';
 
 const Navigation = () => {
