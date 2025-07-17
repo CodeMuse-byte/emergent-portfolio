@@ -309,7 +309,7 @@ const Projects = () => {
         )}
 
         {/* Game Started - Pixelated Transition */}
-        {gameStarted && !detailsAnimating && (
+        {gameStarted && !detailsAnimating && !gameEnding && (
           <div className="absolute inset-0 flex items-center justify-center bg-black">
             <div className="text-center">
               <div className="text-4xl md:text-6xl font-bold pixel-font text-green-400 animate-pulse mb-4">
@@ -317,6 +317,20 @@ const Projects = () => {
               </div>
               <div className="text-xl md:text-2xl font-bold pixel-font text-cyan-400">
                 LOADING...
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Game Over Overlay */}
+        {showGameOver && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black z-60">
+            <div className="text-center">
+              <div className="text-6xl md:text-8xl font-bold pixel-font text-red-400 animate-pulse mb-4">
+                💀 GAME OVER 💀
+              </div>
+              <div className="text-2xl md:text-3xl font-bold pixel-font text-yellow-400 animate-bounce">
+                RETURNING TO ARCADE...
               </div>
             </div>
           </div>
