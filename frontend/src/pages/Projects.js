@@ -143,12 +143,13 @@ const Projects = () => {
 
     return (
       <div 
-        className={`arcade-machine relative transition-all duration-300 cursor-pointer ${
+        className={`arcade-machine relative transition-all duration-300 cursor-pointer transform-gpu ${
           isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
         }`}
         style={{
           filter: isVisible ? 'none' : 'blur(4px)',
-          transform: isVisible ? 'translateY(0)' : 'translateY(20px)'
+          transform: isVisible ? 'translateY(0) rotateY(0deg)' : 'translateY(20px) rotateY(15deg)',
+          transformStyle: 'preserve-3d'
         }}
         onMouseEnter={() => {
           setHoveredProject(project.id);
@@ -157,52 +158,70 @@ const Projects = () => {
         onMouseLeave={() => setHoveredProject(null)}
         onClick={() => handleProjectClick(project)}
       >
-        {/* Arcade Machine Frame */}
+        {/* Arcade Machine Frame with 3D depth */}
         <div className={`bg-gradient-to-b from-gray-600 to-gray-800 p-2 rounded-lg border-2 border-gray-500 shadow-2xl transform transition-all duration-300 ${
-          isHovered ? 'scale-105 shadow-purple-500/50' : ''
-        }`}>
+          isHovered ? 'scale-105 shadow-purple-500/50 rotate-y-5' : ''
+        }`}
+        style={{
+          transformStyle: 'preserve-3d',
+          transform: isHovered ? 'scale(1.05) rotateY(5deg) translateZ(10px)' : 'rotateY(0deg) translateZ(0px)',
+          boxShadow: isHovered ? '0 25px 50px -12px rgba(139, 92, 246, 0.5), 0 0 30px rgba(139, 92, 246, 0.3)' : '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
+        }}>
           
-          {/* Screen */}
+          {/* Screen with enhanced 3D effect */}
           <div className={`relative bg-black rounded border-2 border-gray-400 p-4 mb-3 transition-all duration-300 ${
             isHovered ? 'border-cyan-400 shadow-lg shadow-cyan-400/50' : ''
-          }`}>
+          }`}
+          style={{
+            transform: isHovered ? 'translateZ(5px)' : 'translateZ(0px)',
+            boxShadow: isHovered ? 'inset 0 0 20px rgba(6, 182, 212, 0.3), 0 0 30px rgba(6, 182, 212, 0.2)' : 'inset 0 0 10px rgba(0, 0, 0, 0.5)'
+          }}>
             
-            {/* Screen Glow Effect */}
+            {/* 3D Screen Glow Effect */}
             {isHovered && (
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-purple-600/20 rounded animate-pulse"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-purple-600/20 rounded animate-pulse"
+                   style={{transform: 'translateZ(1px)'}}></div>
             )}
             
-            {/* Project Image/Preview */}
-            <div className="relative h-48 overflow-hidden rounded mb-4">
+            {/* Project Image/Preview with 3D depth */}
+            <div className="relative h-48 overflow-hidden rounded mb-4"
+                 style={{
+                   transform: isHovered ? 'translateZ(3px)' : 'translateZ(0px)',
+                   transition: 'transform 0.3s ease'
+                 }}>
               <img 
                 src={project.image} 
                 alt={project.title}
                 className={`w-full h-full object-cover transition-all duration-300 ${
-                  isHovered ? 'brightness-125 saturate-150' : 'brightness-75'
+                  isHovered ? 'brightness-125 saturate-150 scale-110' : 'brightness-75'
                 }`}
                 style={{
                   filter: isHovered ? 'hue-rotate(10deg) contrast(1.2)' : 'contrast(0.8)',
-                  imageRendering: 'pixelated'
+                  imageRendering: 'pixelated',
+                  transform: isHovered ? 'scale(1.1) rotateY(2deg)' : 'scale(1) rotateY(0deg)'
                 }}
               />
               
-              {/* Pixelated Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              {/* 3D Pixelated Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
+                   style={{transform: 'translateZ(2px)'}}></div>
               
-              {/* Featured Badge */}
+              {/* Featured Badge with 3D effect */}
               {project.featured && (
-                <div className="absolute top-2 right-2">
-                  <Badge className="bg-yellow-500 text-black font-bold pixel-font animate-pulse">
+                <div className="absolute top-2 right-2"
+                     style={{transform: 'translateZ(4px)'}}>
+                  <Badge className="bg-yellow-500 text-black font-bold pixel-font animate-pulse shadow-lg">
                     <Star className="w-3 h-3 mr-1" />
                     HIGH SCORE
                   </Badge>
                 </div>
               )}
               
-              {/* Screen Scanlines */}
+              {/* Enhanced Screen Scanlines */}
               <div className="absolute inset-0 opacity-20 pointer-events-none"
                 style={{
-                  background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,255,0.1) 2px, rgba(0,255,255,0.1) 4px)'
+                  background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,255,0.1) 2px, rgba(0,255,255,0.1) 4px)',
+                  transform: 'translateZ(1px)'
                 }}
               ></div>
             </div>
