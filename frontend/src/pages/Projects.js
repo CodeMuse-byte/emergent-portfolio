@@ -124,28 +124,6 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Interactive Playground */}
-      <section className="py-20 bg-slate-900">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-purple-500/20">
-                <Gamepad2 className="w-4 h-4 mr-2" />
-                Interactive Demo
-              </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                Interactive Playground
-              </h2>
-              <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                Experience physics-based interactions with real-time collision detection, gravity simulation, and particle effects.
-              </p>
-            </div>
-            
-            <PhysicsPlayground />
-          </div>
-        </div>
-      </section>
-
       {/* Projects Grid */}
       <section className="py-20">
         <div className="container mx-auto px-4">
