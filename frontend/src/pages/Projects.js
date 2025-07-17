@@ -362,7 +362,7 @@ const Projects = () => {
             <div className="container mx-auto px-4 max-w-6xl">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
                 {/* Main Game View */}
-                <div className="sprite-block bg-gray-900 p-6 rounded-lg border-2 border-cyan-400 shadow-lg shadow-cyan-400/50">
+                <div className={`sprite-block bg-gray-900 p-6 rounded-lg border-2 border-cyan-400 shadow-lg shadow-cyan-400/50 ${gameEnding ? 'fade-out' : ''}`}>
                   <div className="relative">
                     <img 
                       src={project.image} 
@@ -379,7 +379,7 @@ const Projects = () => {
                 </div>
 
                 {/* Game Info Panel */}
-                <div className="sprite-block bg-gray-900 p-6 rounded-lg border-2 border-purple-400 shadow-lg shadow-purple-400/50">
+                <div className={`sprite-block bg-gray-900 p-6 rounded-lg border-2 border-purple-400 shadow-lg shadow-purple-400/50 ${gameEnding ? 'fade-out' : ''}`}>
                   <h3 className="text-2xl font-bold pixel-font text-purple-400 mb-4">
                     📊 GAME STATS
                   </h3>
