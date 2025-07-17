@@ -186,37 +186,10 @@ const Skills = () => {
 
   return (
     <div className="min-h-screen bg-gray-900">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
-        <section className="container mx-auto px-4 py-20 lg:py-32">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium border-gray-600 text-gray-300">
-              <Compass className="w-4 h-4 mr-2" />
-              Skills Network
-            </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Technical Skills Network
-            </h1>
-            <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-              Explore my interconnected technical skills. Each node represents a technology, connected to show how they work together.
-            </p>
-          </div>
-        </section>
-      </div>
-
       {/* Skills Network */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-                Interactive Skills Network
-              </h2>
-              <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8">
-                Click on any skill node to see detailed information and explore the connections between technologies.
-              </p>
-            </div>
-            
             {/* Network Container */}
             <div className="relative h-96 md:h-[600px] bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
               {/* Connection lines */}
