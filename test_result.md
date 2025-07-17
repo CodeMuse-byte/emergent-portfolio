@@ -301,7 +301,7 @@ test_plan:
           agent: "main"
           comment: "Successfully removed progress bars from all skill nodes in the network map. Also removed progress bars from the selected skill details section. Skills now show only the skill name in clean, simple card format."
 
-  - task: "Add Hover Effect to Connected Lines"
+  - task: "Enhanced Hover Effect with Category Colors"
     implemented: true
     working: true
     file: "frontend/src/pages/Skills.js"
@@ -311,8 +311,8 @@ test_plan:
     status_history:
         - working: true
           agent: "main"
-          comment: "Successfully implemented hover effect for connected lines. When hovering over any skill node, the connection lines to related skills now shine with white color, increased thickness, and glowing effect. Non-related lines remain dimmed."
+          comment: "Successfully enhanced hover effects to use category colors. When hovering over a skill: 1) The skill itself shines with its category color (pink for Frontend, cyan for Backend, purple for Tools, green for Other) 2) Connection lines take the color of the skill they connect to 3) Increased line thickness and added glow effects for better visibility"
 
 agent_communication:
     - agent: "main"
-      message: "Successfully completed all requested changes: 1) Removed Network Overview section completely 2) Removed progress bars from skill nodes and detail section 3) Added interactive hover effects to connection lines that make them shine/glow when hovering over related skills. The skills network now has a cleaner look with enhanced interactivity."
+      message: "Successfully completed all requested enhancements: 1) Removed Network Overview section completely 2) Removed progress bars from skill nodes and detail section 3) Added advanced interactive hover effects where connection lines take the color of the connected skill (blue for Backend, pink for Frontend, purple for Tools, green for Other) and the hovered skill shines with its category color. The network now provides rich visual feedback showing skill relationships through color-coded connections."
