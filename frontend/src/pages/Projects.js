@@ -87,6 +87,11 @@ const Projects = () => {
     console.log('🎮 GAME START SOUND! *BEEP BEEP BOOP*');
   };
 
+  // Play game over sound
+  const playGameOverSound = () => {
+    console.log('💀 GAME OVER SOUND! *GAME OVER*');
+  };
+
   // Handle project click - Start game sequence
   const handleProjectClick = (project) => {
     setSelectedProject(project);
