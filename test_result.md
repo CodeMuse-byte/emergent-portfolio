@@ -270,7 +270,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Arcade Game Transition - Enter Game Details"
+    - "Back to Lobby - Reverse Animation System"
     - "Add Second Playground - Particle System"
     - "Interactive Playground with Physics-Based Elements"
   stuck_tasks: []
