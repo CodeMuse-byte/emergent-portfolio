@@ -4,6 +4,7 @@ import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import AnimatedBackground from '../components/AnimatedBackground';
+import PhysicsPlayground from '../components/PhysicsPlayground';
 import { projects } from '../data/mockData';
 import { 
   Search,
@@ -14,7 +15,8 @@ import {
   Filter,
   Star,
   Eye,
-  GitBranch
+  GitBranch,
+  Gamepad2
 } from 'lucide-react';
 
 const Projects = () => {
