@@ -246,16 +246,26 @@ const Projects = () => {
             </div>
           </div>
           
-          {/* Control Panel */}
-          <div className="bg-gray-700 p-3 rounded border border-gray-500">
-            {/* Flashing Title */}
+          {/* Control Panel with 3D depth */}
+          <div className="bg-gray-700 p-3 rounded border border-gray-500 relative"
+               style={{
+                 transform: isHovered ? 'translateZ(3px)' : 'translateZ(0px)',
+                 boxShadow: isHovered ? '0 8px 16px rgba(0, 0, 0, 0.3)' : '0 4px 8px rgba(0, 0, 0, 0.2)',
+                 transition: 'all 0.3s ease'
+               }}>
+            
+            {/* 3D Flashing Title */}
             <h3 className={`text-white font-bold text-center mb-2 pixel-font ${
               isHovered ? 'animate-pulse text-yellow-400' : ''
-            }`}>
+            }`}
+            style={{
+              transform: isHovered ? 'translateZ(2px)' : 'translateZ(0px)',
+              textShadow: isHovered ? '0 0 20px currentColor, 0 2px 4px rgba(0,0,0,0.5)' : '0 0 10px currentColor'
+            }}>
               {project.title.toUpperCase()}
             </h3>
             
-            {/* Arcade Buttons */}
+            {/* 3D Arcade Buttons */}
             <div className="flex justify-center space-x-2 mb-3">
               <Button 
                 size="sm" 
@@ -263,6 +273,11 @@ const Projects = () => {
                 className={`arcade-button bg-red-600 border-red-400 hover:bg-red-500 text-white font-bold ${
                   isHovered ? 'animate-bounce' : ''
                 }`}
+                style={{
+                  transform: isHovered ? 'translateZ(4px) scale(1.05)' : 'translateZ(0px) scale(1)',
+                  boxShadow: isHovered ? '0 0 20px rgba(239, 68, 68, 0.5), 0 4px 8px rgba(0,0,0,0.3)' : '0 0 10px currentColor',
+                  transition: 'all 0.3s ease'
+                }}
                 onClick={(e) => {
                   e.stopPropagation();
                   window.open(project.demo, '_blank');
@@ -278,6 +293,12 @@ const Projects = () => {
                 className={`arcade-button bg-blue-600 border-blue-400 hover:bg-blue-500 text-white font-bold ${
                   isHovered ? 'animate-bounce' : ''
                 }`}
+                style={{
+                  transform: isHovered ? 'translateZ(4px) scale(1.05)' : 'translateZ(0px) scale(1)',
+                  boxShadow: isHovered ? '0 0 20px rgba(59, 130, 246, 0.5), 0 4px 8px rgba(0,0,0,0.3)' : '0 0 10px currentColor',
+                  transition: 'all 0.3s ease',
+                  animationDelay: '0.1s'
+                }}
                 onClick={(e) => {
                   e.stopPropagation();
                   window.open(project.github, '_blank');
@@ -288,9 +309,16 @@ const Projects = () => {
               </Button>
             </div>
             
-            {/* Score Display */}
-            <div className="text-center">
-              <div className="text-green-400 font-mono text-xs">
+            {/* 3D Score Display */}
+            <div className="text-center"
+                 style={{
+                   transform: isHovered ? 'translateZ(1px)' : 'translateZ(0px)',
+                   transition: 'transform 0.3s ease'
+                 }}>
+              <div className="text-green-400 font-mono text-xs"
+                   style={{
+                     textShadow: isHovered ? '0 0 15px currentColor' : '0 0 5px currentColor'
+                   }}>
                 SCORE: {(project.id * 1000).toLocaleString()}
               </div>
             </div>
