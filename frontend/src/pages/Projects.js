@@ -337,7 +337,7 @@ const Projects = () => {
         )}
 
         {/* Game Details - Sprite Animation */}
-        {detailsAnimating && (
+        {detailsAnimating && !gameEnding && (
           <div className="absolute inset-0 overflow-y-auto bg-gradient-to-b from-black via-purple-900/20 to-black">
             {/* Close Button */}
             <Button
