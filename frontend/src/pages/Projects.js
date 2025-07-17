@@ -383,24 +383,42 @@ const Projects = () => {
           </div>
         )}
 
-        {/* Game Details - Sprite Animation */}
+        {/* Game Details - Enhanced 3D Sprite Animation */}
         {detailsAnimating && !gameEnding && (
-          <div className="absolute inset-0 overflow-y-auto bg-gradient-to-b from-black via-purple-900/20 to-black">
-            {/* Close Button */}
+          <div className="absolute inset-0 overflow-y-auto bg-gradient-to-b from-black via-purple-900/30 to-black"
+               style={{
+                 background: 'radial-gradient(ellipse at center, rgba(139, 92, 246, 0.1) 0%, rgba(0, 0, 0, 0.8) 70%, black 100%)',
+                 backdropFilter: 'blur(1px)'
+               }}>
+            {/* Close Button with 3D effect */}
             <Button
               onClick={closeGameView}
-              className="absolute top-4 right-4 z-50 bg-red-600 hover:bg-red-500 text-white pixel-font"
+              className="absolute top-4 right-4 z-50 bg-red-600 hover:bg-red-500 text-white pixel-font shadow-lg"
+              style={{
+                transform: 'translateZ(10px)',
+                boxShadow: '0 8px 16px rgba(239, 68, 68, 0.3), 0 0 20px rgba(239, 68, 68, 0.2)'
+              }}
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               BACK TO ARCADE
             </Button>
 
-            {/* Game Header */}
-            <div className={`text-center py-12 ${gameEnding ? 'animate-fade-out' : 'animate-fade-in'}`}>
-              <div className="text-5xl md:text-7xl font-bold pixel-font text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 mb-4">
+            {/* Enhanced 3D Game Header */}
+            <div className={`text-center py-12 ${gameEnding ? 'animate-fade-out' : 'animate-fade-in'}`}
+                 style={{
+                   transform: 'translateZ(5px)',
+                   textShadow: '0 0 30px currentColor, 0 4px 8px rgba(0,0,0,0.5)'
+                 }}>
+              <div className="text-5xl md:text-7xl font-bold pixel-font text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 mb-4"
+                   style={{
+                     filter: 'drop-shadow(0 0 20px rgba(6, 182, 212, 0.5))'
+                   }}>
                 {project.title.toUpperCase()}
               </div>
-              <div className="text-xl text-cyan-400 pixel-font">
+              <div className="text-xl text-cyan-400 pixel-font"
+                   style={{
+                     textShadow: '0 0 15px currentColor'
+                   }}>
                 GAME #{project.id.toString().padStart(3, '0')} - LEVEL {project.id}
               </div>
             </div>
