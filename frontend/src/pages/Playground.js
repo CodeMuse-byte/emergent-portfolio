@@ -2,6 +2,7 @@ import React from 'react';
 import { Badge } from '../components/ui/badge';
 import AnimatedBackground from '../components/AnimatedBackground';
 import PhysicsPlayground from '../components/PhysicsPlayground';
+import ParticlePlayground from '../components/ParticlePlayground';
 import { 
   Gamepad2,
   Zap,
