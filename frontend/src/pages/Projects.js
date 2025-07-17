@@ -349,7 +349,7 @@ const Projects = () => {
             </Button>
 
             {/* Game Header */}
-            <div className="text-center py-12 animate-fade-in">
+            <div className={`text-center py-12 ${gameEnding ? 'animate-fade-out' : 'animate-fade-in'}`}>
               <div className="text-5xl md:text-7xl font-bold pixel-font text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 mb-4">
                 {project.title.toUpperCase()}
               </div>
