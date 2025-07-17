@@ -270,12 +270,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Network-Style Skills Map"
-    - "Skill Node Cards Design"
-    - "Network Connection Lines"
-    - "Dark Theme UI Design"
-    - "Interactive Network Navigation"
-    - "Constellation-Style Positioning"
+    - "Remove Network Overview Section"
+    - "Remove Progress Bars from Skills"
+    - "Add Hover Effect to Connected Lines"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
