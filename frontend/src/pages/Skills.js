@@ -1,17 +1,18 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Text, Box, Plane, Sphere, Cylinder, Cone } from '@react-three/drei';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Progress } from '../components/ui/progress';
 import AnimatedBackground from '../components/AnimatedBackground';
 import { 
   Star,
-  Waves,
-  Fish,
-  Anchor
+  Code,
+  Database,
+  Globe,
+  Settings,
+  Layers,
+  Terminal,
+  Zap
 } from 'lucide-react';
-import * as THREE from 'three';
 
 const Skills = () => {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
