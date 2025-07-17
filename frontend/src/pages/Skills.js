@@ -246,22 +246,6 @@ const Skills = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-6">
-                    <div>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="font-medium text-gray-300">Proficiency Level</span>
-                        <span className="text-sm font-bold text-white">{selectedSkill.level}%</span>
-                      </div>
-                      <div className="w-full bg-gray-700 rounded-full h-3">
-                        <div 
-                          className="h-3 rounded-full transition-all duration-300"
-                          style={{ 
-                            width: `${selectedSkill.level}%`,
-                            backgroundColor: getSkillCategory(selectedSkill.name)?.color
-                          }}
-                        ></div>
-                      </div>
-                    </div>
-                    
                     <div className="flex items-center space-x-4">
                       <div className="flex items-center space-x-1">
                         {[...Array(5)].map((_, i) => (
