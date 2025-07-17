@@ -13,197 +13,238 @@ import {
 
 const Skills = () => {
   const [selectedSkill, setSelectedSkill] = useState(null);
+  const [hoveredSkill, setHoveredSkill] = useState(null);
 
-  // Skills organized in categories
-  const skillsMapping = {
+  // Skills positioned like locations on a map
+  const skillsMap = {
     frontend: {
-      title: "Frontend Development",
-      icon: <Globe className="w-5 h-5" />,
-      color: "bg-blue-500",
+      name: "Frontend Territory",
+      color: "#3B82F6",
       skills: [
-        { 
-          name: "React", 
-          level: 90, 
-          description: "Building dynamic user interfaces with React ecosystem",
-          icon: <Code className="w-4 h-4" />
-        },
-        { 
-          name: "JavaScript", 
-          level: 95, 
-          description: "Core language for web development",
-          icon: <Code className="w-4 h-4" />
-        },
-        { 
-          name: "TypeScript", 
-          level: 85, 
-          description: "Type-safe JavaScript development",
-          icon: <Code className="w-4 h-4" />
-        },
-        { 
-          name: "Next.js", 
-          level: 80, 
-          description: "React framework for production applications",
-          icon: <Layers className="w-4 h-4" />
-        }
+        { name: "React", level: 90, x: 25, y: 30, connections: ['JavaScript', 'TypeScript', 'Next.js'] },
+        { name: "JavaScript", level: 95, x: 35, y: 20, connections: ['React', 'Node.js', 'TypeScript'] },
+        { name: "TypeScript", level: 85, x: 45, y: 35, connections: ['React', 'JavaScript', 'Next.js'] },
+        { name: "Next.js", level: 80, x: 55, y: 25, connections: ['React', 'TypeScript'] }
       ]
     },
     backend: {
-      title: "Backend Development",
-      icon: <Database className="w-5 h-5" />,
-      color: "bg-green-500",
+      name: "Backend Valley",
+      color: "#10B981",
       skills: [
-        { 
-          name: "Node.js", 
-          level: 85, 
-          description: "Server-side JavaScript runtime",
-          icon: <Terminal className="w-4 h-4" />
-        },
-        { 
-          name: "Python", 
-          level: 80, 
-          description: "Versatile programming language",
-          icon: <Code className="w-4 h-4" />
-        },
-        { 
-          name: "FastAPI", 
-          level: 75, 
-          description: "Modern Python web framework",
-          icon: <Zap className="w-4 h-4" />
-        },
-        { 
-          name: "MongoDB", 
-          level: 85, 
-          description: "NoSQL database management",
-          icon: <Database className="w-4 h-4" />
-        }
+        { name: "Node.js", level: 85, x: 65, y: 55, connections: ['JavaScript', 'MongoDB', 'FastAPI'] },
+        { name: "Python", level: 80, x: 75, y: 45, connections: ['FastAPI', 'MongoDB'] },
+        { name: "FastAPI", level: 75, x: 85, y: 60, connections: ['Python', 'Node.js'] },
+        { name: "MongoDB", level: 85, x: 70, y: 70, connections: ['Node.js', 'Python'] }
       ]
     },
     tools: {
-      title: "Development Tools",
-      icon: <Settings className="w-5 h-5" />,
-      color: "bg-purple-500",
+      name: "Tools Mountain",
+      color: "#8B5CF6",
       skills: [
-        { 
-          name: "Git", 
-          level: 90, 
-          description: "Version control and collaboration",
-          icon: <Terminal className="w-4 h-4" />
-        },
-        { 
-          name: "Docker", 
-          level: 75, 
-          description: "Containerization and deployment",
-          icon: <Settings className="w-4 h-4" />
-        },
-        { 
-          name: "Linux", 
-          level: 85, 
-          description: "System administration and operations",
-          icon: <Terminal className="w-4 h-4" />
-        },
-        { 
-          name: "Jest", 
-          level: 80, 
-          description: "JavaScript testing framework",
-          icon: <Settings className="w-4 h-4" />
-        }
+        { name: "Git", level: 90, x: 20, y: 70, connections: ['Docker', 'Linux'] },
+        { name: "Docker", level: 75, x: 30, y: 80, connections: ['Git', 'Linux'] },
+        { name: "Linux", level: 85, x: 40, y: 75, connections: ['Git', 'Docker', 'Jest'] },
+        { name: "Jest", level: 80, x: 50, y: 85, connections: ['Linux', 'JavaScript'] }
       ]
     },
-    other: {
-      title: "Problem Solving",
-      icon: <Zap className="w-5 h-5" />,
-      color: "bg-orange-500",
+    core: {
+      name: "Core Skills Island",
+      color: "#F59E0B",
       skills: [
-        { 
-          name: "Problem Solving", 
-          level: 95, 
-          description: "Analytical thinking and solution design",
-          icon: <Zap className="w-4 h-4" />
-        }
+        { name: "Problem Solving", level: 95, x: 50, y: 50, connections: ['JavaScript', 'Python', 'Git'] }
       ]
     }
+  };
+
+  const getAllSkills = () => {
+    return Object.values(skillsMap).flatMap(territory => territory.skills);
+  };
+
+  const getSkillByName = (name) => {
+    return getAllSkills().find(skill => skill.name === name);
   };
 
   const handleSkillClick = (skill) => {
     setSelectedSkill(selectedSkill?.name === skill.name ? null : skill);
   };
 
+  const SkillNode = ({ skill, territory }) => {
+    const isSelected = selectedSkill?.name === skill.name;
+    const isHovered = hoveredSkill === skill.name;
+    
+    return (
+      <div
+        className={`absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-300 ${
+          isSelected ? 'scale-125 z-20' : isHovered ? 'scale-110 z-10' : 'z-5'
+        }`}
+        style={{ left: `${skill.x}%`, top: `${skill.y}%` }}
+        onClick={() => handleSkillClick(skill)}
+        onMouseEnter={() => setHoveredSkill(skill.name)}
+        onMouseLeave={() => setHoveredSkill(null)}
+      >
+        <div
+          className={`w-16 h-16 rounded-full border-4 border-white shadow-lg flex items-center justify-center text-white font-bold text-sm transition-all duration-300 ${
+            isSelected ? 'ring-4 ring-blue-400' : ''
+          }`}
+          style={{ backgroundColor: territory.color }}
+        >
+          <MapPin className="w-6 h-6" />
+        </div>
+        <div className="absolute top-20 left-1/2 transform -translate-x-1/2 text-center">
+          <div className="bg-white px-2 py-1 rounded shadow-md text-sm font-medium text-gray-800">
+            {skill.name}
+          </div>
+          <div className="text-xs text-gray-600 mt-1">{skill.level}%</div>
+        </div>
+      </div>
+    );
+  };
+
+  const ConnectionLines = () => {
+    const allSkills = getAllSkills();
+    const connections = [];
+
+    allSkills.forEach(skill => {
+      skill.connections.forEach(connectionName => {
+        const connectedSkill = getSkillByName(connectionName);
+        if (connectedSkill) {
+          connections.push({
+            from: skill,
+            to: connectedSkill,
+            key: `${skill.name}-${connectionName}`
+          });
+        }
+      });
+    });
+
+    return (
+      <svg className="absolute inset-0 w-full h-full pointer-events-none">
+        {connections.map(({ from, to, key }) => (
+          <line
+            key={key}
+            x1={`${from.x}%`}
+            y1={`${from.y}%`}
+            x2={`${to.x}%`}
+            y2={`${to.y}%`}
+            stroke="#E5E7EB"
+            strokeWidth="2"
+            strokeDasharray="5,5"
+            className="animate-pulse"
+          />
+        ))}
+      </svg>
+    );
+  };
+
+  const TerritoryLabels = () => {
+    return (
+      <>
+        {/* Frontend Territory */}
+        <div className="absolute top-4 left-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg">
+          <div className="flex items-center space-x-2">
+            <Navigation className="w-4 h-4" />
+            <span className="font-bold">Frontend Territory</span>
+          </div>
+        </div>
+
+        {/* Backend Valley */}
+        <div className="absolute top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg">
+          <div className="flex items-center space-x-2">
+            <Navigation className="w-4 h-4" />
+            <span className="font-bold">Backend Valley</span>
+          </div>
+        </div>
+
+        {/* Tools Mountain */}
+        <div className="absolute bottom-4 left-4 bg-purple-500 text-white px-4 py-2 rounded-lg shadow-lg">
+          <div className="flex items-center space-x-2">
+            <Navigation className="w-4 h-4" />
+            <span className="font-bold">Tools Mountain</span>
+          </div>
+        </div>
+
+        {/* Core Skills Island */}
+        <div className="absolute bottom-4 right-4 bg-orange-500 text-white px-4 py-2 rounded-lg shadow-lg">
+          <div className="flex items-center space-x-2">
+            <Navigation className="w-4 h-4" />
+            <span className="font-bold">Core Skills Island</span>
+          </div>
+        </div>
+      </>
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
       {/* Hero Section */}
       <AnimatedBackground className="relative overflow-hidden">
         <section className="container mx-auto px-4 py-20 lg:py-32">
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium">
-              <Code className="w-4 h-4 mr-2" />
-              Technical Skills Overview
+              <Compass className="w-4 h-4 mr-2" />
+              Interactive Skills Map
             </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-              Skills & Expertise
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+              Skills Navigation Map
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              A comprehensive overview of my technical skills and expertise across different domains.
+              Explore my technical skills mapped across different territories. Click on any skill node to discover connections and proficiency levels.
             </p>
           </div>
         </section>
       </AnimatedBackground>
 
-      {/* Skills Mapping */}
+      {/* Skills Map */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-10">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
-                Skills Mapping
+                Interactive Skills Map
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Click on any skill to see detailed information and proficiency level.
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                Navigate through different skill territories and discover how technologies connect with each other.
               </p>
+              <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+                <span>🗺️ Click nodes to explore</span>
+                <span>🔗 Connected skills shown</span>
+                <span>📍 Hover for details</span>
+              </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-              {Object.entries(skillsMapping).map(([key, category]) => (
-                <Card key={key} className="hover:shadow-lg transition-shadow">
-                  <CardHeader className="pb-4">
-                    <CardTitle className="flex items-center space-x-3">
-                      <div className={`w-10 h-10 rounded-lg ${category.color} flex items-center justify-center text-white`}>
-                        {category.icon}
-                      </div>
-                      <span className="text-xl font-bold text-gray-900">{category.title}</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      {category.skills.map((skill) => (
-                        <div 
-                          key={skill.name}
-                          onClick={() => handleSkillClick(skill)}
-                          className="flex items-center justify-between p-3 rounded-lg bg-gray-50 hover:bg-gray-100 cursor-pointer transition-colors"
-                        >
-                          <div className="flex items-center space-x-3">
-                            <div className="text-gray-600">
-                              {skill.icon}
-                            </div>
-                            <div>
-                              <h3 className="font-medium text-gray-900">{skill.name}</h3>
-                              <p className="text-sm text-gray-600">{skill.level}%</p>
-                            </div>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <div className="w-20 bg-gray-200 rounded-full h-2">
-                              <div 
-                                className={`h-2 rounded-full ${category.color}`}
-                                style={{ width: `${skill.level}%` }}
-                              ></div>
-                            </div>
-                            <span className="text-sm font-medium text-gray-700">{skill.level}%</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+            {/* Map Container */}
+            <div className="relative h-96 md:h-[600px] bg-gradient-to-br from-green-100 via-blue-100 to-purple-100 rounded-lg shadow-xl border-2 border-gray-200 overflow-hidden">
+              {/* Background pattern */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute inset-0 bg-grid-pattern"></div>
+              </div>
+              
+              {/* Connection lines */}
+              <ConnectionLines />
+              
+              {/* Territory labels */}
+              <TerritoryLabels />
+              
+              {/* Skills nodes */}
+              {Object.entries(skillsMap).map(([key, territory]) =>
+                territory.skills.map(skill => (
+                  <SkillNode key={skill.name} skill={skill} territory={territory} />
+                ))
+              )}
+              
+              {/* Map legend */}
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white px-4 py-2 rounded-lg shadow-lg">
+                <div className="flex items-center space-x-4 text-sm">
+                  <div className="flex items-center space-x-2">
+                    <MapPin className="w-4 h-4 text-blue-500" />
+                    <span>Skill Node</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Route className="w-4 h-4 text-gray-400" />
+                    <span>Connections</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -217,12 +258,12 @@ const Skills = () => {
               <Card className="border-2 border-blue-200">
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-3">
-                    <div className="text-blue-600">
-                      {selectedSkill.icon}
+                    <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                      <MapPin className="w-6 h-6 text-white" />
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold text-gray-900">{selectedSkill.name}</h3>
-                      <p className="text-gray-600">{selectedSkill.description}</p>
+                      <p className="text-gray-600">Skill Level: {selectedSkill.level}%</p>
                     </div>
                   </CardTitle>
                 </CardHeader>
@@ -249,6 +290,17 @@ const Skills = () => {
                         {selectedSkill.level >= 90 ? 'Expert' : selectedSkill.level >= 80 ? 'Advanced' : 'Intermediate'}
                       </Badge>
                     </div>
+                    
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <h4 className="font-semibold text-gray-900 mb-2">Connected Skills:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedSkill.connections.map(connection => (
+                          <Badge key={connection} variant="secondary" className="text-sm">
+                            {connection}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -257,55 +309,78 @@ const Skills = () => {
         </section>
       )}
 
-      {/* Skills Overview */}
+      {/* Map Overview */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
-              Skills Overview
+              Map Overview
             </h2>
             <p className="text-lg text-gray-600 mb-12">
-              A summary of my technical expertise across different domains
+              Explore different territories of my technical expertise
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              {Object.entries(skillsMap).map(([key, territory]) => (
+                <Card key={key} className="hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6 text-center">
+                    <div 
+                      className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4"
+                      style={{ backgroundColor: territory.color }}
+                    >
+                      <MapPin className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-lg font-bold mb-2 text-gray-900">{territory.name}</h3>
+                    <p className="text-gray-600">{territory.skills.length} Skills</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Map Instructions */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">
+              How to Navigate the Map
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <Card className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <div className="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Globe className="w-6 h-6 text-white" />
+                <CardContent className="p-6">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <div className="bg-blue-500 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                    <h3 className="font-semibold text-gray-900">Click to Explore</h3>
                   </div>
-                  <h3 className="text-2xl font-bold mb-2 text-gray-900">4</h3>
-                  <p className="text-gray-600">Frontend Skills</p>
+                  <p className="text-gray-600">
+                    Click on any skill node to see detailed information and discover connected technologies.
+                  </p>
                 </CardContent>
               </Card>
               
               <Card className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <div className="bg-green-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Database className="w-6 h-6 text-white" />
+                <CardContent className="p-6">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <div className="bg-green-500 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                    <h3 className="font-semibold text-gray-900">Follow Connections</h3>
                   </div>
-                  <h3 className="text-2xl font-bold mb-2 text-gray-900">4</h3>
-                  <p className="text-gray-600">Backend Skills</p>
+                  <p className="text-gray-600">
+                    Dotted lines show how skills connect and complement each other in real projects.
+                  </p>
                 </CardContent>
               </Card>
               
               <Card className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <div className="bg-purple-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Settings className="w-6 h-6 text-white" />
+                <CardContent className="p-6">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <div className="bg-purple-500 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                    <h3 className="font-semibold text-gray-900">Explore Territories</h3>
                   </div>
-                  <h3 className="text-2xl font-bold mb-2 text-gray-900">4</h3>
-                  <p className="text-gray-600">Dev Tools</p>
-                </CardContent>
-              </Card>
-              
-              <Card className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <div className="bg-orange-500 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Zap className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-2 text-gray-900">85%</h3>
-                  <p className="text-gray-600">Avg Level</p>
+                  <p className="text-gray-600">
+                    Navigate through different skill territories to understand the full technology landscape.
+                  </p>
                 </CardContent>
               </Card>
             </div>
