@@ -726,10 +726,19 @@ const Projects = () => {
         .animate-fade-in {
           animation: fadeIn 1s ease-out forwards;
         }
+
+        .animate-fade-out {
+          animation: fadeOut 1s ease-out forwards;
+        }
         
         @keyframes fadeIn {
           0% { opacity: 0; transform: translateY(30px); }
           100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeOut {
+          0% { opacity: 1; transform: translateY(0); }
+          100% { opacity: 0; transform: translateY(-30px); }
         }
       `}</style>
     </div>
