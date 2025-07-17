@@ -17,7 +17,12 @@ import {
   Gamepad2,
   Zap,
   Trophy,
-  Play
+  Play,
+  X,
+  ArrowLeft,
+  Monitor,
+  Users,
+  Clock
 } from 'lucide-react';
 
 const Projects = () => {
@@ -25,6 +30,11 @@ const Projects = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [visibleProjects, setVisibleProjects] = useState([]);
   const [hoveredProject, setHoveredProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [gameStarting, setGameStarting] = useState(false);
+  const [showInsertCoin, setShowInsertCoin] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false);
+  const [detailsAnimating, setDetailsAnimating] = useState(false);
 
   // Get all unique technologies for filtering
   const allTechnologies = [...new Set(projects.flatMap(project => project.technologies))];
@@ -65,10 +75,45 @@ const Projects = () => {
     setVisibleProjects([]);
   }, [selectedFilter, searchQuery]);
 
-  // Play arcade jingle sound (placeholder - in real implementation you'd add actual sound)
+  // Play arcade jingle sound (placeholder)
   const playArcadeJingle = () => {
-    // Placeholder for sound effect
     console.log('🎵 Arcade jingle playing...');
+  };
+
+  // Play game start sound
+  const playGameStartSound = () => {
+    console.log('🎮 GAME START SOUND! *BEEP BEEP BOOP*');
+  };
+
+  // Handle project click - Start game sequence
+  const handleProjectClick = (project) => {
+    setSelectedProject(project);
+    setGameStarting(true);
+    setShowInsertCoin(true);
+    
+    // Play coin sound
+    console.log('🪙 INSERT COIN SOUND!');
+    
+    // Show INSERT COIN message
+    setTimeout(() => {
+      setShowInsertCoin(false);
+      setGameStarted(true);
+      playGameStartSound();
+      
+      // Start details animation
+      setTimeout(() => {
+        setDetailsAnimating(true);
+      }, 500);
+    }, 2000);
+  };
+
+  // Close game view
+  const closeGameView = () => {
+    setSelectedProject(null);
+    setGameStarting(false);
+    setShowInsertCoin(false);
+    setGameStarted(false);
+    setDetailsAnimating(false);
   };
 
   const ArcadeMachine = ({ project, index }) => {
@@ -77,7 +122,7 @@ const Projects = () => {
 
     return (
       <div 
-        className={`arcade-machine relative transition-all duration-300 ${
+        className={`arcade-machine relative transition-all duration-300 cursor-pointer ${
           isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
         }`}
         style={{
@@ -89,6 +134,7 @@ const Projects = () => {
           playArcadeJingle();
         }}
         onMouseLeave={() => setHoveredProject(null)}
+        onClick={() => handleProjectClick(project)}
       >
         {/* Arcade Machine Frame */}
         <div className={`bg-gradient-to-b from-gray-600 to-gray-800 p-2 rounded-lg border-2 border-gray-500 shadow-2xl transform transition-all duration-300 ${
@@ -177,12 +223,13 @@ const Projects = () => {
                 className={`arcade-button bg-red-600 border-red-400 hover:bg-red-500 text-white font-bold ${
                   isHovered ? 'animate-bounce' : ''
                 }`}
-                asChild
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(project.demo, '_blank');
+                }}
               >
-                <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                  <Play className="w-4 h-4 mr-1" />
-                  PLAY
-                </a>
+                <Play className="w-4 h-4 mr-1" />
+                PLAY
               </Button>
               
               <Button 
@@ -191,12 +238,13 @@ const Projects = () => {
                 className={`arcade-button bg-blue-600 border-blue-400 hover:bg-blue-500 text-white font-bold ${
                   isHovered ? 'animate-bounce' : ''
                 }`}
-                asChild
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(project.github, '_blank');
+                }}
               >
-                <a href={project.github} target="_blank" rel="noopener noreferrer">
-                  <Code className="w-4 h-4 mr-1" />
-                  CODE
-                </a>
+                <Code className="w-4 h-4 mr-1" />
+                CODE
               </Button>
             </div>
             
@@ -215,6 +263,164 @@ const Projects = () => {
         {/* Glow Effect */}
         {isHovered && (
           <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-cyan-600/20 rounded-lg blur-lg -z-10 animate-pulse"></div>
+        )}
+      </div>
+    );
+  };
+
+  const GameDetailsView = ({ project }) => {
+    if (!project) return null;
+
+    return (
+      <div className="fixed inset-0 z-50 bg-black">
+        {/* INSERT COIN Overlay */}
+        {showInsertCoin && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black">
+            <div className="text-center">
+              <div className="text-6xl md:text-8xl font-bold pixel-font text-yellow-400 animate-pulse mb-4">
+                🪙 INSERT COIN 🪙
+              </div>
+              <div className="text-2xl md:text-3xl font-bold pixel-font text-cyan-400 animate-bounce">
+                PRESS START
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Game Started - Pixelated Transition */}
+        {gameStarted && !detailsAnimating && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black">
+            <div className="text-center">
+              <div className="text-4xl md:text-6xl font-bold pixel-font text-green-400 animate-pulse mb-4">
+                🎮 GAME START! 🎮
+              </div>
+              <div className="text-xl md:text-2xl font-bold pixel-font text-cyan-400">
+                LOADING...
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Game Details - Sprite Animation */}
+        {detailsAnimating && (
+          <div className="absolute inset-0 overflow-y-auto bg-gradient-to-b from-black via-purple-900/20 to-black">
+            {/* Close Button */}
+            <Button
+              onClick={closeGameView}
+              className="absolute top-4 right-4 z-50 bg-red-600 hover:bg-red-500 text-white pixel-font"
+            >
+              <X className="w-4 h-4 mr-2" />
+              QUIT GAME
+            </Button>
+
+            {/* Game Header */}
+            <div className="text-center py-12 animate-fade-in">
+              <div className="text-5xl md:text-7xl font-bold pixel-font text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 mb-4">
+                {project.title.toUpperCase()}
+              </div>
+              <div className="text-xl text-cyan-400 pixel-font">
+                GAME #{project.id.toString().padStart(3, '0')} - LEVEL {project.id}
+              </div>
+            </div>
+
+            {/* Game Screen */}
+            <div className="container mx-auto px-4 max-w-6xl">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                {/* Main Game View */}
+                <div className="sprite-block bg-gray-900 p-6 rounded-lg border-2 border-cyan-400 shadow-lg shadow-cyan-400/50">
+                  <div className="relative">
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-64 object-cover rounded border-2 border-gray-600"
+                      style={{ imageRendering: 'pixelated' }}
+                    />
+                    <div className="absolute inset-0 opacity-20 pointer-events-none rounded"
+                      style={{
+                        background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,255,0.1) 2px, rgba(0,255,255,0.1) 4px)'
+                      }}
+                    ></div>
+                  </div>
+                </div>
+
+                {/* Game Info Panel */}
+                <div className="sprite-block bg-gray-900 p-6 rounded-lg border-2 border-purple-400 shadow-lg shadow-purple-400/50">
+                  <h3 className="text-2xl font-bold pixel-font text-purple-400 mb-4">
+                    📊 GAME STATS
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center border-b border-gray-700 pb-2">
+                      <span className="text-cyan-400 pixel-font">GENRE:</span>
+                      <span className="text-white pixel-font">WEB APPLICATION</span>
+                    </div>
+                    <div className="flex justify-between items-center border-b border-gray-700 pb-2">
+                      <span className="text-cyan-400 pixel-font">YEAR:</span>
+                      <span className="text-white pixel-font">2024</span>
+                    </div>
+                    <div className="flex justify-between items-center border-b border-gray-700 pb-2">
+                      <span className="text-cyan-400 pixel-font">SCORE:</span>
+                      <span className="text-green-400 pixel-font">{(project.id * 1000).toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between items-center border-b border-gray-700 pb-2">
+                      <span className="text-cyan-400 pixel-font">STATUS:</span>
+                      <span className="text-yellow-400 pixel-font">ACTIVE</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Game Description */}
+              <div className="sprite-block bg-gray-900 p-6 rounded-lg border-2 border-green-400 shadow-lg shadow-green-400/50 mb-8">
+                <h3 className="text-2xl font-bold pixel-font text-green-400 mb-4">
+                  🎯 GAME DESCRIPTION
+                </h3>
+                <p className="text-white pixel-font text-lg leading-relaxed">
+                  {project.description}
+                </p>
+              </div>
+
+              {/* Power-ups (Technologies) */}
+              <div className="sprite-block bg-gray-900 p-6 rounded-lg border-2 border-yellow-400 shadow-lg shadow-yellow-400/50 mb-8">
+                <h3 className="text-2xl font-bold pixel-font text-yellow-400 mb-4">
+                  ⚡ POWER-UPS COLLECTED
+                </h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {project.technologies.map((tech, index) => (
+                    <div 
+                      key={index}
+                      className="bg-gradient-to-r from-green-600 to-green-500 p-3 rounded border-2 border-green-400 text-center power-up-block"
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                    >
+                      <div className="text-white pixel-font font-bold">{tech}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="sprite-block text-center mb-12">
+                <div className="flex justify-center space-x-6">
+                  <Button 
+                    size="lg"
+                    className="bg-red-600 hover:bg-red-500 text-white font-bold pixel-font text-xl px-8 py-4"
+                    onClick={() => window.open(project.demo, '_blank')}
+                  >
+                    <Play className="w-6 h-6 mr-2" />
+                    PLAY GAME
+                  </Button>
+                  
+                  <Button 
+                    size="lg"
+                    className="bg-blue-600 hover:bg-blue-500 text-white font-bold pixel-font text-xl px-8 py-4"
+                    onClick={() => window.open(project.github, '_blank')}
+                  >
+                    <Code className="w-6 h-6 mr-2" />
+                    VIEW CODE
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     );
@@ -249,7 +455,7 @@ const Projects = () => {
               
               <p className="text-lg md:text-xl text-cyan-300 max-w-2xl mx-auto leading-relaxed pixel-font">
                 🕹️ WELCOME TO THE ARCADE! 🕹️<br/>
-                Choose your game and start playing!
+                Click on any game machine to start playing!
               </p>
             </div>
           </div>
@@ -375,6 +581,11 @@ const Projects = () => {
         </div>
       </section>
 
+      {/* Game Details Modal */}
+      {selectedProject && (
+        <GameDetailsView project={selectedProject} />
+      )}
+
       {/* Custom Styles */}
       <style jsx>{`
         .pixel-font {
@@ -396,6 +607,43 @@ const Projects = () => {
           image-rendering: crisp-edges;
         }
         
+        .sprite-block {
+          animation: blockBuildUp 0.5s ease-out forwards;
+          opacity: 0;
+          transform: translateY(20px) scale(0.9);
+        }
+        
+        .power-up-block {
+          animation: powerUpCollect 0.3s ease-out forwards;
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        
+        @keyframes blockBuildUp {
+          0% {
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+        
+        @keyframes powerUpCollect {
+          0% {
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          50% {
+            transform: scale(1.1);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        
         @keyframes neon-glow {
           0%, 100% { text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor; }
           50% { text-shadow: 0 0 2px currentColor, 0 0 5px currentColor, 0 0 8px currentColor; }
@@ -403,6 +651,15 @@ const Projects = () => {
         
         .animate-neon {
           animation: neon-glow 2s ease-in-out infinite;
+        }
+        
+        .animate-fade-in {
+          animation: fadeIn 1s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+          0% { opacity: 0; transform: translateY(30px); }
+          100% { opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </div>
