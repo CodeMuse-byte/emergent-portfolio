@@ -385,6 +385,18 @@ test_plan:
           agent: "main"
           comment: "Successfully implemented Step 2 of arcade theme - Enter Game transition: 1) Click interaction on arcade machines with proper event handling 2) 'INSERT COIN' / 'PRESS START' flashing message with coin emoji and pulsing animation 3) 'GAME START!' transition with loading message 4) Full-screen modal overlay with black background 5) Game details view with sprite-like building animations 6) Project info displayed as game blocks with colored borders (cyan, purple, green, yellow) 7) Technologies shown as 'POWER-UPS COLLECTED' with staggered animations 8) Game stats panel with arcade-style information (GENRE, YEAR, SCORE, STATUS) 9) Arcade-style action buttons (PLAY GAME, VIEW CODE) 10) QUIT GAME button to return to lobby 11) Smooth transitions between phases with proper timing"
 
+  - task: "Back to Lobby - Reverse Animation System"
+    implemented: true
+    working: true
+    file: "frontend/src/pages/Projects.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "Successfully implemented Step 3 of arcade theme - Back to Lobby: 1) Changed button text from 'QUIT GAME' to 'BACK TO ARCADE' with ArrowLeft icon 2) Added reverse animation sequence with fade-out effects 3) Implemented 'GAME OVER' overlay with skull emoji and 'RETURNING TO ARCADE...' message 4) Added playGameOverSound() function with console placeholder 5) Reverse animation flow: Click BACK TO ARCADE → GAME OVER screen (2s) → Fade out details → Return to lobby 6) All sprite blocks (game view, stats, description, power-ups, actions) fade out with smooth animations 7) Game header fades out with reverse animation 8) Proper state management for gameEnding and showGameOver states 9) Action buttons disabled during game ending sequence 10) Complete authentic arcade exit experience"
+
 agent_communication:
     - agent: "main"
       message: "Successfully implemented Step 2 of the arcade theme - Enter Game transition system: 1) Complete click interaction system for arcade machines 2) Authentic arcade game sequence: INSERT COIN → PRESS START → GAME START! → Details View 3) Full-screen modal system with black background overlay 4) Sprite-like building animations for project details with staggered timing 5) Game-themed information display: Game Stats panel, Game Description, Power-ups Collected 6) Arcade-style action buttons and controls 7) Smooth transitions between all phases with proper timing (2s INSERT COIN, 0.5s GAME START, staggered detail animations) 8) Sound effect placeholders for coin insertion and game start 9) Proper event handling to prevent conflicts with existing buttons 10) Complete immersive arcade experience from lobby to game details"
