@@ -272,7 +272,7 @@ test_plan:
   current_focus:
     - "Remove Network Overview Section"
     - "Remove Progress Bars from Skills"
-    - "Add Hover Effect to Connected Lines"
+    - "Enhanced Hover Effect with Category Colors"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
