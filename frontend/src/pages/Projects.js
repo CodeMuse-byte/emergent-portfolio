@@ -35,6 +35,8 @@ const Projects = () => {
   const [showInsertCoin, setShowInsertCoin] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [detailsAnimating, setDetailsAnimating] = useState(false);
+  const [gameEnding, setGameEnding] = useState(false);
+  const [showGameOver, setShowGameOver] = useState(false);
 
   // Get all unique technologies for filtering
   const allTechnologies = [...new Set(projects.flatMap(project => project.technologies))];
