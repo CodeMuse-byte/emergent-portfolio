@@ -10,7 +10,6 @@ import {
   Github, 
   Linkedin, 
   Twitter, 
-  ChevronDown,
   Sparkles,
   Code,
   Zap,
