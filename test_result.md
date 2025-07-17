@@ -313,6 +313,18 @@ test_plan:
           agent: "main"
           comment: "Successfully enhanced hover effects to use category colors. When hovering over a skill: 1) The skill itself shines with its category color (pink for Frontend, cyan for Backend, purple for Tools, green for Other) 2) Connection lines take the color of the skill they connect to 3) Increased line thickness and added glow effects for better visibility"
 
+  - task: "Update Navbar - Remove Cover Link and Make Name Clickable"
+    implemented: true
+    working: true
+    file: "frontend/src/components/Navigation.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "Successfully updated navbar: 1) Removed the 'Cover' link from the navbar 2) Made 'Alex Johnson' name clickable to navigate to the cover page (/) 3) Cleaned up the navbar layout by removing the separator and extra link. Navigation now works seamlessly from any page."
+
 agent_communication:
     - agent: "main"
-      message: "Successfully completed all requested enhancements: 1) Removed Network Overview section completely 2) Removed progress bars from skill nodes and detail section 3) Added advanced interactive hover effects where connection lines take the color of the connected skill (blue for Backend, pink for Frontend, purple for Tools, green for Other) and the hovered skill shines with its category color. The network now provides rich visual feedback showing skill relationships through color-coded connections."
+      message: "Successfully completed all requested enhancements: 1) Removed Network Overview section completely 2) Removed progress bars from skill nodes and detail section 3) Added advanced interactive hover effects where connection lines take the color of the connected skill (blue for Backend, pink for Frontend, purple for Tools, green for Other) and the hovered skill shines with its category color 4) Updated navbar to remove 'Cover' link and make 'Alex Johnson' name clickable to navigate to cover page. The application now has a cleaner navigation experience and enhanced visual feedback."
