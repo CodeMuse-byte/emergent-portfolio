@@ -4,11 +4,7 @@ import { Badge } from '../components/ui/badge';
 import { Progress } from '../components/ui/progress';
 import AnimatedBackground from '../components/AnimatedBackground';
 import { 
-  Star,
-  MapPin,
-  Route,
-  Compass,
-  Navigation
+  Star
 } from 'lucide-react';
 import '../styles/skills-map.css';
 
