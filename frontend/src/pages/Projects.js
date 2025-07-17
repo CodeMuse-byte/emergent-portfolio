@@ -465,15 +465,41 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Arcade Room Background */}
+      {/* 3D Arcade Room Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-black to-purple-900/30"></div>
-        <div className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: 'radial-gradient(circle at 25% 25%, #ff00ff 0%, transparent 50%), radial-gradient(circle at 75% 75%, #00ffff 0%, transparent 50%)',
-            backgroundSize: '50px 50px'
-          }}
-        ></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-indigo-900 via-purple-900 to-black"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-pink-900/20 via-transparent to-cyan-900/20"></div>
+        
+        {/* 3D Grid Floor */}
+        <div className="absolute bottom-0 left-0 right-0 h-1/2 overflow-hidden">
+          <div className="absolute inset-0 perspective-1000">
+            <div className="absolute inset-0 transform rotate-x-75 translate-z-0" 
+                 style={{
+                   background: 'linear-gradient(90deg, transparent 0%, rgba(0,255,255,0.1) 50%, transparent 100%), linear-gradient(0deg, transparent 0%, rgba(255,0,255,0.1) 50%, transparent 100%)',
+                   backgroundSize: '50px 50px',
+                   transform: 'rotateX(75deg) translateZ(0)'
+                 }}>
+            </div>
+          </div>
+        </div>
+        
+        {/* Floating Neon Particles */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute w-2 h-2 bg-cyan-400 rounded-full animate-float-1" style={{top: '20%', left: '10%'}}></div>
+          <div className="absolute w-1 h-1 bg-pink-400 rounded-full animate-float-2" style={{top: '50%', left: '80%'}}></div>
+          <div className="absolute w-3 h-3 bg-purple-400 rounded-full animate-float-3" style={{top: '70%', left: '15%'}}></div>
+          <div className="absolute w-1 h-1 bg-yellow-400 rounded-full animate-float-4" style={{top: '30%', left: '70%'}}></div>
+          <div className="absolute w-2 h-2 bg-green-400 rounded-full animate-float-5" style={{top: '60%', left: '40%'}}></div>
+          <div className="absolute w-1 h-1 bg-orange-400 rounded-full animate-float-6" style={{top: '80%', left: '90%'}}></div>
+        </div>
+        
+        {/* 3D Neon Lines */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse"></div>
+          <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-pink-400 to-transparent animate-pulse" style={{animationDelay: '0.5s'}}></div>
+          <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent animate-pulse" style={{animationDelay: '1.5s'}}></div>
+        </div>
       </div>
 
       {/* Neon Header */}
