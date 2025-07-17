@@ -270,11 +270,8 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Remove Network Overview Section"
-    - "Remove Progress Bars from Skills"
-    - "Enhanced Hover Effect with Category Colors"
-    - "Update Navbar - Remove Cover Link and Make Name Clickable"
-    - "Convert Sub-Header to Hero Section"
+    - "Add Playground to Navigation"
+    - "Remove Physics Playground from Projects"
     - "Interactive Playground with Physics-Based Elements"
   stuck_tasks: []
   test_all: false
