@@ -10,6 +10,7 @@ import {
   Compass,
   Navigation
 } from 'lucide-react';
+import '../styles/skills-map.css';
 
 const Skills = () => {
   const [selectedSkill, setSelectedSkill] = useState(null);
