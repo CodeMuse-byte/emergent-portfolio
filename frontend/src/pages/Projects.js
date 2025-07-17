@@ -114,13 +114,27 @@ const Projects = () => {
     }, 2000);
   };
 
-  // Close game view
+  // Close game view with reverse animation
   const closeGameView = () => {
-    setSelectedProject(null);
-    setGameStarting(false);
-    setShowInsertCoin(false);
-    setGameStarted(false);
-    setDetailsAnimating(false);
+    setGameEnding(true);
+    setShowGameOver(true);
+    
+    // Play game over sound
+    playGameOverSound();
+    
+    // Show GAME OVER message for 2 seconds
+    setTimeout(() => {
+      setShowGameOver(false);
+      setDetailsAnimating(false);
+      
+      // Start reverse animation sequence
+      setTimeout(() => {
+        setGameStarted(false);
+        setGameStarting(false);
+        setSelectedProject(null);
+        setGameEnding(false);
+      }, 500);
+    }, 2000);
   };
 
   const ArcadeMachine = ({ project, index }) => {
