@@ -733,12 +733,15 @@ const Projects = () => {
           image-rendering: pixelated;
           image-rendering: -moz-crisp-edges;
           image-rendering: crisp-edges;
+          transform-style: preserve-3d;
+          perspective: 1000px;
         }
         
         .sprite-block {
           animation: blockBuildUp 0.5s ease-out forwards;
           opacity: 0;
-          transform: translateY(20px) scale(0.9);
+          transform: translateY(20px) scale(0.9) translateZ(0px);
+          transform-style: preserve-3d;
         }
         
         .sprite-block.fade-out {
@@ -748,7 +751,8 @@ const Projects = () => {
         .power-up-block {
           animation: powerUpCollect 0.3s ease-out forwards;
           opacity: 0;
-          transform: scale(0.8);
+          transform: scale(0.8) translateZ(0px);
+          transform-style: preserve-3d;
         }
         
         .power-up-block.fade-out {
