@@ -5,13 +5,10 @@ import { Progress } from '../components/ui/progress';
 import AnimatedBackground from '../components/AnimatedBackground';
 import { 
   Star,
-  Code,
-  Database,
-  Globe,
-  Settings,
-  Layers,
-  Terminal,
-  Zap
+  MapPin,
+  Route,
+  Compass,
+  Navigation
 } from 'lucide-react';
 
 const Skills = () => {
