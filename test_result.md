@@ -270,8 +270,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Add Playground to Navigation"
-    - "Remove Physics Playground from Projects"
+    - "Add Second Playground - Particle System"
     - "Interactive Playground with Physics-Based Elements"
   stuck_tasks: []
   test_all: false
