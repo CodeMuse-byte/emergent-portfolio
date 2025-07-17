@@ -275,6 +275,7 @@ test_plan:
     - "Enhanced Hover Effect with Category Colors"
     - "Update Navbar - Remove Cover Link and Make Name Clickable"
     - "Convert Sub-Header to Hero Section"
+    - "Interactive Playground with Physics-Based Elements"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
