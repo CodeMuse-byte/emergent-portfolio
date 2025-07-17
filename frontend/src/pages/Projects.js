@@ -648,10 +648,18 @@ const Projects = () => {
           transform: translateY(20px) scale(0.9);
         }
         
+        .sprite-block.fade-out {
+          animation: blockFadeOut 0.5s ease-out forwards;
+        }
+        
         .power-up-block {
           animation: powerUpCollect 0.3s ease-out forwards;
           opacity: 0;
           transform: scale(0.8);
+        }
+        
+        .power-up-block.fade-out {
+          animation: powerUpFadeOut 0.3s ease-out forwards;
         }
         
         @keyframes blockBuildUp {
