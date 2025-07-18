@@ -187,12 +187,12 @@ const Skills = () => {
       <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
         <section className="container mx-auto px-4 py-12 lg:py-20">
           <div className="max-w-4xl mx-auto text-center">
-            <ScrollReveal delay={100}>
+            <ScrollReveal delay={200}>
               <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Interactive Skills Network
               </h1>
             </ScrollReveal>
-            <ScrollReveal delay={200}>
+            <ScrollReveal delay={400}>
               <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
                 Click on any skill node to see detailed information and explore the connections between technologies.
               </p>
