@@ -226,7 +226,7 @@ const Skills = () => {
 
       {/* Selected Skill Details */}
       {selectedSkill && (
-        <ScrollReveal delay={100}>
+        <ScrollReveal delay={200}>
           <section className="py-16 bg-gray-800">
             <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto">
