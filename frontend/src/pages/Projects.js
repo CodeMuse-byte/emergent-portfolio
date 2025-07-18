@@ -119,118 +119,87 @@ const Projects = () => {
     return (
       <div 
         className={`filing-drawer relative transition-all duration-500 cursor-pointer ${
-          isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+          isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
         }`}
         style={{
-          transitionDelay: `${index * 50}ms`
+          transitionDelay: `${index * 100}ms`
         }}
         onMouseEnter={() => handleDrawerHover(project)}
         onMouseLeave={handleDrawerLeave}
       >
-        {/* Filing Cabinet Drawer */}
-        <div className="relative">
+        {/* Filing Cabinet Drawer Container */}
+        <div className="relative h-64 perspective-1000">
           {/* Drawer Body */}
-          <div className={`filing-drawer-body bg-gradient-to-r from-amber-800 to-amber-900 border-2 border-amber-700 rounded-lg shadow-2xl transition-all duration-300 ${
-            isOpen ? 'transform translate-x-4' : ''
+          <div className={`filing-drawer-body relative w-full h-full transition-all duration-400 ${
+            isOpen ? 'transform-gpu' : ''
           }`}
           style={{
-            background: 'linear-gradient(135deg, #8B4513 0%, #654321 50%, #8B4513 100%)',
-            boxShadow: isOpen ? '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)' : '0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1)'
+            transform: isOpen ? 'rotateX(5deg) translateZ(8px)' : 'rotateX(0deg) translateZ(0px)',
+            transformStyle: 'preserve-3d'
           }}>
             
-            {/* Wood Grain Texture */}
-            <div className="absolute inset-0 opacity-20 rounded-lg"
+            {/* Wood Cabinet Frame */}
+            <div className="absolute inset-0 rounded-lg border-2 border-amber-700 shadow-2xl"
                  style={{
-                   background: 'repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139,69,19,0.3) 2px, rgba(139,69,19,0.3) 4px)'
-                 }}></div>
-            
-            {/* Drawer Face */}
-            <div className="relative p-6 h-24 flex items-center justify-between">
-              {/* Drawer Label */}
-              <div className="flex items-center space-x-3">
-                <div className="bg-white rounded px-3 py-1 shadow-inner">
-                  <div className="text-xs font-bold text-gray-800 uppercase tracking-wide">
-                    {project.title}
-                  </div>
-                  <div className="text-xs text-gray-600">
-                    Project #{project.id.toString().padStart(3, '0')}
-                  </div>
-                </div>
-                
-                {project.featured && (
-                  <Badge className="bg-yellow-500 text-black font-bold shadow-md">
-                    <Star className="w-3 h-3 mr-1" />
-                    Featured
-                  </Badge>
-                )}
-              </div>
-              
-              {/* Drawer Handle */}
-              <div className="flex items-center space-x-2">
-                <div className="w-12 h-6 bg-gradient-to-b from-gray-300 to-gray-500 rounded-full shadow-inner border border-gray-400 flex items-center justify-center">
-                  <div className="w-8 h-4 bg-gradient-to-b from-gray-400 to-gray-600 rounded-full shadow-md"></div>
-                </div>
-                <FolderOpen className="w-5 h-5 text-amber-600" />
-              </div>
-            </div>
-            
-            {/* Drawer Interior Shadow */}
-            <div className="absolute inset-0 rounded-lg shadow-inner pointer-events-none"
-                 style={{
-                   boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1), inset 0 -2px 4px rgba(0,0,0,0.1)'
-                 }}></div>
-          </div>
-          
-          {/* File Document */}
-          <div className={`absolute top-2 left-0 w-full transition-all duration-500 ${
-            isFileOut ? 'transform translate-x-80' : 'transform translate-x-0'
-          }`}
-               style={{
-                 zIndex: isFileOut ? 20 : 10
-               }}>
-            <div className="bg-white rounded-lg shadow-2xl border-2 border-gray-300 p-6 max-w-md ml-20"
-                 style={{
-                   background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)',
-                   boxShadow: '0 20px 40px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.06)'
+                   background: 'linear-gradient(135deg, #8B4513 0%, #654321 30%, #8B4513 60%, #654321 100%)',
+                   boxShadow: isOpen ? '0 12px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)' : '0 6px 12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1)'
                  }}>
               
-              {/* File Header */}
-              <div className="flex items-center justify-between mb-4 border-b border-gray-200 pb-3">
-                <div className="flex items-center space-x-2">
-                  <FileText className="w-5 h-5 text-blue-600" />
-                  <div>
-                    <h3 className="font-bold text-gray-800">{project.title}</h3>
-                    <p className="text-xs text-gray-500">Project Documentation</p>
+              {/* Wood Grain Texture */}
+              <div className="absolute inset-0 opacity-40 rounded-lg"
+                   style={{
+                     background: 'repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(139,69,19,0.3) 3px, rgba(139,69,19,0.3) 6px)',
+                     mixBlendMode: 'overlay'
+                   }}></div>
+              
+              {/* Drawer Interior */}
+              <div className="relative p-4 h-full flex flex-col">
+                {/* Drawer Label Area */}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="bg-white rounded px-3 py-1 shadow-inner max-w-[70%]">
+                    <div className="text-xs font-bold text-gray-800 uppercase tracking-wide truncate">
+                      {project.title}
+                    </div>
+                    <div className="text-xs text-gray-600">
+                      #{project.id.toString().padStart(3, '0')}
+                    </div>
+                  </div>
+                  
+                  {/* Drawer Handle */}
+                  <div className="flex items-center space-x-1">
+                    <div className="w-8 h-4 bg-gradient-to-b from-gray-300 to-gray-500 rounded-full shadow-inner border border-gray-400 flex items-center justify-center">
+                      <div className="w-6 h-2 bg-gradient-to-b from-gray-400 to-gray-600 rounded-full"></div>
+                    </div>
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="text-xs text-gray-500">ID: {project.id.toString().padStart(3, '0')}</div>
-                  <div className="text-xs text-gray-500">Status: Active</div>
+
+                {/* File Preview Area */}
+                <div className="flex-1 bg-gray-800 rounded border-2 border-gray-600 p-2 relative overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-cover rounded opacity-80"
+                  />
+                  
+                  {/* File Icon Overlay */}
+                  <div className="absolute top-2 left-2">
+                    <FileText className="w-4 h-4 text-white opacity-90" />
+                  </div>
+                  
+                  {/* Featured Badge */}
+                  {project.featured && (
+                    <div className="absolute top-2 right-2">
+                      <Badge className="bg-yellow-500 text-black font-bold text-xs">
+                        <Star className="w-3 h-3 mr-1" />
+                        Featured
+                      </Badge>
+                    </div>
+                  )}
                 </div>
-              </div>
-              
-              {/* Project Image */}
-              <div className="mb-4">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-32 object-cover rounded border shadow-sm"
-                />
-              </div>
-              
-              {/* Project Description */}
-              <div className="mb-4">
-                <h4 className="font-semibold text-gray-800 mb-2">Description</h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  {project.description}
-                </p>
-              </div>
-              
-              {/* Technologies */}
-              <div className="mb-4">
-                <h4 className="font-semibold text-gray-800 mb-2">Technologies</h4>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, techIndex) => (
+
+                {/* Technologies Preview */}
+                <div className="mt-2 flex flex-wrap gap-1 max-h-8 overflow-hidden">
+                  {project.technologies.slice(0, 3).map((tech, techIndex) => (
                     <span 
                       key={techIndex}
                       className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium"
@@ -238,42 +207,113 @@ const Projects = () => {
                       {tech}
                     </span>
                   ))}
+                  {project.technologies.length > 3 && (
+                    <span className="text-xs text-gray-600 self-center">
+                      +{project.technologies.length - 3}
+                    </span>
+                  )}
                 </div>
               </div>
-              
-              {/* Action Buttons */}
-              <div className="flex space-x-3">
-                <Button 
-                  size="sm"
-                  className="bg-blue-600 hover:bg-blue-700 text-white"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    window.open(project.demo, '_blank');
-                  }}
-                >
-                  <Play className="w-4 h-4 mr-1" />
-                  View Demo
-                </Button>
-                
-                <Button 
-                  size="sm"
-                  variant="outline"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    window.open(project.github, '_blank');
-                  }}
-                >
-                  <Code className="w-4 h-4 mr-1" />
-                  Source Code
-                </Button>
-              </div>
-              
-              {/* File Corner Fold */}
-              <div className="absolute top-0 right-0 w-6 h-6 bg-gray-100 border-l border-b border-gray-300"
-                   style={{
-                     clipPath: 'polygon(0 0, 100% 0, 0 100%)'
-                   }}></div>
             </div>
+          </div>
+          
+          {/* File Document that slides out */}
+          <div className={`absolute top-0 left-0 w-full h-full transition-all duration-500 pointer-events-none ${
+            isFileOut ? 'transform translate-x-full translate-y-4 scale-110' : 'transform translate-x-0 translate-y-0 scale-100'
+          }`}
+               style={{
+                 zIndex: isFileOut ? 30 : 10,
+                 transformOrigin: 'left center'
+               }}>
+            
+            {isFileOut && (
+              <div className="bg-white rounded-lg shadow-2xl border-2 border-gray-300 p-4 h-full overflow-y-auto pointer-events-auto"
+                   style={{
+                     background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)',
+                     boxShadow: '0 20px 40px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.1)'
+                   }}>
+                
+                {/* File Header */}
+                <div className="flex items-center justify-between mb-3 border-b border-gray-200 pb-2">
+                  <div className="flex items-center space-x-2">
+                    <FileText className="w-4 h-4 text-blue-600" />
+                    <div>
+                      <h3 className="font-bold text-sm text-gray-800">{project.title}</h3>
+                      <p className="text-xs text-gray-500">Project File</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-xs text-gray-500">ID: {project.id.toString().padStart(3, '0')}</div>
+                  </div>
+                </div>
+                
+                {/* Project Image */}
+                <div className="mb-3">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-24 object-cover rounded border shadow-sm"
+                  />
+                </div>
+                
+                {/* Project Description */}
+                <div className="mb-3">
+                  <h4 className="font-semibold text-gray-800 mb-1 text-sm">Description</h4>
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    {project.description.substring(0, 120)}...
+                  </p>
+                </div>
+                
+                {/* Technologies */}
+                <div className="mb-3">
+                  <h4 className="font-semibold text-gray-800 mb-1 text-sm">Technologies</h4>
+                  <div className="flex flex-wrap gap-1">
+                    {project.technologies.map((tech, techIndex) => (
+                      <span 
+                        key={techIndex}
+                        className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Action Buttons */}
+                <div className="flex space-x-2">
+                  <Button 
+                    size="sm"
+                    className="bg-blue-600 hover:bg-blue-700 text-white text-xs"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(project.demo, '_blank');
+                    }}
+                  >
+                    <Play className="w-3 h-3 mr-1" />
+                    Demo
+                  </Button>
+                  
+                  <Button 
+                    size="sm"
+                    variant="outline"
+                    className="text-xs"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(project.github, '_blank');
+                    }}
+                  >
+                    <Code className="w-3 h-3 mr-1" />
+                    Code
+                  </Button>
+                </div>
+                
+                {/* File Corner Fold */}
+                <div className="absolute top-0 right-0 w-4 h-4 bg-gray-100 border-l border-b border-gray-300"
+                     style={{
+                       clipPath: 'polygon(0 0, 100% 0, 0 100%)'
+                     }}></div>
+              </div>
+            )}
           </div>
         </div>
       </div>
