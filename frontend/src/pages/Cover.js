@@ -14,7 +14,8 @@ import {
   Code,
   Zap,
   Sun,
-  Moon
+  Moon,
+  Gamepad2
 } from 'lucide-react';
 
 const Cover = () => {
