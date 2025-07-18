@@ -211,7 +211,7 @@ const Projects = () => {
       <section className="py-8 bg-white shadow-sm">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="flex flex-col md:flex-row gap-4 mb-6">
+            <div className="flex flex-col md:flex-row gap-4">
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <Input
@@ -233,37 +233,6 @@ const Projects = () => {
                   </option>
                 ))}
               </select>
-            </div>
-
-            {/* Filter Buttons */}
-            <div className="flex flex-wrap gap-3">
-              <Button
-                variant={selectedFilter === 'all' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setSelectedFilter('all')}
-              >
-                All ({projects.length})
-              </Button>
-              
-              <Button
-                variant={selectedFilter === 'featured' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setSelectedFilter('featured')}
-              >
-                <Star className="w-4 h-4 mr-1" />
-                Featured ({projects.filter(p => p.featured).length})
-              </Button>
-              
-              {allTechnologies.slice(0, 5).map(tech => (
-                <Button
-                  key={tech}
-                  variant={selectedFilter === tech ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setSelectedFilter(tech)}
-                >
-                  {tech}
-                </Button>
-              ))}
             </div>
           </div>
         </div>
