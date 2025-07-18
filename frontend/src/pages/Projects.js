@@ -31,8 +31,6 @@ const Projects = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [visibleProjects, setVisibleProjects] = useState([]);
   const [hoveredProject, setHoveredProject] = useState(null);
-  const [openDrawer, setOpenDrawer] = useState(null);
-  const [fileSlideOut, setFileSlideOut] = useState(null);
 
   // Get all unique technologies for filtering
   const allTechnologies = [...new Set(projects.flatMap(project => project.technologies))];
@@ -55,7 +53,7 @@ const Projects = () => {
     ...allTechnologies.map(tech => ({ value: tech, label: tech }))
   ];
 
-  // Staggered animation for filing cabinet drawers
+  // Simple animation for project cards
   useEffect(() => {
     const timer = setTimeout(() => {
       filteredProjects.forEach((project, index) => {
@@ -71,45 +69,7 @@ const Projects = () => {
   // Reset visible projects when filter changes
   useEffect(() => {
     setVisibleProjects([]);
-    setOpenDrawer(null);
-    setFileSlideOut(null);
   }, [selectedFilter, searchQuery]);
-
-  // Handle drawer hover
-  const handleDrawerHover = (project) => {
-    setHoveredProject(project.id);
-    setOpenDrawer(project.id);
-    
-    // Delay file slide out animation
-    setTimeout(() => {
-      setFileSlideOut(project.id);
-    }, 300);
-  };
-
-  // Handle drawer leave
-  const handleDrawerLeave = () => {
-    setHoveredProject(null);
-    setFileSlideOut(null);
-    
-    // Delay drawer close
-    setTimeout(() => {
-      setOpenDrawer(null);
-    }, 200);
-  };
-
-  // Handle click outside to close
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!e.target.closest('.filing-drawer')) {
-        setOpenDrawer(null);
-        setFileSlideOut(null);
-        setHoveredProject(null);
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, []);
 
   const FilingDrawer = ({ project, index }) => {
     const isVisible = visibleProjects.includes(project.id);
