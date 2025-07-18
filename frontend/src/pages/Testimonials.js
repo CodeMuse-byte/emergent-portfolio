@@ -245,40 +245,6 @@ const Testimonials = () => {
         </div>
       </section>
 
-      {/* Company Logos */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              Trusted by Great Companies
-            </h2>
-            <p className="text-lg text-muted-foreground mb-12">
-              I've had the privilege of working with these amazing organizations
-            </p>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-center">
-              {[
-                { name: 'TechCorp Inc.', logo: '🏢' },
-                { name: 'StartupXYZ', logo: '🚀' },
-                { name: 'Creative Agency', logo: '🎨' },
-                { name: 'InnovateNow', logo: '💡' },
-                { name: 'GlobalTech', logo: '🌐' },
-                { name: 'DevStudio', logo: '⚡' },
-                { name: 'CloudTech', logo: '☁️' },
-                { name: 'NextGen', logo: '🔮' }
-              ].map((company, index) => (
-                <div key={index} className="group hover:scale-110 transition-transform duration-300">
-                  <Card className="p-6 hover:shadow-lg transition-shadow">
-                    <div className="text-4xl mb-2">{company.logo}</div>
-                    <p className="text-sm text-muted-foreground">{company.name}</p>
-                  </Card>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-20 bg-accent/5">
         <div className="container mx-auto px-4">
