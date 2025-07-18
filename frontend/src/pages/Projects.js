@@ -95,7 +95,10 @@ const Projects = () => {
             <div className="relative group">
               <div className={`relative overflow-hidden rounded-2xl shadow-2xl transition-all duration-500 ${
                 isHovered ? 'scale-105 shadow-3xl' : 'scale-100'
-              }`}>
+              }`}
+                onMouseEnter={() => setHoveredProject(project.id)}
+                onMouseLeave={() => setHoveredProject(null)}
+              >
                 
                 {/* Project Image */}
                 <img 
