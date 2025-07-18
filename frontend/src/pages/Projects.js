@@ -58,7 +58,7 @@ const Projects = () => {
     const isEven = index % 2 === 0;
 
     return (
-      <ScrollReveal delay={200 + (index * 200)} className="project-row relative">
+      <ScrollReveal delay={100 + (index * 100)} className="project-row relative">
         {/* Project Container */}
         <div className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-16 py-16 ${
           isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
