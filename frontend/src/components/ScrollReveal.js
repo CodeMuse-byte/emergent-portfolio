@@ -1,5 +1,4 @@
-import React from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import React, { useEffect, useRef, useState } from 'react';
 
 const ScrollReveal = ({ 
   children, 
@@ -8,30 +7,45 @@ const ScrollReveal = ({
   direction = 'up',
   distance = 30,
   duration = 600,
+  threshold = 0.1,
   ...props 
 }) => {
-  const [ref, isVisible] = useScrollReveal({ 
-    threshold: 0.1, 
-    delay,
-    triggerOnce: true 
-  });
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
 
-  const getTransformStyle = () => {
-    if (!isVisible) {
-      switch (direction) {
-        case 'up':
-          return `translateY(${distance}px)`;
-        case 'down':
-          return `translateY(-${distance}px)`;
-        case 'left':
-          return `translateX(${distance}px)`;
-        case 'right':
-          return `translateX(-${distance}px)`;
-        default:
-          return `translateY(${distance}px)`;
-      }
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            setIsVisible(true);
+          }, delay);
+          observer.disconnect(); // Trigger only once
+        }
+      },
+      { threshold, rootMargin: '0px' }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
     }
-    return 'translateY(0)';
+
+    return () => observer.disconnect();
+  }, [delay, threshold]);
+
+  const getInitialTransform = () => {
+    switch (direction) {
+      case 'up':
+        return `translateY(${distance}px)`;
+      case 'down':
+        return `translateY(-${distance}px)`;
+      case 'left':
+        return `translateX(${distance}px)`;
+      case 'right':
+        return `translateX(-${distance}px)`;
+      default:
+        return `translateY(${distance}px)`;
+    }
   };
 
   return (
@@ -40,9 +54,9 @@ const ScrollReveal = ({
       className={`transition-all ease-out ${className}`}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: getTransformStyle(),
+        transform: isVisible ? 'translate(0, 0)' : getInitialTransform(),
         transitionDuration: `${duration}ms`,
-        transitionDelay: `${delay}ms`
+        transitionDelay: isVisible ? `${delay}ms` : '0ms'
       }}
       {...props}
     >
