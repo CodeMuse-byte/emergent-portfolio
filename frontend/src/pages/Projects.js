@@ -84,8 +84,6 @@ const Projects = () => {
         style={{
           transitionDelay: `${index * 200}ms`
         }}
-        onMouseEnter={() => setHoveredProject(project.id)}
-        onMouseLeave={() => setHoveredProject(null)}
       >
         {/* Project Container */}
         <div className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-16 py-16 ${
