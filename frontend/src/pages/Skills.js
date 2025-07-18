@@ -205,7 +205,7 @@ const Skills = () => {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <ScrollReveal delay={300}>
+            <ScrollReveal delay={600}>
               {/* Network Container */}
               <div className="relative h-96 md:h-[600px] bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
                 {/* Connection lines */}
