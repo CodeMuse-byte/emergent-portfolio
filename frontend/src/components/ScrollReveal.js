@@ -5,33 +5,38 @@ const ScrollReveal = ({
   className = '', 
   delay = 0, 
   direction = 'up',
-  distance = 30,
-  duration = 600,
+  distance = 50,
+  duration = 800,
   threshold = 0.1,
   ...props 
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [hasTriggered, setHasTriggered] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !hasTriggered) {
+          setHasTriggered(true);
           setTimeout(() => {
             setIsVisible(true);
           }, delay);
-          observer.disconnect(); // Trigger only once
         }
       },
-      { threshold, rootMargin: '50px' }
+      { 
+        threshold, 
+        rootMargin: '0px 0px -50px 0px' // Trigger when element is 50px from viewport
+      }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
+    observer.observe(element);
+    
     return () => observer.disconnect();
-  }, [delay, threshold]);
+  }, [delay, threshold, hasTriggered]);
 
   const getInitialTransform = () => {
     switch (direction) {
@@ -51,12 +56,12 @@ const ScrollReveal = ({
   return (
     <div
       ref={ref}
-      className={`transition-all ease-out ${className}`}
+      className={`transform transition-all duration-800 ease-out ${className}`}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translate(0, 0)' : getInitialTransform(),
+        transform: isVisible ? 'translate3d(0, 0, 0)' : getInitialTransform(),
         transitionDuration: `${duration}ms`,
-        transitionDelay: isVisible ? `0ms` : '0ms'
+        willChange: 'transform, opacity'
       }}
       {...props}
     >
