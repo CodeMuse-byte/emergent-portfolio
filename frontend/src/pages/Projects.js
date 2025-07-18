@@ -263,10 +263,10 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Projects Grid */}
+      {/* Projects List */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             {filteredProjects.length === 0 ? (
               <div className="text-center py-20">
                 <div className="text-6xl mb-4">🔍</div>
@@ -274,7 +274,7 @@ const Projects = () => {
                 <p className="text-gray-500">Try adjusting your search or filter criteria.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="space-y-0">
                 {filteredProjects.map((project, index) => (
                   <ProjectCard key={project.id} project={project} index={index} />
                 ))}
