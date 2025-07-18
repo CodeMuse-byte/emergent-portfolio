@@ -284,70 +284,47 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Enhanced CSS for Alternating Layout */}
+      {/* Simple and Smooth CSS - No Flickering */}
       <style jsx global>{`
         .project-row {
           position: relative;
         }
         
-        .project-row:hover .tech-tag {
-          transform: scale(1.05);
-        }
-        
         .project-row img {
-          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: transform 0.3s ease;
         }
         
         .project-row:hover img {
-          transform: scale(1.1);
+          transform: scale(1.05);
         }
         
-        .shadow-3xl {
-          box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
-        }
-        
-        @keyframes pulse-play {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.1); }
-        }
-        
-        .animate-pulse {
-          animation: pulse-play 2s infinite;
-        }
-        
-        .project-row:hover .animate-pulse {
-          animation: pulse-play 1s infinite;
-        }
-        
-        /* Smooth transitions for all elements */
-        .project-row * {
+        .tech-tag {
           transition: all 0.3s ease;
         }
         
-        /* Enhanced hover effects */
-        .project-row:hover h3 {
-          transform: translateX(8px);
+        .project-row:hover .tech-tag {
+          transform: scale(1.02);
         }
         
-        .project-row:hover p {
-          transform: translateX(4px);
+        .shadow-3xl {
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
         
-        /* Alternating animation delays */
-        .project-row:nth-child(even) img {
-          transition-delay: 0.1s;
+        /* Simple pulse animation */
+        @keyframes simple-pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.8; }
         }
         
-        .project-row:nth-child(odd) img {
-          transition-delay: 0.2s;
+        .animate-pulse {
+          animation: simple-pulse 2s infinite;
         }
         
-        /* Responsive adjustments */
-        @media (max-width: 1024px) {
-          .project-row:hover h3,
-          .project-row:hover p {
-            transform: translateX(0);
-          }
+        /* Remove all complex transforms */
+        * {
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+          -moz-backface-visibility: hidden;
         }
       `}</style>
     </div>
