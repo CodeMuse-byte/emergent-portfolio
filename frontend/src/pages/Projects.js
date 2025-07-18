@@ -393,10 +393,10 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Filing Cabinet */}
+      {/* Filing Cabinet Grid */}
       <section className="relative z-10 py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             {filteredProjects.length === 0 ? (
               <div className="text-center py-20">
                 <div className="text-6xl mb-4">📂</div>
@@ -404,7 +404,7 @@ const Projects = () => {
                 <p className="text-gray-500">No projects match your search criteria.</p>
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredProjects.map((project, index) => (
                   <FilingDrawer key={project.id} project={project} index={index} />
                 ))}
