@@ -31,13 +31,8 @@ const Projects = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [visibleProjects, setVisibleProjects] = useState([]);
   const [hoveredProject, setHoveredProject] = useState(null);
-  const [selectedProject, setSelectedProject] = useState(null);
-  const [gameStarting, setGameStarting] = useState(false);
-  const [showInsertCoin, setShowInsertCoin] = useState(false);
-  const [gameStarted, setGameStarted] = useState(false);
-  const [detailsAnimating, setDetailsAnimating] = useState(false);
-  const [gameEnding, setGameEnding] = useState(false);
-  const [showGameOver, setShowGameOver] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(null);
+  const [fileSlideOut, setFileSlideOut] = useState(null);
 
   // Get all unique technologies for filtering
   const allTechnologies = [...new Set(projects.flatMap(project => project.technologies))];
@@ -55,20 +50,20 @@ const Projects = () => {
   });
 
   const filterOptions = [
-    { value: 'all', label: 'All Games' },
+    { value: 'all', label: 'All Projects' },
     { value: 'featured', label: 'Featured' },
     ...allTechnologies.map(tech => ({ value: tech, label: tech }))
   ];
 
-  // Pixelated pop-in animation effect
+  // Staggered animation for filing cabinet drawers
   useEffect(() => {
     const timer = setTimeout(() => {
       filteredProjects.forEach((project, index) => {
         setTimeout(() => {
           setVisibleProjects(prev => [...prev, project.id]);
-        }, index * 150);
+        }, index * 100);
       });
-    }, 500);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, [filteredProjects]);
@@ -76,67 +71,45 @@ const Projects = () => {
   // Reset visible projects when filter changes
   useEffect(() => {
     setVisibleProjects([]);
+    setOpenDrawer(null);
+    setFileSlideOut(null);
   }, [selectedFilter, searchQuery]);
 
-  // Play arcade jingle sound (placeholder)
-  const playArcadeJingle = () => {
-    console.log('🎵 Arcade jingle playing...');
-  };
-
-  // Play game start sound
-  const playGameStartSound = () => {
-    console.log('🎮 GAME START SOUND! *BEEP BEEP BOOP*');
-  };
-
-  // Play game over sound
-  const playGameOverSound = () => {
-    console.log('💀 GAME OVER SOUND! *GAME OVER*');
-  };
-
-  // Handle project click - Start game sequence
-  const handleProjectClick = (project) => {
-    setSelectedProject(project);
-    setGameStarting(true);
-    setShowInsertCoin(true);
+  // Handle drawer hover
+  const handleDrawerHover = (project) => {
+    setHoveredProject(project.id);
+    setOpenDrawer(project.id);
     
-    // Play coin sound
-    console.log('🪙 INSERT COIN SOUND!');
-    
-    // Show INSERT COIN message
+    // Delay file slide out animation
     setTimeout(() => {
-      setShowInsertCoin(false);
-      setGameStarted(true);
-      playGameStartSound();
-      
-      // Start details animation
-      setTimeout(() => {
-        setDetailsAnimating(true);
-      }, 500);
-    }, 2000);
+      setFileSlideOut(project.id);
+    }, 300);
   };
 
-  // Close game view with reverse animation
-  const closeGameView = () => {
-    setGameEnding(true);
-    setShowGameOver(true);
+  // Handle drawer leave
+  const handleDrawerLeave = () => {
+    setHoveredProject(null);
+    setFileSlideOut(null);
     
-    // Play game over sound
-    playGameOverSound();
-    
-    // Show GAME OVER message for 2 seconds
+    // Delay drawer close
     setTimeout(() => {
-      setShowGameOver(false);
-      setDetailsAnimating(false);
-      
-      // Start reverse animation sequence
-      setTimeout(() => {
-        setGameStarted(false);
-        setGameStarting(false);
-        setSelectedProject(null);
-        setGameEnding(false);
-      }, 500);
-    }, 2000);
+      setOpenDrawer(null);
+    }, 200);
   };
+
+  // Handle click outside to close
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.closest('.filing-drawer')) {
+        setOpenDrawer(null);
+        setFileSlideOut(null);
+        setHoveredProject(null);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
 
   const ArcadeMachine = ({ project, index }) => {
     const isVisible = visibleProjects.includes(project.id);
