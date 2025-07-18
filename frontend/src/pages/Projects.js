@@ -284,63 +284,70 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Fixed 3D Animation CSS */}
+      {/* Enhanced CSS for Alternating Layout */}
       <style jsx global>{`
-        .project-card {
-          transform-style: preserve-3d;
-          perspective: 1000px;
+        .project-row {
+          position: relative;
+        }
+        
+        .project-row:hover .tech-tag {
+          transform: scale(1.05);
+        }
+        
+        .project-row img {
+          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-row:hover img {
+          transform: scale(1.1);
+        }
+        
+        .shadow-3xl {
+          box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        @keyframes pulse-play {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.1); }
+        }
+        
+        .animate-pulse {
+          animation: pulse-play 2s infinite;
+        }
+        
+        .project-row:hover .animate-pulse {
+          animation: pulse-play 1s infinite;
+        }
+        
+        /* Smooth transitions for all elements */
+        .project-row * {
           transition: all 0.3s ease;
         }
         
-        .project-card > div {
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          transform-style: preserve-3d;
+        /* Enhanced hover effects */
+        .project-row:hover h3 {
+          transform: translateX(8px);
         }
         
-        .project-card:hover > div {
-          transform: rotateX(10deg) rotateY(10deg) translateZ(20px);
-          box-shadow: 
-            0 20px 40px rgba(0,0,0,0.15),
-            0 10px 20px rgba(0,0,0,0.1),
-            0 5px 10px rgba(0,0,0,0.05);
+        .project-row:hover p {
+          transform: translateX(4px);
         }
         
-        .project-card:hover {
-          transform: translateY(-5px);
+        /* Alternating animation delays */
+        .project-row:nth-child(even) img {
+          transition-delay: 0.1s;
         }
         
-        .project-card:hover img {
-          transform: scale(1.05);
+        .project-row:nth-child(odd) img {
+          transition-delay: 0.2s;
         }
         
-        .project-card:hover h3 {
-          color: #2563eb;
-        }
-        
-        .project-card:hover .tech-tag {
-          transform: scale(1.05);
-          background-color: #3b82f6;
-          color: white;
-        }
-        
-        .project-card:hover button {
-          transform: scale(1.05);
-        }
-        
-        .project-card img {
-          transition: transform 0.3s ease;
-        }
-        
-        .project-card h3 {
-          transition: color 0.3s ease;
-        }
-        
-        .project-card .tech-tag {
-          transition: all 0.3s ease;
-        }
-        
-        .project-card button {
-          transition: transform 0.3s ease;
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+          .project-row:hover h3,
+          .project-row:hover p {
+            transform: translateX(0);
+          }
         }
       `}</style>
     </div>
