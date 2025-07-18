@@ -184,7 +184,7 @@ const Skills = () => {
     <div className="min-h-screen bg-gray-900">
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
-        <section className="container mx-auto px-4 py-20 lg:py-32">
+        <section className="container mx-auto px-4 py-12 lg:py-20">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               Interactive Skills Network
