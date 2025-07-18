@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { useTheme } from '../contexts/ThemeContext';
 import AnimatedBackground from '../components/AnimatedBackground';
+import ScrollReveal from '../components/ScrollReveal';
 import { personalInfo } from '../data/mockData';
 import { 
   Play, 
