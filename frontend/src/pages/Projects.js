@@ -193,7 +193,7 @@ const Projects = () => {
       </section>
 
       {/* Search and Filter */}
-      <ScrollReveal delay={600}>
+      <ScrollReveal delay={300}>
         <section className="py-8 bg-white shadow-sm">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
