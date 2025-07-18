@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "add back option in playground to reach cover page and remove back option from cover page and change position of playground to top right corner of 'hello' in cover page"
+user_problem_statement: "in testimonials section: create a design like wih 3-d animation, 'Show testimonial quotes inside speech bubbles like chat messages, with profile icons next to them.'"
 
 backend:
   - task: "Health Check Endpoint"
