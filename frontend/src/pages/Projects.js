@@ -14,15 +14,16 @@ import {
   Star,
   Eye,
   GitBranch,
-  Gamepad2,
-  Zap,
-  Trophy,
+  FolderOpen,
+  FileText,
   Play,
   X,
   ArrowLeft,
   Monitor,
   Users,
-  Clock
+  Clock,
+  Briefcase,
+  Archive
 } from 'lucide-react';
 
 const Projects = () => {
