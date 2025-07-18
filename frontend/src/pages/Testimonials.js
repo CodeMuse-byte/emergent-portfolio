@@ -154,30 +154,6 @@ const Testimonials = () => {
         </section>
       </AnimatedBackground>
 
-      {/* Stats Section */}
-      <section className="py-20 bg-accent/5">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-            {[
-              { label: 'Happy Clients', value: '30+', icon: Users },
-              { label: 'Projects Delivered', value: '50+', icon: Award },
-              { label: 'Client Satisfaction', value: '98%', icon: ThumbsUp },
-              { label: 'Testimonials', value: testimonials.length, icon: MessageSquare }
-            ].map((stat, index) => (
-              <div key={index} className="text-center group hover:scale-105 transition-transform duration-300">
-                <Card className="p-6 hover:shadow-lg transition-shadow">
-                  <div className="bg-gradient-to-r from-purple-500 to-blue-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <stat.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-3xl font-bold mb-2 text-primary">{stat.value}</h3>
-                  <p className="text-muted-foreground">{stat.label}</p>
-                </Card>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* 3D Chat Interface Section */}
       <section className="py-20 relative overflow-hidden">
         {/* 3D Background Effects */}
