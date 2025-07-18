@@ -69,15 +69,21 @@ const Playground = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">
-                Particle Network
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                Interactive particle system with dynamic connections, attraction effects, and burst patterns.
-              </p>
+              <ScrollReveal delay={100}>
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-green-400 bg-clip-text text-transparent">
+                  Particle Network
+                </h2>
+              </ScrollReveal>
+              <ScrollReveal delay={200}>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                  Interactive particle system with dynamic connections, attraction effects, and burst patterns.
+                </p>
+              </ScrollReveal>
             </div>
             
-            <ParticlePlayground />
+            <ScrollReveal delay={300}>
+              <ParticlePlayground />
+            </ScrollReveal>
           </div>
         </div>
       </section>
