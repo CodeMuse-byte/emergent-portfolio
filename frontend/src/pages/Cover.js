@@ -81,89 +81,99 @@ const Cover = () => {
               {/* Main Content - Two Column Layout */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 {/* Left Column - Text Content */}
-                <div className={`transform transition-all duration-1000 ${
-                  isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-                }`}>
+                <div className="space-y-6">
                   {/* Greeting */}
                   <div className="mb-8">
-                    <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 mb-6">
-                      <Sparkles className="w-4 h-4 mr-2 text-purple-500" />
-                      <span className="text-sm font-medium text-muted-foreground">
-                        Welcome to my digital space
-                      </span>
-                    </div>
-                    
-                    <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                      Hello
-                    </h1>
-                    
-                    <p className="text-xl md:text-2xl text-muted-foreground mb-6">
-                      I'm <span className="font-semibold text-foreground">{personalInfo.name}</span>
-                    </p>
-                    
-                    <div className="h-16 flex items-start justify-start mb-8">
-                      <div className="text-2xl md:text-3xl font-semibold">
-                        <span className="text-muted-foreground">A passionate </span>
-                        <span 
-                          key={textIndex}
-                          className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent animate-pulse"
-                        >
-                          {dynamicTexts[textIndex]}
+                    <ScrollReveal delay={100}>
+                      <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 mb-6">
+                        <Sparkles className="w-4 h-4 mr-2 text-purple-500" />
+                        <span className="text-sm font-medium text-muted-foreground">
+                          Welcome to my digital space
                         </span>
                       </div>
-                    </div>
+                    </ScrollReveal>
+                    
+                    <ScrollReveal delay={200}>
+                      <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                        Hello
+                      </h1>
+                    </ScrollReveal>
+                    
+                    <ScrollReveal delay={300}>
+                      <p className="text-xl md:text-2xl text-muted-foreground mb-6">
+                        I'm <span className="font-semibold text-foreground">{personalInfo.name}</span>
+                      </p>
+                    </ScrollReveal>
+                    
+                    <ScrollReveal delay={400}>
+                      <div className="h-16 flex items-start justify-start mb-8">
+                        <div className="text-2xl md:text-3xl font-semibold">
+                          <span className="text-muted-foreground">A passionate </span>
+                          <span 
+                            key={textIndex}
+                            className="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent animate-pulse"
+                          >
+                            {dynamicTexts[textIndex]}
+                          </span>
+                        </div>
+                      </div>
+                    </ScrollReveal>
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-6 justify-start items-start mb-12">
-                    <Button 
-                      size="lg" 
-                      asChild
-                      className="group relative overflow-hidden bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-6 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                    >
-                      <Link to="/portfolio">
+                  <ScrollReveal delay={500}>
+                    <div className="flex flex-col sm:flex-row gap-6 justify-start items-start mb-12">
+                      <Button 
+                        size="lg" 
+                        asChild
+                        className="group relative overflow-hidden bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-6 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                      >
+                        <Link to="/portfolio">
+                          <div className="flex items-center space-x-3">
+                            <Play className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            <span>Start Story</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </div>
+                        </Link>
+                      </Button>
+                      
+                      <Button 
+                        size="lg" 
+                        variant="outline"
+                        className="group px-8 py-6 text-lg font-semibold rounded-full border-2 border-purple-500/30 hover:border-purple-500 hover:bg-purple-500/10 transition-all duration-300 hover:scale-105"
+                        onClick={() => window.open(personalInfo.resume, '_blank')}
+                      >
                         <div className="flex items-center space-x-3">
-                          <Play className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                          <span>Start Story</span>
-                          <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                          <FileText className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                          <span>View Resume</span>
                         </div>
-                      </Link>
-                    </Button>
-                    
-                    <Button 
-                      size="lg" 
-                      variant="outline"
-                      className="group px-8 py-6 text-lg font-semibold rounded-full border-2 border-purple-500/30 hover:border-purple-500 hover:bg-purple-500/10 transition-all duration-300 hover:scale-105"
-                      onClick={() => window.open(personalInfo.resume, '_blank')}
-                    >
-                      <div className="flex items-center space-x-3">
-                        <FileText className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                        <span>View Resume</span>
-                      </div>
-                    </Button>
-                  </div>
+                      </Button>
+                    </div>
+                  </ScrollReveal>
 
                   {/* Social Links */}
-                  <div className="flex justify-start space-x-6 mb-12">
-                    {socialLinks.map((social, index) => (
-                      <Button
-                        key={index}
-                        variant="ghost"
-                        size="icon"
-                        asChild
-                        className="rounded-full hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-blue-500/10 hover:scale-110 transition-all duration-300"
-                      >
-                        <a 
-                          href={social.href} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          aria-label={social.label}
+                  <ScrollReveal delay={600}>
+                    <div className="flex justify-start space-x-6 mb-12">
+                      {socialLinks.map((social, index) => (
+                        <Button
+                          key={index}
+                          variant="ghost"
+                          size="icon"
+                          asChild
+                          className="rounded-full hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-blue-500/10 hover:scale-110 transition-all duration-300"
                         >
-                          <social.icon className="w-6 h-6" />
-                        </a>
-                      </Button>
-                    ))}
-                  </div>
+                          <a 
+                            href={social.href} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            aria-label={social.label}
+                          >
+                            <social.icon className="w-6 h-6" />
+                          </a>
+                        </Button>
+                      ))}
+                    </div>
+                  </ScrollReveal>
                 </div>
 
                 {/* Right Column - Profile Photo */}
