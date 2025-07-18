@@ -177,7 +177,7 @@ const Cover = () => {
                 </div>
 
                 {/* Right Column - Profile Photo */}
-                <ScrollReveal delay={700} direction="right">
+                <ScrollReveal delay={1400} direction="right">
                   <div className="relative max-w-md mx-auto lg:max-w-full">
                     {/* Profile Photo Container */}
                     <div className="relative">
