@@ -89,23 +89,16 @@ const Projects = () => {
         onMouseLeave={() => setHoveredProject(null)}
       >
         {/* 3D Card Container */}
-        <div className={`bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden transition-all duration-300 ${
-          isHovered ? 'transform-gpu' : ''
-        }`}
-        style={{
-          transform: isHovered ? 'rotateX(5deg) rotateY(5deg) translateZ(20px)' : 'rotateX(0deg) rotateY(0deg) translateZ(0px)',
-          transformStyle: 'preserve-3d',
-          boxShadow: isHovered ? '0 25px 50px rgba(0,0,0,0.15), 0 12px 24px rgba(0,0,0,0.1)' : '0 4px 16px rgba(0,0,0,0.08)'
-        }}>
+        <div className={`bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden ${
+          isHovered ? '' : ''
+        }`}>
           
           {/* Project Image */}
           <div className="relative overflow-hidden">
             <img 
               src={project.image} 
               alt={project.title}
-              className={`w-full h-48 object-cover transition-all duration-300 ${
-                isHovered ? 'scale-110' : 'scale-100'
-              }`}
+              className="w-full h-48 object-cover"
             />
             
             {/* Featured Badge */}
