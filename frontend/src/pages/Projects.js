@@ -287,29 +287,139 @@ const Projects = () => {
         </section>
       )}
 
-      {/* Simple CSS for 3D effects */}
+      {/* Simple CSS for Enhanced 3D effects */}
       <style jsx>{`
         .project-card {
           transform-style: preserve-3d;
-          perspective: 1000px;
+          perspective: 1200px;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         .transform-gpu {
           transform: translateZ(0);
           backface-visibility: hidden;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         .project-card:hover .transform-gpu {
-          transform: rotateX(5deg) rotateY(5deg) translateZ(20px);
-        }
-        
-        @keyframes cardFloat {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-5px); }
+          transform: rotateX(8deg) rotateY(8deg) translateZ(30px);
+          box-shadow: 
+            0 35px 60px rgba(0,0,0,0.2), 
+            0 15px 30px rgba(0,0,0,0.15),
+            0 5px 15px rgba(0,0,0,0.1);
         }
         
         .project-card:hover {
-          animation: cardFloat 2s ease-in-out infinite;
+          transform: translateY(-10px) scale(1.02);
+        }
+        
+        .project-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          pointer-events: none;
+          border-radius: 12px;
+          z-index: 1;
+        }
+        
+        .project-card:hover::before {
+          opacity: 1;
+        }
+        
+        .project-card:hover img {
+          transform: scale(1.15) rotateZ(2deg);
+        }
+        
+        .project-card:hover h3 {
+          transform: translateZ(10px);
+          color: #1e40af;
+        }
+        
+        .project-card:hover p {
+          transform: translateZ(8px);
+        }
+        
+        .project-card:hover .tech-tag {
+          transform: translateZ(5px) scale(1.05);
+        }
+        
+        .project-card:hover button {
+          transform: translateZ(15px) scale(1.1);
+        }
+        
+        @keyframes cardFloat {
+          0%, 100% { 
+            transform: translateY(-10px) scale(1.02) rotateX(1deg); 
+          }
+          50% { 
+            transform: translateY(-15px) scale(1.02) rotateX(-1deg); 
+          }
+        }
+        
+        .project-card:hover {
+          animation: cardFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        
+        .project-card:hover::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+          animation: shimmer 2s ease-in-out infinite;
+          border-radius: 12px;
+          z-index: 2;
+          pointer-events: none;
+        }
+        
+        /* Enhanced button animations */
+        .project-card button {
+          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          position: relative;
+          z-index: 10;
+        }
+        
+        .project-card button:hover {
+          transform: translateZ(20px) scale(1.15) rotateX(10deg);
+          box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        /* Tech tag animations */
+        .tech-tag {
+          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          position: relative;
+          z-index: 5;
+        }
+        
+        .tech-tag:hover {
+          transform: translateZ(8px) scale(1.1) rotateX(5deg);
+          box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+        }
+        
+        /* Image 3D effects */
+        .project-card img {
+          transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          transform-style: preserve-3d;
+        }
+        
+        /* Title and text 3D effects */
+        .project-card h3,
+        .project-card p {
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          transform-style: preserve-3d;
         }
       `}</style>
     </div>
