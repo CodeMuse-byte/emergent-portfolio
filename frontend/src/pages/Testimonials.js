@@ -22,7 +22,7 @@ const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleTestimonials, setVisibleTestimonials] = useState([]);
 
-  // Animation for testimonials appearing one by one
+  // Animation for testimonials appearing one by one - enhanced for smoothness
   useEffect(() => {
     const timer = setTimeout(() => {
       setVisibleTestimonials(prev => {
@@ -31,7 +31,7 @@ const Testimonials = () => {
         }
         return prev;
       });
-    }, 800);
+    }, 600); // Reduced from 800ms to 600ms for smoother progression
 
     return () => clearTimeout(timer);
   }, [visibleTestimonials]);
