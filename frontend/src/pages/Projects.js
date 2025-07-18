@@ -288,16 +288,8 @@ const Projects = () => {
           transition: transform 0.3s ease;
         }
         
-        .project-row:hover img {
-          transform: scale(1.05);
-        }
-        
         .tech-tag {
           transition: all 0.3s ease;
-        }
-        
-        .project-row:hover .tech-tag {
-          transform: scale(1.02);
         }
         
         .shadow-3xl {
