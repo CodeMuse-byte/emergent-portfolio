@@ -111,201 +111,171 @@ const Projects = () => {
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
 
-  const ArcadeMachine = ({ project, index }) => {
+  const FilingDrawer = ({ project, index }) => {
     const isVisible = visibleProjects.includes(project.id);
-    const isHovered = hoveredProject === project.id;
+    const isOpen = openDrawer === project.id;
+    const isFileOut = fileSlideOut === project.id;
 
     return (
       <div 
-        className={`arcade-machine relative transition-all duration-300 cursor-pointer transform-gpu ${
-          isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+        className={`filing-drawer relative transition-all duration-500 cursor-pointer ${
+          isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
         }`}
         style={{
-          filter: isVisible ? 'none' : 'blur(4px)',
-          transform: isVisible ? 'translateY(0) rotateY(0deg)' : 'translateY(20px) rotateY(15deg)',
-          transformStyle: 'preserve-3d'
+          transitionDelay: `${index * 50}ms`
         }}
-        onMouseEnter={() => {
-          setHoveredProject(project.id);
-          playArcadeJingle();
-        }}
-        onMouseLeave={() => setHoveredProject(null)}
-        onClick={() => handleProjectClick(project)}
+        onMouseEnter={() => handleDrawerHover(project)}
+        onMouseLeave={handleDrawerLeave}
       >
-        {/* Arcade Machine Frame with 3D depth */}
-        <div className={`bg-gradient-to-b from-gray-600 to-gray-800 p-2 rounded-lg border-2 border-gray-500 shadow-2xl transform transition-all duration-300 ${
-          isHovered ? 'scale-105 shadow-purple-500/50 rotate-y-5' : ''
-        }`}
-        style={{
-          transformStyle: 'preserve-3d',
-          transform: isHovered ? 'scale(1.05) rotateY(5deg) translateZ(10px)' : 'rotateY(0deg) translateZ(0px)',
-          boxShadow: isHovered ? '0 25px 50px -12px rgba(139, 92, 246, 0.5), 0 0 30px rgba(139, 92, 246, 0.3)' : '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
-        }}>
-          
-          {/* Screen with enhanced 3D effect */}
-          <div className={`relative bg-black rounded border-2 border-gray-400 p-4 mb-3 transition-all duration-300 ${
-            isHovered ? 'border-cyan-400 shadow-lg shadow-cyan-400/50' : ''
+        {/* Filing Cabinet Drawer */}
+        <div className="relative">
+          {/* Drawer Body */}
+          <div className={`filing-drawer-body bg-gradient-to-r from-amber-800 to-amber-900 border-2 border-amber-700 rounded-lg shadow-2xl transition-all duration-300 ${
+            isOpen ? 'transform translate-x-4' : ''
           }`}
           style={{
-            transform: isHovered ? 'translateZ(5px)' : 'translateZ(0px)',
-            boxShadow: isHovered ? 'inset 0 0 20px rgba(6, 182, 212, 0.3), 0 0 30px rgba(6, 182, 212, 0.2)' : 'inset 0 0 10px rgba(0, 0, 0, 0.5)'
+            background: 'linear-gradient(135deg, #8B4513 0%, #654321 50%, #8B4513 100%)',
+            boxShadow: isOpen ? '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)' : '0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1)'
           }}>
             
-            {/* 3D Screen Glow Effect */}
-            {isHovered && (
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-purple-600/20 rounded animate-pulse"
-                   style={{transform: 'translateZ(1px)'}}></div>
-            )}
-            
-            {/* Project Image/Preview with 3D depth */}
-            <div className="relative h-48 overflow-hidden rounded mb-4"
+            {/* Wood Grain Texture */}
+            <div className="absolute inset-0 opacity-20 rounded-lg"
                  style={{
-                   transform: isHovered ? 'translateZ(3px)' : 'translateZ(0px)',
-                   transition: 'transform 0.3s ease'
-                 }}>
-              <img 
-                src={project.image} 
-                alt={project.title}
-                className={`w-full h-full object-cover transition-all duration-300 ${
-                  isHovered ? 'brightness-125 saturate-150 scale-110' : 'brightness-75'
-                }`}
-                style={{
-                  filter: isHovered ? 'hue-rotate(10deg) contrast(1.2)' : 'contrast(0.8)',
-                  imageRendering: 'pixelated',
-                  transform: isHovered ? 'scale(1.1) rotateY(2deg)' : 'scale(1) rotateY(0deg)'
-                }}
-              />
-              
-              {/* 3D Pixelated Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
-                   style={{transform: 'translateZ(2px)'}}></div>
-              
-              {/* Featured Badge with 3D effect */}
-              {project.featured && (
-                <div className="absolute top-2 right-2"
-                     style={{transform: 'translateZ(4px)'}}>
-                  <Badge className="bg-yellow-500 text-black font-bold pixel-font animate-pulse shadow-lg">
-                    <Star className="w-3 h-3 mr-1" />
-                    HIGH SCORE
-                  </Badge>
+                   background: 'repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139,69,19,0.3) 2px, rgba(139,69,19,0.3) 4px)'
+                 }}></div>
+            
+            {/* Drawer Face */}
+            <div className="relative p-6 h-24 flex items-center justify-between">
+              {/* Drawer Label */}
+              <div className="flex items-center space-x-3">
+                <div className="bg-white rounded px-3 py-1 shadow-inner">
+                  <div className="text-xs font-bold text-gray-800 uppercase tracking-wide">
+                    {project.title}
+                  </div>
+                  <div className="text-xs text-gray-600">
+                    Project #{project.id.toString().padStart(3, '0')}
+                  </div>
                 </div>
-              )}
-              
-              {/* Enhanced Screen Scanlines */}
-              <div className="absolute inset-0 opacity-20 pointer-events-none"
-                style={{
-                  background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,255,0.1) 2px, rgba(0,255,255,0.1) 4px)',
-                  transform: 'translateZ(1px)'
-                }}
-              ></div>
-            </div>
-            
-            {/* Game Info Display */}
-            <div className="text-center">
-              <div className={`text-cyan-400 font-mono text-sm mb-2 ${isHovered ? 'animate-pulse' : ''}`}>
-                GAME #{project.id.toString().padStart(3, '0')}
+                
+                {project.featured && (
+                  <Badge className="bg-yellow-500 text-black font-bold shadow-md">
+                    <Star className="w-3 h-3 mr-1" />
+                    Featured
+                  </Badge>
+                )}
               </div>
               
-              {/* Technology Tags as Power-ups */}
-              <div className="flex flex-wrap gap-1 mb-3 justify-center">
-                {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                  <span 
-                    key={techIndex}
-                    className="bg-green-600 text-white px-2 py-1 rounded text-xs font-bold pixel-font border border-green-400"
-                  >
-                    {tech}
-                  </span>
-                ))}
+              {/* Drawer Handle */}
+              <div className="flex items-center space-x-2">
+                <div className="w-12 h-6 bg-gradient-to-b from-gray-300 to-gray-500 rounded-full shadow-inner border border-gray-400 flex items-center justify-center">
+                  <div className="w-8 h-4 bg-gradient-to-b from-gray-400 to-gray-600 rounded-full shadow-md"></div>
+                </div>
+                <FolderOpen className="w-5 h-5 text-amber-600" />
               </div>
             </div>
-          </div>
-          
-          {/* Control Panel with 3D depth */}
-          <div className="bg-gray-700 p-3 rounded border border-gray-500 relative"
-               style={{
-                 transform: isHovered ? 'translateZ(3px)' : 'translateZ(0px)',
-                 boxShadow: isHovered ? '0 8px 16px rgba(0, 0, 0, 0.3)' : '0 4px 8px rgba(0, 0, 0, 0.2)',
-                 transition: 'all 0.3s ease'
-               }}>
             
-            {/* 3D Flashing Title */}
-            <h3 className={`text-white font-bold text-center mb-2 pixel-font ${
-              isHovered ? 'animate-pulse text-yellow-400' : ''
-            }`}
-            style={{
-              transform: isHovered ? 'translateZ(2px)' : 'translateZ(0px)',
-              textShadow: isHovered ? '0 0 20px currentColor, 0 2px 4px rgba(0,0,0,0.5)' : '0 0 10px currentColor'
-            }}>
-              {project.title.toUpperCase()}
-            </h3>
-            
-            {/* 3D Arcade Buttons */}
-            <div className="flex justify-center space-x-2 mb-3">
-              <Button 
-                size="sm" 
-                variant="outline" 
-                className={`arcade-button bg-red-600 border-red-400 hover:bg-red-500 text-white font-bold ${
-                  isHovered ? 'animate-bounce' : ''
-                }`}
-                style={{
-                  transform: isHovered ? 'translateZ(4px) scale(1.05)' : 'translateZ(0px) scale(1)',
-                  boxShadow: isHovered ? '0 0 20px rgba(239, 68, 68, 0.5), 0 4px 8px rgba(0,0,0,0.3)' : '0 0 10px currentColor',
-                  transition: 'all 0.3s ease'
-                }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  window.open(project.demo, '_blank');
-                }}
-              >
-                <Play className="w-4 h-4 mr-1" />
-                PLAY
-              </Button>
-              
-              <Button 
-                size="sm" 
-                variant="outline" 
-                className={`arcade-button bg-blue-600 border-blue-400 hover:bg-blue-500 text-white font-bold ${
-                  isHovered ? 'animate-bounce' : ''
-                }`}
-                style={{
-                  transform: isHovered ? 'translateZ(4px) scale(1.05)' : 'translateZ(0px) scale(1)',
-                  boxShadow: isHovered ? '0 0 20px rgba(59, 130, 246, 0.5), 0 4px 8px rgba(0,0,0,0.3)' : '0 0 10px currentColor',
-                  transition: 'all 0.3s ease',
-                  animationDelay: '0.1s'
-                }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  window.open(project.github, '_blank');
-                }}
-              >
-                <Code className="w-4 h-4 mr-1" />
-                CODE
-              </Button>
-            </div>
-            
-            {/* 3D Score Display */}
-            <div className="text-center"
+            {/* Drawer Interior Shadow */}
+            <div className="absolute inset-0 rounded-lg shadow-inner pointer-events-none"
                  style={{
-                   transform: isHovered ? 'translateZ(1px)' : 'translateZ(0px)',
-                   transition: 'transform 0.3s ease'
-                 }}>
-              <div className="text-green-400 font-mono text-xs"
-                   style={{
-                     textShadow: isHovered ? '0 0 15px currentColor' : '0 0 5px currentColor'
-                   }}>
-                SCORE: {(project.id * 1000).toLocaleString()}
-              </div>
-            </div>
+                   boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1), inset 0 -2px 4px rgba(0,0,0,0.1)'
+                 }}></div>
           </div>
           
-          {/* Arcade Machine Base */}
-          <div className="h-2 bg-gradient-to-r from-gray-700 to-gray-600 rounded-b border-t border-gray-500 mt-1"></div>
+          {/* File Document */}
+          <div className={`absolute top-2 left-0 w-full transition-all duration-500 ${
+            isFileOut ? 'transform translate-x-80' : 'transform translate-x-0'
+          }`}
+               style={{
+                 zIndex: isFileOut ? 20 : 10
+               }}>
+            <div className="bg-white rounded-lg shadow-2xl border-2 border-gray-300 p-6 max-w-md ml-20"
+                 style={{
+                   background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)',
+                   boxShadow: '0 20px 40px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.06)'
+                 }}>
+              
+              {/* File Header */}
+              <div className="flex items-center justify-between mb-4 border-b border-gray-200 pb-3">
+                <div className="flex items-center space-x-2">
+                  <FileText className="w-5 h-5 text-blue-600" />
+                  <div>
+                    <h3 className="font-bold text-gray-800">{project.title}</h3>
+                    <p className="text-xs text-gray-500">Project Documentation</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-xs text-gray-500">ID: {project.id.toString().padStart(3, '0')}</div>
+                  <div className="text-xs text-gray-500">Status: Active</div>
+                </div>
+              </div>
+              
+              {/* Project Image */}
+              <div className="mb-4">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-32 object-cover rounded border shadow-sm"
+                />
+              </div>
+              
+              {/* Project Description */}
+              <div className="mb-4">
+                <h4 className="font-semibold text-gray-800 mb-2">Description</h4>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  {project.description}
+                </p>
+              </div>
+              
+              {/* Technologies */}
+              <div className="mb-4">
+                <h4 className="font-semibold text-gray-800 mb-2">Technologies</h4>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech, techIndex) => (
+                    <span 
+                      key={techIndex}
+                      className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Action Buttons */}
+              <div className="flex space-x-3">
+                <Button 
+                  size="sm"
+                  className="bg-blue-600 hover:bg-blue-700 text-white"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(project.demo, '_blank');
+                  }}
+                >
+                  <Play className="w-4 h-4 mr-1" />
+                  View Demo
+                </Button>
+                
+                <Button 
+                  size="sm"
+                  variant="outline"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(project.github, '_blank');
+                  }}
+                >
+                  <Code className="w-4 h-4 mr-1" />
+                  Source Code
+                </Button>
+              </div>
+              
+              {/* File Corner Fold */}
+              <div className="absolute top-0 right-0 w-6 h-6 bg-gray-100 border-l border-b border-gray-300"
+                   style={{
+                     clipPath: 'polygon(0 0, 100% 0, 0 100%)'
+                   }}></div>
+            </div>
+          </div>
         </div>
-        
-        {/* Glow Effect */}
-        {isHovered && (
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-cyan-600/20 rounded-lg blur-lg -z-10 animate-pulse"></div>
-        )}
       </div>
     );
   };
