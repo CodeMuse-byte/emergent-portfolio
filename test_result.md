@@ -282,9 +282,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Cover Page Layout Enhancement"
-    - "Back to Lobby - Reverse Animation System"
-    - "Enhanced 3D Arcade Background and Animations"
+    - "Cover Page Navigation Improvements"
+    - "Playground Page Navigation Improvements"
+    - "Complete Navigation Flow"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
