@@ -62,18 +62,7 @@ const Cover = () => {
         </Button>
       </div>
 
-      {/* Playground Game Icon */}
-      <div className="absolute top-6 right-20 z-20">
-        <Link to="/playground">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 backdrop-blur-sm hover:from-purple-500/30 hover:to-blue-500/30 hover:scale-110 transition-all duration-300 group"
-          >
-            <Gamepad2 size={20} className="text-purple-500 group-hover:text-purple-400" />
-          </Button>
-        </Link>
-      </div>
+
 
       <AnimatedBackground className="absolute inset-0">
         <div className="relative z-10 min-h-screen flex items-center justify-center">
