@@ -178,127 +178,92 @@ const Testimonials = () => {
         </div>
       </section>
 
-      {/* Featured Testimonial */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
+      {/* 3D Chat Interface Section */}
+      <section className="py-20 relative overflow-hidden">
+        {/* 3D Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-blue-900/20"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+        
+        {/* Floating 3D Elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-32 h-32 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full blur-xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-xl animate-pulse delay-500"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
-            <Card className="relative overflow-hidden hover:shadow-2xl transition-shadow duration-300">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-blue-500" />
-              <CardContent className="p-8 md:p-12">
-                <div className="flex items-center justify-center mb-8">
-                  <Quote className="w-16 h-16 text-purple-500 opacity-20" />
-                </div>
-                
-                <div className="text-center mb-8">
-                  <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6 italic">
-                    "{currentTestimonial.content}"
-                  </p>
-                  
-                  <div className="flex items-center justify-center mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star 
-                        key={i} 
-                        className={`w-5 h-5 ${i < currentTestimonial.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} 
-                      />
-                    ))}
+            {/* Chat Header */}
+            <div className="text-center mb-12">
+              <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-purple-500/20 backdrop-blur-sm">
+                <MessageSquare className="w-4 h-4 mr-2" />
+                Client Messages
+              </Badge>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                What Clients Say
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Real conversations with satisfied clients who trusted me with their projects.
+              </p>
+            </div>
+
+            {/* Chat Interface */}
+            <div className="bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 transform-gpu hover:scale-[1.02] transition-all duration-500">
+              {/* Chat Header Bar */}
+              <div className="flex items-center justify-between pb-6 mb-6 border-b border-gray-200/50">
+                <div className="flex items-center gap-3">
+                  <div className="flex gap-2">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                   </div>
-                  
-                  <div className="flex items-center justify-center space-x-4">
-                    <Avatar className="w-16 h-16">
-                      <AvatarImage src={currentTestimonial.avatar} alt={currentTestimonial.name} />
-                      <AvatarFallback>
-                        {currentTestimonial.name.split(' ').map(n => n[0]).join('')}
+                  <h3 className="font-semibold text-gray-800">Client Testimonials</h3>
+                </div>
+                <div className="flex items-center gap-2 text-green-600">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-sm font-medium">Online</span>
+                </div>
+              </div>
+
+              {/* Chat Messages */}
+              <div className="space-y-6 max-h-[600px] overflow-y-auto custom-scrollbar">
+                {visibleTestimonials.map((testimonial, index) => (
+                  <ChatBubble 
+                    key={testimonial.id} 
+                    testimonial={testimonial} 
+                    index={index} 
+                    isLeft={index % 2 === 0}
+                  />
+                ))}
+                
+                {/* Typing indicator */}
+                {visibleTestimonials.length < testimonials.length && (
+                  <div className="flex items-center gap-4 opacity-60">
+                    <Avatar className="w-12 h-12">
+                      <AvatarFallback className="bg-gradient-to-r from-purple-500 to-blue-500 text-white">
+                        ...
                       </AvatarFallback>
                     </Avatar>
-                    <div className="text-left">
-                      <h4 className="font-semibold">{currentTestimonial.name}</h4>
-                      <p className="text-muted-foreground">{currentTestimonial.role}</p>
-                      <p className="text-sm text-muted-foreground">{currentTestimonial.company}</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="flex items-center justify-center space-x-4">
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
-                    onClick={prevTestimonial}
-                    className="hover:scale-110 transition-transform duration-300"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </Button>
-                  
-                  <div className="flex space-x-2">
-                    {testimonials.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setCurrentIndex(index)}
-                        className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                          index === currentIndex ? 'bg-purple-500' : 'bg-gray-300'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
-                    onClick={nextTestimonial}
-                    className="hover:scale-110 transition-transform duration-300"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* All Testimonials Grid */}
-      <section className="py-20 bg-accent/5">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              All Testimonials
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
-                <Card key={testimonial.id} className="hover:shadow-lg transition-all duration-300 hover:scale-105">
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i} 
-                          className={`w-4 h-4 ${i < testimonial.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} 
-                        />
-                      ))}
-                    </div>
-                    
-                    <blockquote className="text-muted-foreground mb-4 italic">
-                      "{testimonial.content}"
-                    </blockquote>
-                    
-                    <div className="flex items-center space-x-3 pt-4 border-t border-border">
-                      <Avatar>
-                        <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
-                        <AvatarFallback>
-                          {testimonial.name.split(' ').map(n => n[0]).join('')}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <h4 className="font-semibold text-sm">{testimonial.name}</h4>
-                        <p className="text-xs text-muted-foreground">{testimonial.role}</p>
-                        <p className="text-xs text-muted-foreground flex items-center">
-                          <Building className="w-3 h-3 mr-1" />
-                          {testimonial.company}
-                        </p>
+                    <div className="bg-white rounded-2xl p-4 shadow-lg">
+                      <div className="flex gap-1">
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
+                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200"></div>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Chat Input (decorative) */}
+              <div className="mt-6 pt-6 border-t border-gray-200/50">
+                <div className="flex items-center gap-3 bg-gray-100/50 rounded-full p-3">
+                  <div className="flex-1 px-4 py-2 text-gray-500 text-sm">
+                    Share your experience working with Alex...
+                  </div>
+                  <Button size="sm" className="rounded-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600">
+                    <Send className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
