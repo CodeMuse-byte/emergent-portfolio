@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
@@ -15,7 +15,10 @@ import {
   MessageSquare,
   Award,
   Building,
-  User
+  User,
+  Send,
+  Clock,
+  CheckCheck
 } from 'lucide-react';
 
 const Testimonials = () => {
