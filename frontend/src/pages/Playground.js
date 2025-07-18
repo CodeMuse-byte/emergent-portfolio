@@ -20,16 +20,22 @@ const Playground = () => {
       <AnimatedBackground className="relative overflow-hidden">
         <section className="container mx-auto px-4 py-20 lg:py-32">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-purple-500/20">
-              <Gamepad2 className="w-4 h-4 mr-2" />
-              Interactive Demo
-            </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
-              Interactive Playgrounds
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Experience multiple physics-based interactions with real-time simulations, particle effects, and interactive controls. Click, drag, and interact with the elements!
-            </p>
+            <ScrollReveal delay={100}>
+              <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-purple-500/20">
+                <Gamepad2 className="w-4 h-4 mr-2" />
+                Interactive Demo
+              </Badge>
+            </ScrollReveal>
+            <ScrollReveal delay={200}>
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                Interactive Playgrounds
+              </h1>
+            </ScrollReveal>
+            <ScrollReveal delay={300}>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                Experience multiple physics-based interactions with real-time simulations, particle effects, and interactive controls. Click, drag, and interact with the elements!
+              </p>
+            </ScrollReveal>
           </div>
         </section>
       </AnimatedBackground>
@@ -39,15 +45,21 @@ const Playground = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                Physics Simulation
-              </h2>
-              <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-                Real-time physics with collision detection, gravity effects, and interactive mouse controls.
-              </p>
+              <ScrollReveal delay={100}>
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                  Physics Simulation
+                </h2>
+              </ScrollReveal>
+              <ScrollReveal delay={200}>
+                <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                  Real-time physics with collision detection, gravity effects, and interactive mouse controls.
+                </p>
+              </ScrollReveal>
             </div>
             
-            <PhysicsPlayground />
+            <ScrollReveal delay={300}>
+              <PhysicsPlayground />
+            </ScrollReveal>
           </div>
         </div>
       </section>
