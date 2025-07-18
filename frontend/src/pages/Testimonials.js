@@ -246,23 +246,23 @@ const Testimonials = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section with enhanced smoothness */}
       <section className="py-20 bg-accent/5">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent transition-all duration-700 hover:scale-105">
               Ready to Work Together?
             </h2>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto transition-all duration-500 hover:text-foreground">
               Join the list of satisfied clients who have trusted me with their projects. Let's create something amazing together.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="group hover:scale-105 transition-all duration-300">
-                <User className="w-5 h-5 mr-2 group-hover:bounce transition-transform" />
+              <Button size="lg" className="group hover:scale-105 transition-all duration-500 hover:shadow-2xl">
+                <User className="w-5 h-5 mr-2 group-hover:bounce transition-transform duration-300" />
                 Start Your Project
               </Button>
-              <Button size="lg" variant="outline" className="group hover:scale-105 transition-all duration-300">
-                <MessageSquare className="w-5 h-5 mr-2" />
+              <Button size="lg" variant="outline" className="group hover:scale-105 transition-all duration-500 hover:shadow-xl">
+                <MessageSquare className="w-5 h-5 mr-2 transition-transform duration-300 group-hover:rotate-12" />
                 Schedule a Call
               </Button>
             </div>
