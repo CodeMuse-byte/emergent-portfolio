@@ -281,6 +281,7 @@ const Skills = () => {
             </div>
           </div>
         </section>
+        </ScrollReveal>
       )}
     </div>
   );
