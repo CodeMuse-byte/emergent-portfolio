@@ -12,6 +12,7 @@ import Testimonials from './pages/Testimonials';
 import Contact from './pages/Contact';
 import { Toaster } from './components/ui/toaster';
 import './App.css';
+import './styles/scroll-reveal.css';
 
 function AppContent() {
   const location = useLocation();
