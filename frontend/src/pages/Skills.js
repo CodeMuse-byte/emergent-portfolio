@@ -187,12 +187,16 @@ const Skills = () => {
       <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
         <section className="container mx-auto px-4 py-12 lg:py-20">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Interactive Skills Network
-            </h1>
-            <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-              Click on any skill node to see detailed information and explore the connections between technologies.
-            </p>
+            <ScrollReveal delay={100}>
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Interactive Skills Network
+              </h1>
+            </ScrollReveal>
+            <ScrollReveal delay={200}>
+              <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                Click on any skill node to see detailed information and explore the connections between technologies.
+              </p>
+            </ScrollReveal>
           </div>
         </section>
       </div>
@@ -201,19 +205,21 @@ const Skills = () => {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            {/* Network Container */}
-            <div className="relative h-96 md:h-[600px] bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
-              {/* Connection lines */}
-              <ConnectionLines />
-              
-              {/* Skills nodes */}
-              {getAllSkills().map(skill => (
-                <SkillNode key={skill.name} skill={skill} />
-              ))}
-              
-              {/* Category legend */}
-              <CategoryLegend />
-            </div>
+            <ScrollReveal delay={300}>
+              {/* Network Container */}
+              <div className="relative h-96 md:h-[600px] bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
+                {/* Connection lines */}
+                <ConnectionLines />
+                
+                {/* Skills nodes */}
+                {getAllSkills().map(skill => (
+                  <SkillNode key={skill.name} skill={skill} />
+                ))}
+                
+                {/* Category legend */}
+                <CategoryLegend />
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
