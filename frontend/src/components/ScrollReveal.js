@@ -23,7 +23,7 @@ const ScrollReveal = ({
           observer.disconnect(); // Trigger only once
         }
       },
-      { threshold, rootMargin: '0px' }
+      { threshold, rootMargin: '50px' }
     );
 
     if (ref.current) {
@@ -56,7 +56,7 @@ const ScrollReveal = ({
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translate(0, 0)' : getInitialTransform(),
         transitionDuration: `${duration}ms`,
-        transitionDelay: isVisible ? `${delay}ms` : '0ms'
+        transitionDelay: isVisible ? `0ms` : '0ms'
       }}
       {...props}
     >
