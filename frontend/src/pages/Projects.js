@@ -259,34 +259,6 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Simple Stats */}
-      {filteredProjects.length > 0 && (
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div>
-                  <div className="text-3xl font-bold text-blue-600 mb-2">{filteredProjects.length}</div>
-                  <div className="text-gray-600">Projects</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-green-600 mb-2">{projects.filter(p => p.featured).length}</div>
-                  <div className="text-gray-600">Featured</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-purple-600 mb-2">{allTechnologies.length}</div>
-                  <div className="text-gray-600">Technologies</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-orange-600 mb-2">100%</div>
-                  <div className="text-gray-600">Quality</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Simple CSS for Enhanced 3D effects */}
       <style jsx>{`
         .project-card {
