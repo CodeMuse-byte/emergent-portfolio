@@ -53,9 +53,9 @@ const Testimonials = () => {
 
   const currentTestimonial = testimonials[currentIndex];
 
-  // Chat bubble component with 3D effects
+  // Chat bubble component with enhanced 3D effects and smoother animations
   const ChatBubble = ({ testimonial, index, isLeft = false }) => {
-    const bubbleDelay = index * 0.5;
+    const bubbleDelay = index * 0.3; // Reduced delay for smoother sequence
     
     return (
       <div 
@@ -63,56 +63,60 @@ const Testimonials = () => {
           transform-gpu animate-fadeInUp`}
         style={{
           animationDelay: `${bubbleDelay}s`,
+          animationDuration: '1s',
           animationFillMode: 'both'
         }}
       >
-        {/* Profile Avatar with 3D effect */}
+        {/* Profile Avatar with enhanced 3D effect */}
         <div className="flex-shrink-0 relative group">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full scale-110 opacity-0 group-hover:opacity-20 transition-all duration-300 blur-sm"></div>
-          <Avatar className="w-12 h-12 ring-2 ring-white/20 shadow-lg transform-gpu hover:scale-110 transition-all duration-300 relative z-10">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full scale-110 opacity-0 group-hover:opacity-30 transition-all duration-500 blur-sm animate-pulse"></div>
+          <Avatar className="w-12 h-12 ring-2 ring-white/20 shadow-lg transform-gpu hover:scale-110 transition-all duration-500 relative z-10 hover:rotate-3">
             <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
             <AvatarFallback className="bg-gradient-to-r from-purple-500 to-blue-500 text-white">
               {testimonial.name.split(' ').map(n => n[0]).join('')}
             </AvatarFallback>
           </Avatar>
-          {/* Online indicator */}
+          {/* Enhanced online indicator */}
           <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-lg animate-pulse"></div>
         </div>
 
-        {/* Speech Bubble with 3D effect */}
+        {/* Speech Bubble with enhanced 3D effect and smoother transitions */}
         <div className={`relative max-w-md group ${isLeft ? 'mr-auto' : 'ml-auto'}`}>
-          {/* 3D Shadow */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-2xl transform translate-x-1 translate-y-1 blur-sm opacity-60"></div>
+          {/* Enhanced 3D Shadow */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-2xl transform translate-x-1 translate-y-1 blur-sm opacity-60 transition-all duration-500 group-hover:translate-x-2 group-hover:translate-y-2"></div>
           
-          {/* Main bubble */}
+          {/* Main bubble with enhanced effects */}
           <div className={`relative bg-gradient-to-br ${isLeft ? 'from-white to-gray-50' : 'from-purple-500 to-blue-500'} 
-            rounded-2xl p-6 shadow-xl transform-gpu hover:scale-105 transition-all duration-300 
-            backdrop-blur-sm border border-white/20`}>
+            rounded-2xl p-6 shadow-xl transform-gpu hover:scale-105 transition-all duration-500 
+            backdrop-blur-sm border border-white/20 hover:shadow-2xl hover:rotate-1`}>
             
             {/* Bubble tail */}
             <div className={`absolute top-4 ${isLeft ? '-left-2' : '-right-2'} w-4 h-4 
               bg-gradient-to-br ${isLeft ? 'from-white to-gray-50' : 'from-purple-500 to-blue-500'} 
-              rotate-45 border-l border-t border-white/20`}></div>
+              rotate-45 border-l border-t border-white/20 transition-all duration-500`}></div>
             
             {/* Message content */}
             <div className="relative z-10">
-              <p className={`text-sm leading-relaxed ${isLeft ? 'text-gray-800' : 'text-white'} mb-3`}>
+              <p className={`text-sm leading-relaxed ${isLeft ? 'text-gray-800' : 'text-white'} mb-3 transition-all duration-300`}>
                 {testimonial.content}
               </p>
               
-              {/* Rating stars */}
+              {/* Enhanced rating stars */}
               <div className="flex items-center gap-1 mb-3">
                 {[...Array(5)].map((_, i) => (
                   <Star 
                     key={i} 
-                    className={`w-4 h-4 ${i < testimonial.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} 
+                    className={`w-4 h-4 transition-all duration-300 hover:scale-125 ${i < testimonial.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
+                    style={{
+                      animationDelay: `${bubbleDelay + (i * 0.1)}s`
+                    }}
                   />
                 ))}
               </div>
               
-              {/* Sender info */}
+              {/* Sender info with enhanced transitions */}
               <div className="flex items-center justify-between">
-                <div>
+                <div className="transition-all duration-300 hover:scale-105">
                   <p className={`font-semibold text-sm ${isLeft ? 'text-gray-900' : 'text-white'}`}>
                     {testimonial.name}
                   </p>
@@ -120,7 +124,7 @@ const Testimonials = () => {
                     {testimonial.role} at {testimonial.company}
                   </p>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 transition-all duration-300 hover:scale-110">
                   <Clock className={`w-3 h-3 ${isLeft ? 'text-gray-400' : 'text-white/60'}`} />
                   <CheckCheck className={`w-4 h-4 ${isLeft ? 'text-blue-500' : 'text-white/80'}`} />
                 </div>
