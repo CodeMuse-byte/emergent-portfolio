@@ -182,25 +182,25 @@ const Testimonials = () => {
               </p>
             </div>
 
-            {/* Chat Interface */}
-            <div className="bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 transform-gpu hover:scale-[1.02] transition-all duration-500">
-              {/* Chat Header Bar */}
+            {/* Chat Interface with enhanced smoothness */}
+            <div className="bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 transform-gpu hover:scale-[1.02] transition-all duration-700 hover:shadow-3xl">
+              {/* Chat Header Bar with enhanced effects */}
               <div className="flex items-center justify-between pb-6 mb-6 border-b border-gray-200/50">
                 <div className="flex items-center gap-3">
                   <div className="flex gap-2">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-red-500 rounded-full transition-all duration-300 hover:scale-125"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full transition-all duration-300 hover:scale-125 delay-100"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full transition-all duration-300 hover:scale-125 delay-200"></div>
                   </div>
-                  <h3 className="font-semibold text-gray-800">Client Testimonials</h3>
+                  <h3 className="font-semibold text-gray-800 transition-all duration-300 hover:text-purple-600">Client Testimonials</h3>
                 </div>
                 <div className="flex items-center gap-2 text-green-600">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-sm font-medium">Online</span>
+                  <span className="text-sm font-medium transition-all duration-300 hover:text-green-700">Online</span>
                 </div>
               </div>
 
-              {/* Chat Messages */}
+              {/* Chat Messages with enhanced scrolling */}
               <div className="space-y-6 max-h-[600px] overflow-y-auto custom-scrollbar">
                 {visibleTestimonials.map((testimonial, index) => (
                   <ChatBubble 
@@ -211,15 +211,15 @@ const Testimonials = () => {
                   />
                 ))}
                 
-                {/* Typing indicator */}
+                {/* Enhanced typing indicator */}
                 {visibleTestimonials.length < testimonials.length && (
-                  <div className="flex items-center gap-4 opacity-60">
-                    <Avatar className="w-12 h-12">
+                  <div className="flex items-center gap-4 opacity-60 animate-fadeIn">
+                    <Avatar className="w-12 h-12 animate-pulse">
                       <AvatarFallback className="bg-gradient-to-r from-purple-500 to-blue-500 text-white">
                         ...
                       </AvatarFallback>
                     </Avatar>
-                    <div className="bg-white rounded-2xl p-4 shadow-lg">
+                    <div className="bg-white rounded-2xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-300">
                       <div className="flex gap-1">
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
@@ -230,14 +230,14 @@ const Testimonials = () => {
                 )}
               </div>
 
-              {/* Chat Input (decorative) */}
+              {/* Chat Input with enhanced interactivity */}
               <div className="mt-6 pt-6 border-t border-gray-200/50">
-                <div className="flex items-center gap-3 bg-gray-100/50 rounded-full p-3">
-                  <div className="flex-1 px-4 py-2 text-gray-500 text-sm">
+                <div className="flex items-center gap-3 bg-gray-100/50 rounded-full p-3 transition-all duration-300 hover:bg-gray-100/70 hover:scale-[1.02]">
+                  <div className="flex-1 px-4 py-2 text-gray-500 text-sm transition-all duration-300 hover:text-gray-700">
                     Share your experience working with Alex...
                   </div>
-                  <Button size="sm" className="rounded-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600">
-                    <Send className="w-4 h-4" />
+                  <Button size="sm" className="rounded-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 transition-all duration-500 hover:scale-110 hover:shadow-lg">
+                    <Send className="w-4 h-4 transition-transform duration-300 hover:translate-x-1" />
                   </Button>
                 </div>
               </div>
