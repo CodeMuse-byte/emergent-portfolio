@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Badge } from '../components/ui/badge';
 import AnimatedBackground from '../components/AnimatedBackground';
 import ScrollReveal from '../components/ScrollReveal';
@@ -10,7 +11,8 @@ import {
   MousePointer,
   Sparkles,
   Settings,
-  Play
+  Play,
+  ArrowLeft
 } from 'lucide-react';
 
 const Playground = () => {
