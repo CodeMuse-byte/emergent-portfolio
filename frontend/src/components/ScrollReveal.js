@@ -29,7 +29,7 @@ const ScrollReveal = ({
       },
       { 
         threshold, 
-        rootMargin: '0px 0px -50px 0px' // Trigger when element is 50px from viewport
+        rootMargin: '0px 0px -100px 0px' // Trigger earlier when element is 100px from viewport
       }
     );
 
