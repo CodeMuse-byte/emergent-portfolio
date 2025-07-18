@@ -178,12 +178,12 @@ const Projects = () => {
       <section className="py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <ScrollReveal delay={200}>
+            <ScrollReveal delay={100}>
               <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gray-800">
                 My Projects
               </h1>
             </ScrollReveal>
-            <ScrollReveal delay={400}>
+            <ScrollReveal delay={200}>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                 A collection of my work showcasing various technologies and creative solutions.
               </p>
