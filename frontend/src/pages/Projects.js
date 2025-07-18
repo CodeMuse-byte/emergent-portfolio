@@ -73,19 +73,11 @@ const Projects = () => {
   }, [selectedFilter, searchQuery]);
 
   const ProjectCard = ({ project, index }) => {
-    const isVisible = visibleProjects.includes(project.id);
     const isHovered = hoveredProject === project.id;
     const isEven = index % 2 === 0;
 
     return (
-      <div 
-        className={`project-row relative transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-        style={{
-          transitionDelay: `${index * 200}ms`
-        }}
-      >
+      <ScrollReveal delay={index * 150} className="project-row relative">
         {/* Project Container */}
         <div className={`flex flex-col lg:flex-row items-center gap-8 lg:gap-16 py-16 ${
           isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'
