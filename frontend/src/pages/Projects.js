@@ -187,7 +187,7 @@ const Projects = () => {
         {index < filteredProjects.length - 1 && (
           <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
         )}
-      </div>
+      </ScrollReveal>
     );
   };
 
