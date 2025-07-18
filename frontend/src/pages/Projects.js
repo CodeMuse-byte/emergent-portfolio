@@ -280,281 +280,71 @@ const Projects = () => {
     );
   };
 
-  const GameDetailsView = ({ project }) => {
-    if (!project) return null;
-
-    return (
-      <div className="fixed inset-0 z-50 bg-black">
-        {/* INSERT COIN Overlay */}
-        {showInsertCoin && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black">
-            <div className="text-center">
-              <div className="text-6xl md:text-8xl font-bold pixel-font text-yellow-400 animate-pulse mb-4">
-                🪙 INSERT COIN 🪙
-              </div>
-              <div className="text-2xl md:text-3xl font-bold pixel-font text-cyan-400 animate-bounce">
-                PRESS START
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Game Started - Pixelated Transition */}
-        {gameStarted && !detailsAnimating && !gameEnding && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black">
-            <div className="text-center">
-              <div className="text-4xl md:text-6xl font-bold pixel-font text-green-400 animate-pulse mb-4">
-                🎮 GAME START! 🎮
-              </div>
-              <div className="text-xl md:text-2xl font-bold pixel-font text-cyan-400">
-                LOADING...
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Game Over Overlay */}
-        {showGameOver && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black z-60">
-            <div className="text-center">
-              <div className="text-6xl md:text-8xl font-bold pixel-font text-red-400 animate-pulse mb-4">
-                💀 GAME OVER 💀
-              </div>
-              <div className="text-2xl md:text-3xl font-bold pixel-font text-yellow-400 animate-bounce">
-                RETURNING TO ARCADE...
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Game Details - Enhanced 3D Sprite Animation */}
-        {detailsAnimating && !gameEnding && (
-          <div className="absolute inset-0 overflow-y-auto bg-gradient-to-b from-black via-purple-900/30 to-black"
-               style={{
-                 background: 'radial-gradient(ellipse at center, rgba(139, 92, 246, 0.1) 0%, rgba(0, 0, 0, 0.8) 70%, black 100%)',
-                 backdropFilter: 'blur(1px)'
-               }}>
-            {/* Close Button with 3D effect */}
-            <Button
-              onClick={closeGameView}
-              className="absolute top-4 right-4 z-50 bg-red-600 hover:bg-red-500 text-white pixel-font shadow-lg"
-              style={{
-                transform: 'translateZ(10px)',
-                boxShadow: '0 8px 16px rgba(239, 68, 68, 0.3), 0 0 20px rgba(239, 68, 68, 0.2)'
-              }}
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              BACK TO ARCADE
-            </Button>
-
-            {/* Enhanced 3D Game Header */}
-            <div className={`text-center py-12 ${gameEnding ? 'animate-fade-out' : 'animate-fade-in'}`}
-                 style={{
-                   transform: 'translateZ(5px)',
-                   textShadow: '0 0 30px currentColor, 0 4px 8px rgba(0,0,0,0.5)'
-                 }}>
-              <div className="text-5xl md:text-7xl font-bold pixel-font text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 mb-4"
-                   style={{
-                     filter: 'drop-shadow(0 0 20px rgba(6, 182, 212, 0.5))'
-                   }}>
-                {project.title.toUpperCase()}
-              </div>
-              <div className="text-xl text-cyan-400 pixel-font"
-                   style={{
-                     textShadow: '0 0 15px currentColor'
-                   }}>
-                GAME #{project.id.toString().padStart(3, '0')} - LEVEL {project.id}
-              </div>
-            </div>
-
-            {/* Game Screen */}
-            <div className="container mx-auto px-4 max-w-6xl">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                {/* Main Game View */}
-                <div className={`sprite-block bg-gray-900 p-6 rounded-lg border-2 border-cyan-400 shadow-lg shadow-cyan-400/50 ${gameEnding ? 'fade-out' : ''}`}>
-                  <div className="relative">
-                    <img 
-                      src={project.image} 
-                      alt={project.title}
-                      className="w-full h-64 object-cover rounded border-2 border-gray-600"
-                      style={{ imageRendering: 'pixelated' }}
-                    />
-                    <div className="absolute inset-0 opacity-20 pointer-events-none rounded"
-                      style={{
-                        background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,255,0.1) 2px, rgba(0,255,255,0.1) 4px)'
-                      }}
-                    ></div>
-                  </div>
-                </div>
-
-                {/* Game Info Panel */}
-                <div className={`sprite-block bg-gray-900 p-6 rounded-lg border-2 border-purple-400 shadow-lg shadow-purple-400/50 ${gameEnding ? 'fade-out' : ''}`}>
-                  <h3 className="text-2xl font-bold pixel-font text-purple-400 mb-4">
-                    📊 GAME STATS
-                  </h3>
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center border-b border-gray-700 pb-2">
-                      <span className="text-cyan-400 pixel-font">GENRE:</span>
-                      <span className="text-white pixel-font">WEB APPLICATION</span>
-                    </div>
-                    <div className="flex justify-between items-center border-b border-gray-700 pb-2">
-                      <span className="text-cyan-400 pixel-font">YEAR:</span>
-                      <span className="text-white pixel-font">2024</span>
-                    </div>
-                    <div className="flex justify-between items-center border-b border-gray-700 pb-2">
-                      <span className="text-cyan-400 pixel-font">SCORE:</span>
-                      <span className="text-green-400 pixel-font">{(project.id * 1000).toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between items-center border-b border-gray-700 pb-2">
-                      <span className="text-cyan-400 pixel-font">STATUS:</span>
-                      <span className="text-yellow-400 pixel-font">ACTIVE</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Game Description */}
-              <div className={`sprite-block bg-gray-900 p-6 rounded-lg border-2 border-green-400 shadow-lg shadow-green-400/50 mb-8 ${gameEnding ? 'fade-out' : ''}`}>
-                <h3 className="text-2xl font-bold pixel-font text-green-400 mb-4">
-                  🎯 GAME DESCRIPTION
-                </h3>
-                <p className="text-white pixel-font text-lg leading-relaxed">
-                  {project.description}
-                </p>
-              </div>
-
-              {/* Power-ups (Technologies) */}
-              <div className={`sprite-block bg-gray-900 p-6 rounded-lg border-2 border-yellow-400 shadow-lg shadow-yellow-400/50 mb-8 ${gameEnding ? 'fade-out' : ''}`}>
-                <h3 className="text-2xl font-bold pixel-font text-yellow-400 mb-4">
-                  ⚡ POWER-UPS COLLECTED
-                </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                  {project.technologies.map((tech, index) => (
-                    <div 
-                      key={index}
-                      className={`bg-gradient-to-r from-green-600 to-green-500 p-3 rounded border-2 border-green-400 text-center power-up-block ${gameEnding ? 'fade-out' : ''}`}
-                      style={{ animationDelay: `${index * 0.1}s` }}
-                    >
-                      <div className="text-white pixel-font font-bold">{tech}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className={`sprite-block text-center mb-12 ${gameEnding ? 'fade-out' : ''}`}>
-                <div className="flex justify-center space-x-6">
-                  <Button 
-                    size="lg"
-                    className="bg-red-600 hover:bg-red-500 text-white font-bold pixel-font text-xl px-8 py-4"
-                    onClick={() => window.open(project.demo, '_blank')}
-                    disabled={gameEnding}
-                  >
-                    <Play className="w-6 h-6 mr-2" />
-                    PLAY GAME
-                  </Button>
-                  
-                  <Button 
-                    size="lg"
-                    className="bg-blue-600 hover:bg-blue-500 text-white font-bold pixel-font text-xl px-8 py-4"
-                    onClick={() => window.open(project.github, '_blank')}
-                    disabled={gameEnding}
-                  >
-                    <Code className="w-6 h-6 mr-2" />
-                    VIEW CODE
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  };
-
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* 3D Arcade Room Background */}
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 relative overflow-hidden">
+      {/* Professional Office Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-indigo-900 via-purple-900 to-black"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-pink-900/20 via-transparent to-cyan-900/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-200"></div>
         
-        {/* 3D Grid Floor */}
-        <div className="absolute bottom-0 left-0 right-0 h-1/2 overflow-hidden">
-          <div className="absolute inset-0 perspective-1000">
-            <div className="absolute inset-0 transform rotate-x-75 translate-z-0" 
-                 style={{
-                   background: 'linear-gradient(90deg, transparent 0%, rgba(0,255,255,0.1) 50%, transparent 100%), linear-gradient(0deg, transparent 0%, rgba(255,0,255,0.1) 50%, transparent 100%)',
-                   backgroundSize: '50px 50px',
-                   transform: 'rotateX(75deg) translateZ(0)'
-                 }}>
-            </div>
-          </div>
-        </div>
+        {/* Office Wall Texture */}
+        <div className="absolute inset-0 opacity-30"
+             style={{
+               background: 'repeating-linear-gradient(90deg, transparent, transparent 100px, rgba(156, 163, 175, 0.1) 100px, rgba(156, 163, 175, 0.1) 102px)'
+             }}></div>
         
-        {/* Floating Neon Particles */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute w-2 h-2 bg-cyan-400 rounded-full animate-float-1" style={{top: '20%', left: '10%'}}></div>
-          <div className="absolute w-1 h-1 bg-pink-400 rounded-full animate-float-2" style={{top: '50%', left: '80%'}}></div>
-          <div className="absolute w-3 h-3 bg-purple-400 rounded-full animate-float-3" style={{top: '70%', left: '15%'}}></div>
-          <div className="absolute w-1 h-1 bg-yellow-400 rounded-full animate-float-4" style={{top: '30%', left: '70%'}}></div>
-          <div className="absolute w-2 h-2 bg-green-400 rounded-full animate-float-5" style={{top: '60%', left: '40%'}}></div>
-          <div className="absolute w-1 h-1 bg-orange-400 rounded-full animate-float-6" style={{top: '80%', left: '90%'}}></div>
-        </div>
+        {/* Office Lighting */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
         
-        {/* 3D Neon Lines */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse"></div>
-          <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-pink-400 to-transparent animate-pulse" style={{animationDelay: '0.5s'}}></div>
-          <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent animate-pulse" style={{animationDelay: '1s'}}></div>
-          <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent animate-pulse" style={{animationDelay: '1.5s'}}></div>
-        </div>
+        {/* Subtle Office Elements */}
+        <div className="absolute top-20 right-20 w-2 h-2 bg-gray-400 rounded-full opacity-30"></div>
+        <div className="absolute bottom-32 left-32 w-1 h-1 bg-gray-400 rounded-full opacity-20"></div>
+        <div className="absolute top-1/2 left-20 w-1 h-1 bg-gray-400 rounded-full opacity-25"></div>
       </div>
 
-      {/* Neon Header */}
+      {/* Professional Header */}
       <section className="relative z-10 py-20 lg:py-32">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="mb-8">
-              <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-bold bg-gradient-to-r from-purple-600/20 to-cyan-600/20 border-purple-500 text-purple-400 pixel-font">
-                <Gamepad2 className="w-4 h-4 mr-2" />
-                RETRO ARCADE
+              <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold bg-white/80 border-amber-800 text-amber-800 shadow-sm">
+                <Archive className="w-4 h-4 mr-2" />
+                PROJECT ARCHIVE
               </Badge>
               
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 pixel-font text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 animate-pulse">
-                GAME LOBBY
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gray-800">
+                Project Files
               </h1>
               
-              <p className="text-lg md:text-xl text-cyan-300 max-w-2xl mx-auto leading-relaxed pixel-font">
-                🕹️ WELCOME TO THE ARCADE! 🕹️<br/>
-                Click on any game machine to start playing!
+              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                📁 Professional project portfolio organized in a digital filing system.<br/>
+                Hover over any drawer to explore the project details.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Arcade Controls */}
-      <section className="relative z-10 py-8 bg-gray-900/50 backdrop-blur-sm border-y border-purple-500/30">
+      {/* Office Controls */}
+      <section className="relative z-10 py-8 bg-white/50 backdrop-blur-sm border-y border-gray-300/50">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <div className="flex flex-col md:flex-row gap-4 mb-6">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-cyan-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
                 <Input
-                  placeholder="Search games..."
+                  placeholder="Search projects..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 bg-black border-cyan-500 text-cyan-400 placeholder-cyan-600 pixel-font"
+                  className="pl-10 bg-white border-gray-300 text-gray-700 placeholder-gray-500 shadow-sm"
                 />
               </div>
               
               <div className="flex items-center space-x-4">
-                <Filter className="w-4 h-4 text-cyan-400" />
+                <Filter className="w-4 h-4 text-gray-500" />
                 <select
                   value={selectedFilter}
                   onChange={(e) => setSelectedFilter(e.target.value)}
-                  className="px-4 py-2 border border-cyan-500 rounded-md bg-black text-cyan-400 pixel-font focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                  className="px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                 >
                   {filterOptions.map(option => (
                     <option key={option.value} value={option.value}>
@@ -565,26 +355,26 @@ const Projects = () => {
               </div>
             </div>
 
-            {/* Game Filter Buttons */}
+            {/* Filter Buttons */}
             <div className="flex flex-wrap gap-2 mb-8">
               <Button
                 variant={selectedFilter === 'all' ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedFilter('all')}
-                className="pixel-font bg-purple-600 hover:bg-purple-500 border-purple-400"
+                className="bg-amber-800 hover:bg-amber-700 text-white border-amber-800"
               >
-                <Trophy className="w-4 h-4 mr-1" />
-                ALL GAMES ({projects.length})
+                <Briefcase className="w-4 h-4 mr-1" />
+                All Projects ({projects.length})
               </Button>
               
               <Button
                 variant={selectedFilter === 'featured' ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedFilter('featured')}
-                className="pixel-font bg-yellow-600 hover:bg-yellow-500 border-yellow-400"
+                className="bg-yellow-600 hover:bg-yellow-500 text-white border-yellow-600"
               >
                 <Star className="w-4 h-4 mr-1" />
-                HIGH SCORES ({projects.filter(p => p.featured).length})
+                Featured ({projects.filter(p => p.featured).length})
               </Button>
               
               {allTechnologies.slice(0, 4).map(tech => (
@@ -593,7 +383,7 @@ const Projects = () => {
                   variant={selectedFilter === tech ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setSelectedFilter(tech)}
-                  className="pixel-font bg-green-600 hover:bg-green-500 border-green-400"
+                  className="bg-blue-600 hover:bg-blue-500 text-white border-blue-600"
                 >
                   {tech}
                 </Button>
@@ -603,47 +393,47 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Arcade Machines Grid */}
+      {/* Filing Cabinet */}
       <section className="relative z-10 py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             {filteredProjects.length === 0 ? (
               <div className="text-center py-20">
-                <div className="text-6xl mb-4 pixel-font">💀</div>
-                <h3 className="text-2xl font-semibold mb-2 text-red-400 pixel-font">GAME OVER</h3>
-                <p className="text-cyan-400 pixel-font">No games found! Try different search terms.</p>
+                <div className="text-6xl mb-4">📂</div>
+                <h3 className="text-2xl font-semibold mb-2 text-gray-700">No Files Found</h3>
+                <p className="text-gray-500">No projects match your search criteria.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="space-y-4">
                 {filteredProjects.map((project, index) => (
-                  <ArcadeMachine key={project.id} project={project} index={index} />
+                  <FilingDrawer key={project.id} project={project} index={index} />
                 ))}
               </div>
             )}
             
-            {/* Arcade Stats */}
+            {/* Office Stats */}
             {filteredProjects.length > 0 && (
               <div className="text-center mt-16">
-                <div className="bg-black/50 backdrop-blur-sm rounded-lg p-6 border border-purple-500/30">
-                  <h3 className="text-2xl font-bold mb-4 text-cyan-400 pixel-font">
-                    🏆 ARCADE STATS 🏆
+                <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 border border-gray-200 shadow-lg">
+                  <h3 className="text-2xl font-bold mb-4 text-gray-800">
+                    📊 Archive Statistics
                   </h3>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-yellow-400 pixel-font">{filteredProjects.length}</div>
-                      <div className="text-sm text-cyan-400 pixel-font">GAMES AVAILABLE</div>
+                      <div className="text-3xl font-bold text-amber-600">{filteredProjects.length}</div>
+                      <div className="text-sm text-gray-600">Total Projects</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-green-400 pixel-font">{projects.filter(p => p.featured).length}</div>
-                      <div className="text-sm text-cyan-400 pixel-font">HIGH SCORES</div>
+                      <div className="text-3xl font-bold text-yellow-600">{projects.filter(p => p.featured).length}</div>
+                      <div className="text-sm text-gray-600">Featured</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-purple-400 pixel-font">{allTechnologies.length}</div>
-                      <div className="text-sm text-cyan-400 pixel-font">POWER-UPS</div>
+                      <div className="text-3xl font-bold text-blue-600">{allTechnologies.length}</div>
+                      <div className="text-sm text-gray-600">Technologies</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-pink-400 pixel-font">∞</div>
-                      <div className="text-sm text-cyan-400 pixel-font">FUN LEVEL</div>
+                      <div className="text-3xl font-bold text-green-600">100%</div>
+                      <div className="text-sm text-gray-600">Organized</div>
                     </div>
                   </div>
                 </div>
@@ -653,205 +443,58 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Game Details Modal */}
-      {selectedProject && (
-        <GameDetailsView project={selectedProject} />
-      )}
-
       {/* Custom Styles */}
       <style jsx>{`
-        .pixel-font {
-          font-family: 'Courier New', monospace;
-          font-weight: bold;
-          text-shadow: 0 0 10px currentColor;
+        .filing-drawer-body {
+          position: relative;
+          min-height: 96px;
+          background: linear-gradient(135deg, #8B4513 0%, #654321 30%, #8B4513 60%, #654321 100%);
+          border: 2px solid #6B4423;
+          box-shadow: 
+            0 4px 16px rgba(0,0,0,0.2),
+            inset 0 1px 0 rgba(255,255,255,0.1),
+            inset 0 -1px 0 rgba(0,0,0,0.1);
         }
         
-        .arcade-button {
-          font-family: 'Courier New', monospace;
-          font-weight: bold;
-          text-shadow: 0 0 5px currentColor;
-          box-shadow: 0 0 10px currentColor;
+        .filing-drawer-body::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 4px,
+            rgba(139,69,19,0.3) 4px,
+            rgba(139,69,19,0.3) 6px
+          );
+          border-radius: 0.5rem;
+          opacity: 0.4;
         }
         
-        .arcade-machine {
-          image-rendering: pixelated;
-          image-rendering: -moz-crisp-edges;
-          image-rendering: crisp-edges;
-          transform-style: preserve-3d;
-          perspective: 1000px;
+        .filing-drawer:hover .filing-drawer-body {
+          transform: translateX(16px);
+          box-shadow: 
+            0 8px 32px rgba(0,0,0,0.3),
+            inset 0 1px 0 rgba(255,255,255,0.1),
+            inset 0 -1px 0 rgba(0,0,0,0.1);
         }
         
-        .sprite-block {
-          animation: blockBuildUp 0.5s ease-out forwards;
-          opacity: 0;
-          transform: translateY(20px) scale(0.9) translateZ(0px);
-          transform-style: preserve-3d;
+        .filing-drawer-body:hover {
+          background: linear-gradient(135deg, #A0522D 0%, #6B4423 30%, #A0522D 60%, #6B4423 100%);
         }
         
-        .sprite-block.fade-out {
-          animation: blockFadeOut 0.5s ease-out forwards;
+        @keyframes drawerSlide {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(16px); }
         }
         
-        .power-up-block {
-          animation: powerUpCollect 0.3s ease-out forwards;
-          opacity: 0;
-          transform: scale(0.8) translateZ(0px);
-          transform-style: preserve-3d;
+        @keyframes fileSlideOut {
+          0% { transform: translateX(0); opacity: 0.8; }
+          100% { transform: translateX(320px); opacity: 1; }
         }
         
-        .power-up-block.fade-out {
-          animation: powerUpFadeOut 0.3s ease-out forwards;
-        }
-        
-        @keyframes blockBuildUp {
-          0% {
-            opacity: 0;
-            transform: translateY(20px) scale(0.9) translateZ(0px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0) scale(1) translateZ(10px);
-          }
-        }
-        
-        @keyframes blockFadeOut {
-          0% {
-            opacity: 1;
-            transform: translateY(0) scale(1) translateZ(10px);
-          }
-          100% {
-            opacity: 0;
-            transform: translateY(-20px) scale(0.9) translateZ(0px);
-          }
-        }
-        
-        @keyframes powerUpCollect {
-          0% {
-            opacity: 0;
-            transform: scale(0.8) translateZ(0px);
-          }
-          50% {
-            transform: scale(1.1) translateZ(5px);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1) translateZ(3px);
-          }
-        }
-        
-        @keyframes powerUpFadeOut {
-          0% {
-            opacity: 1;
-            transform: scale(1) translateZ(3px);
-          }
-          50% {
-            transform: scale(0.8) translateZ(1px);
-          }
-          100% {
-            opacity: 0;
-            transform: scale(0.6) translateZ(0px);
-          }
-        }
-        
-        @keyframes float-1 {
-          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-          25% { transform: translateY(-20px) translateX(10px) rotate(90deg); }
-          50% { transform: translateY(-10px) translateX(-5px) rotate(180deg); }
-          75% { transform: translateY(-15px) translateX(8px) rotate(270deg); }
-        }
-        
-        @keyframes float-2 {
-          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-          33% { transform: translateY(-15px) translateX(-8px) rotate(120deg); }
-          66% { transform: translateY(-25px) translateX(12px) rotate(240deg); }
-        }
-        
-        @keyframes float-3 {
-          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-          20% { transform: translateY(-10px) translateX(15px) rotate(72deg); }
-          40% { transform: translateY(-20px) translateX(-10px) rotate(144deg); }
-          60% { transform: translateY(-5px) translateX(20px) rotate(216deg); }
-          80% { transform: translateY(-18px) translateX(-15px) rotate(288deg); }
-        }
-        
-        @keyframes float-4 {
-          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-          50% { transform: translateY(-30px) translateX(15px) rotate(180deg); }
-        }
-        
-        @keyframes float-5 {
-          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-          25% { transform: translateY(-12px) translateX(-20px) rotate(90deg); }
-          50% { transform: translateY(-8px) translateX(5px) rotate(180deg); }
-          75% { transform: translateY(-22px) translateX(10px) rotate(270deg); }
-        }
-        
-        @keyframes float-6 {
-          0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-          33% { transform: translateY(-18px) translateX(8px) rotate(120deg); }
-          66% { transform: translateY(-5px) translateX(-12px) rotate(240deg); }
-        }
-        
-        .animate-float-1 { animation: float-1 6s ease-in-out infinite; }
-        .animate-float-2 { animation: float-2 8s ease-in-out infinite; }
-        .animate-float-3 { animation: float-3 10s ease-in-out infinite; }
-        .animate-float-4 { animation: float-4 7s ease-in-out infinite; }
-        .animate-float-5 { animation: float-5 9s ease-in-out infinite; }
-        .animate-float-6 { animation: float-6 5s ease-in-out infinite; }
-        
-        @keyframes neon-glow {
-          0%, 100% { text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor; }
-          50% { text-shadow: 0 0 2px currentColor, 0 0 5px currentColor, 0 0 8px currentColor; }
-        }
-        
-        .animate-neon {
-          animation: neon-glow 2s ease-in-out infinite;
-        }
-        
-        .perspective-1000 {
-          perspective: 1000px;
-        }
-        
-        .rotate-x-75 {
-          transform: rotateX(75deg);
-        }
-        
-        .rotate-y-5 {
-          transform: rotateY(5deg);
-        }
-        
-        .translate-z-0 {
-          transform: translateZ(0);
-        }
-        
-        .preserve-3d {
-          transform-style: preserve-3d;
-        }
-        
-        .backface-hidden {
-          backface-visibility: hidden;
-        }
-        
-        .neon-glow {
-          animation: neon-glow 2s ease-in-out infinite;
-        }
-        
-        .animate-fade-in {
-          animation: fadeIn 1s ease-out forwards;
-        }
-
-        .animate-fade-out {
-          animation: fadeOut 1s ease-out forwards;
-        }
-        
-        @keyframes fadeIn {
-          0% { opacity: 0; transform: translateY(30px) translateZ(0px); }
-          100% { opacity: 1; transform: translateY(0) translateZ(5px); }
-        }
-
-        @keyframes fadeOut {
-          0% { opacity: 1; transform: translateY(0) translateZ(5px); }
-          100% { opacity: 0; transform: translateY(-30px) translateZ(0px); }
+        .filing-drawer-body {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
       `}</style>
     </div>
