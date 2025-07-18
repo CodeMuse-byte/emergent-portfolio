@@ -145,7 +145,7 @@ const Projects = () => {
             <div className="flex space-x-3">
               <Button 
                 size="sm"
-                className="bg-blue-600 hover:bg-blue-700 text-white transition-all duration-200 transform hover:scale-105"
+                className="bg-blue-600 hover:bg-blue-700 text-white"
                 onClick={(e) => {
                   e.stopPropagation();
                   window.open(project.demo, '_blank');
@@ -158,7 +158,7 @@ const Projects = () => {
               <Button 
                 size="sm"
                 variant="outline"
-                className="border-gray-300 hover:border-gray-400 transition-all duration-200 transform hover:scale-105"
+                className="border-gray-300 hover:border-gray-400"
                 onClick={(e) => {
                   e.stopPropagation();
                   window.open(project.github, '_blank');
@@ -169,16 +169,6 @@ const Projects = () => {
               </Button>
             </div>
           </div>
-          
-          {/* 3D Card Shadow Effect */}
-          <div className={`absolute inset-0 rounded-xl transition-all duration-300 pointer-events-none ${
-            isHovered ? 'shadow-2xl' : 'shadow-none'
-          }`}
-          style={{
-            transform: isHovered ? 'translateZ(-10px)' : 'translateZ(0px)',
-            background: isHovered ? 'rgba(0,0,0,0.1)' : 'transparent',
-            filter: 'blur(10px)'
-          }}></div>
         </div>
       </div>
     );
