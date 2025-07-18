@@ -23,6 +23,28 @@ import {
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleTestimonials, setVisibleTestimonials] = useState([]);
+
+  // Animation for testimonials appearing one by one
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setVisibleTestimonials(prev => {
+        if (prev.length < testimonials.length) {
+          return [...prev, testimonials[prev.length]];
+        }
+        return prev;
+      });
+    }, 800);
+
+    return () => clearTimeout(timer);
+  }, [visibleTestimonials]);
+
+  // Initialize first testimonial
+  useEffect(() => {
+    if (visibleTestimonials.length === 0) {
+      setVisibleTestimonials([testimonials[0]]);
+    }
+  }, []);
 
   const nextTestimonial = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -33,6 +55,85 @@ const Testimonials = () => {
   };
 
   const currentTestimonial = testimonials[currentIndex];
+
+  // Chat bubble component with 3D effects
+  const ChatBubble = ({ testimonial, index, isLeft = false }) => {
+    const bubbleDelay = index * 0.5;
+    
+    return (
+      <div 
+        className={`flex items-end gap-4 mb-8 ${isLeft ? 'flex-row' : 'flex-row-reverse'} 
+          transform-gpu animate-fadeInUp`}
+        style={{
+          animationDelay: `${bubbleDelay}s`,
+          animationFillMode: 'both'
+        }}
+      >
+        {/* Profile Avatar with 3D effect */}
+        <div className="flex-shrink-0 relative group">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full scale-110 opacity-0 group-hover:opacity-20 transition-all duration-300 blur-sm"></div>
+          <Avatar className="w-12 h-12 ring-2 ring-white/20 shadow-lg transform-gpu hover:scale-110 transition-all duration-300 relative z-10">
+            <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
+            <AvatarFallback className="bg-gradient-to-r from-purple-500 to-blue-500 text-white">
+              {testimonial.name.split(' ').map(n => n[0]).join('')}
+            </AvatarFallback>
+          </Avatar>
+          {/* Online indicator */}
+          <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-lg animate-pulse"></div>
+        </div>
+
+        {/* Speech Bubble with 3D effect */}
+        <div className={`relative max-w-md group ${isLeft ? 'mr-auto' : 'ml-auto'}`}>
+          {/* 3D Shadow */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-2xl transform translate-x-1 translate-y-1 blur-sm opacity-60"></div>
+          
+          {/* Main bubble */}
+          <div className={`relative bg-gradient-to-br ${isLeft ? 'from-white to-gray-50' : 'from-purple-500 to-blue-500'} 
+            rounded-2xl p-6 shadow-xl transform-gpu hover:scale-105 transition-all duration-300 
+            backdrop-blur-sm border border-white/20`}>
+            
+            {/* Bubble tail */}
+            <div className={`absolute top-4 ${isLeft ? '-left-2' : '-right-2'} w-4 h-4 
+              bg-gradient-to-br ${isLeft ? 'from-white to-gray-50' : 'from-purple-500 to-blue-500'} 
+              rotate-45 border-l border-t border-white/20`}></div>
+            
+            {/* Message content */}
+            <div className="relative z-10">
+              <p className={`text-sm leading-relaxed ${isLeft ? 'text-gray-800' : 'text-white'} mb-3`}>
+                {testimonial.content}
+              </p>
+              
+              {/* Rating stars */}
+              <div className="flex items-center gap-1 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <Star 
+                    key={i} 
+                    className={`w-4 h-4 ${i < testimonial.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} 
+                  />
+                ))}
+              </div>
+              
+              {/* Sender info */}
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className={`font-semibold text-sm ${isLeft ? 'text-gray-900' : 'text-white'}`}>
+                    {testimonial.name}
+                  </p>
+                  <p className={`text-xs ${isLeft ? 'text-gray-600' : 'text-white/80'}`}>
+                    {testimonial.role} at {testimonial.company}
+                  </p>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Clock className={`w-3 h-3 ${isLeft ? 'text-gray-400' : 'text-white/60'}`} />
+                  <CheckCheck className={`w-4 h-4 ${isLeft ? 'text-blue-500' : 'text-white/80'}`} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen">
