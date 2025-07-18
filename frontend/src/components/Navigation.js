@@ -26,7 +26,6 @@ const Navigation = () => {
     { path: '/about', label: 'About', icon: User },
     { path: '/skills', label: 'Skills', icon: Code },
     { path: '/projects', label: 'Projects', icon: FolderOpen },
-    { path: '/playground', label: 'Playground', icon: Gamepad2 },
     { path: '/testimonials', label: 'Testimonials', icon: MessageSquare },
     { path: '/contact', label: 'Contact', icon: Mail }
   ];
