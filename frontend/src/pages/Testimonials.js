@@ -139,15 +139,15 @@ const Testimonials = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <AnimatedBackground className="relative overflow-hidden">
-        <section className="container mx-auto px-4 py-20 lg:py-32">
+        <section className="container mx-auto px-4 py-12 lg:py-16">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-purple-500/20">
+            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-purple-500/20 transition-all duration-500 hover:scale-105">
               Client Testimonials
             </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent animate-pulse">
               What People Say
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed transition-all duration-700 hover:text-foreground">
               Hear from clients and colleagues about their experience working with me.
             </p>
           </div>
