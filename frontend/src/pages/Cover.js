@@ -84,7 +84,7 @@ const Cover = () => {
                 <div className="space-y-6">
                   {/* Greeting */}
                   <div className="mb-8">
-                    <ScrollReveal delay={100}>
+                    <ScrollReveal delay={200}>
                       <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 mb-6">
                         <Sparkles className="w-4 h-4 mr-2 text-purple-500" />
                         <span className="text-sm font-medium text-muted-foreground">
@@ -93,19 +93,19 @@ const Cover = () => {
                       </div>
                     </ScrollReveal>
                     
-                    <ScrollReveal delay={200}>
+                    <ScrollReveal delay={400}>
                       <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
                         Hello
                       </h1>
                     </ScrollReveal>
                     
-                    <ScrollReveal delay={300}>
+                    <ScrollReveal delay={600}>
                       <p className="text-xl md:text-2xl text-muted-foreground mb-6">
                         I'm <span className="font-semibold text-foreground">{personalInfo.name}</span>
                       </p>
                     </ScrollReveal>
                     
-                    <ScrollReveal delay={400}>
+                    <ScrollReveal delay={800}>
                       <div className="h-16 flex items-start justify-start mb-8">
                         <div className="text-2xl md:text-3xl font-semibold">
                           <span className="text-muted-foreground">A passionate </span>
@@ -121,7 +121,7 @@ const Cover = () => {
                   </div>
 
                   {/* Action Buttons */}
-                  <ScrollReveal delay={500}>
+                  <ScrollReveal delay={1000}>
                     <div className="flex flex-col sm:flex-row gap-6 justify-start items-start mb-12">
                       <Button 
                         size="lg" 
@@ -152,7 +152,7 @@ const Cover = () => {
                   </ScrollReveal>
 
                   {/* Social Links */}
-                  <ScrollReveal delay={600}>
+                  <ScrollReveal delay={1200}>
                     <div className="flex justify-start space-x-6 mb-12">
                       {socialLinks.map((social, index) => (
                         <Button
