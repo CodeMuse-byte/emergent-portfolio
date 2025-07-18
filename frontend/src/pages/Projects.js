@@ -53,24 +53,6 @@ const Projects = () => {
     ...allTechnologies.map(tech => ({ value: tech, label: tech }))
   ];
 
-  // Simple animation for project cards
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      filteredProjects.forEach((project, index) => {
-        setTimeout(() => {
-          setVisibleProjects(prev => [...prev, project.id]);
-        }, index * 100);
-      });
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, [filteredProjects]);
-
-  // Reset visible projects when filter changes
-  useEffect(() => {
-    setVisibleProjects([]);
-  }, [selectedFilter, searchQuery]);
-
   const ProjectCard = ({ project, index }) => {
     const isHovered = hoveredProject === project.id;
     const isEven = index % 2 === 0;
