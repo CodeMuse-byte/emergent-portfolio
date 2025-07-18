@@ -3,7 +3,6 @@ import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '../components/ui/avatar';
-import AnimatedBackground from '../components/AnimatedBackground';
 import { testimonials } from '../data/mockData';
 import { 
   Star,
