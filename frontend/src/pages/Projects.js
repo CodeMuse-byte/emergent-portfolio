@@ -485,56 +485,49 @@ const Projects = () => {
 
       {/* Custom Styles */}
       <style jsx>{`
-        .filing-drawer-body {
-          position: relative;
-          min-height: 96px;
-          background: linear-gradient(135deg, #8B4513 0%, #654321 30%, #8B4513 60%, #654321 100%);
-          border: 2px solid #6B4423;
-          box-shadow: 
-            0 4px 16px rgba(0,0,0,0.2),
-            inset 0 1px 0 rgba(255,255,255,0.1),
-            inset 0 -1px 0 rgba(0,0,0,0.1);
+        .filing-drawer {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .filing-drawer-body::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 4px,
-            rgba(139,69,19,0.3) 4px,
-            rgba(139,69,19,0.3) 6px
-          );
-          border-radius: 0.5rem;
-          opacity: 0.4;
+        .filing-drawer-body {
+          background: linear-gradient(135deg, #8B4513 0%, #654321 30%, #8B4513 60%, #654321 100%);
+          border: 2px solid #6B4423;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .filing-drawer:hover .filing-drawer-body {
-          transform: translateX(16px);
-          box-shadow: 
-            0 8px 32px rgba(0,0,0,0.3),
-            inset 0 1px 0 rgba(255,255,255,0.1),
-            inset 0 -1px 0 rgba(0,0,0,0.1);
+          transform: rotateX(5deg) translateZ(8px);
+          box-shadow: 0 12px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
         }
         
-        .filing-drawer-body:hover {
-          background: linear-gradient(135deg, #A0522D 0%, #6B4423 30%, #A0522D 60%, #6B4423 100%);
+        .perspective-1000 {
+          perspective: 1000px;
         }
         
-        @keyframes drawerSlide {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(16px); }
+        .transform-gpu {
+          transform: translateZ(0);
+          backface-visibility: hidden;
+          perspective: 1000px;
+        }
+        
+        @keyframes drawerOpen {
+          0% { transform: rotateX(0deg) translateZ(0px); }
+          100% { transform: rotateX(5deg) translateZ(8px); }
         }
         
         @keyframes fileSlideOut {
-          0% { transform: translateX(0); opacity: 0.8; }
-          100% { transform: translateX(320px); opacity: 1; }
+          0% { 
+            transform: translateX(0) translateY(0) scale(1); 
+            opacity: 0.9; 
+          }
+          100% { 
+            transform: translateX(100%) translateY(16px) scale(1.1); 
+            opacity: 1; 
+          }
         }
         
-        .filing-drawer-body {
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .filing-drawer:hover .filing-drawer-body {
+          animation: drawerOpen 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
       `}</style>
     </div>
