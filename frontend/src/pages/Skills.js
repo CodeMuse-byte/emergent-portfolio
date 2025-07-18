@@ -226,10 +226,11 @@ const Skills = () => {
 
       {/* Selected Skill Details */}
       {selectedSkill && (
-        <section className="py-16 bg-gray-800">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <Card className="bg-gray-900 border-gray-700">
+        <ScrollReveal delay={100}>
+          <section className="py-16 bg-gray-800">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto">
+                <Card className="bg-gray-900 border-gray-700">
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-3">
                     <div 
