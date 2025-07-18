@@ -18,6 +18,17 @@ import {
 const Playground = () => {
   return (
     <div className="min-h-screen">
+      {/* Back Button - Top Left */}
+      <div className="fixed top-6 left-6 z-50">
+        <Link 
+          to="/" 
+          className="flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 backdrop-blur-sm hover:from-purple-500/30 hover:to-blue-500/30 hover:scale-105 transition-all duration-300 group"
+        >
+          <ArrowLeft size={20} className="text-purple-500 group-hover:text-purple-400" />
+          <span className="text-purple-500 group-hover:text-purple-400 font-medium">Back</span>
+        </Link>
+      </div>
+
       {/* Hero Section */}
       <AnimatedBackground className="relative overflow-hidden">
         <section className="container mx-auto px-4 py-20 lg:py-32">
