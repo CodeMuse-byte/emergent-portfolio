@@ -88,12 +88,12 @@ const Cover = () => {
                         <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
                           Hello
                         </h1>
-                        {/* Back Button positioned to the right corner of 'hello' */}
+                        {/* Playground Button positioned to the right corner of 'hello' */}
                         <Link 
-                          to="/portfolio" 
+                          to="/playground" 
                           className="absolute top-0 right-0 p-2 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 backdrop-blur-sm hover:from-purple-500/30 hover:to-blue-500/30 hover:scale-110 transition-all duration-300 group"
                         >
-                          <ArrowLeft size={24} className="text-purple-500 group-hover:text-purple-400" />
+                          <Gamepad2 size={24} className="text-purple-500 group-hover:text-purple-400" />
                         </Link>
                       </div>
                     </ScrollReveal>
