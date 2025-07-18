@@ -185,19 +185,7 @@ const Projects = () => {
                 </div>
               </div>
               
-              {/* Action Button */}
-              <div className="flex items-center space-x-4">
-                <Button 
-                  size="lg"
-                  className={`bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full transition-all duration-300 transform ${
-                    isHovered ? 'scale-105 shadow-xl' : 'scale-100 shadow-lg'
-                  }`}
-                  onClick={() => window.open(project.demo, '_blank')}
-                >
-                  <ExternalLink className="w-5 h-5 mr-2" />
-                  View Live Demo
-                </Button>
-              </div>
+
             </div>
           </div>
         </div>
