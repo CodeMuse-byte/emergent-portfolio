@@ -16,7 +16,8 @@ import {
   Zap,
   Sun,
   Moon,
-  Gamepad2
+  Gamepad2,
+  ArrowLeft
 } from 'lucide-react';
 
 const Cover = () => {
