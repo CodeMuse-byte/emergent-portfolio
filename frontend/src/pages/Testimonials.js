@@ -138,24 +138,7 @@ const Testimonials = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <AnimatedBackground className="relative overflow-hidden">
-        <section className="container mx-auto px-4 py-12 lg:py-16">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-purple-500/20 transition-all duration-500 hover:scale-105">
-              Client Testimonials
-            </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent animate-pulse">
-              What People Say
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed transition-all duration-700 hover:text-foreground">
-              Hear from clients and colleagues about their experience working with me.
-            </p>
-          </div>
-        </section>
-      </AnimatedBackground>
-
-      {/* 3D Chat Interface Section */}
+      {/* 3D Chat Interface Section with Header */}
       <section className="py-20 relative overflow-hidden">
         {/* 3D Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-blue-900/20"></div>
@@ -168,23 +151,19 @@ const Testimonials = () => {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
-            {/* Chat Header */}
+            {/* Main Header - What Client Say */}
             <div className="text-center mb-12">
-              <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-purple-500/20 backdrop-blur-sm">
-                <MessageSquare className="w-4 h-4 mr-2" />
-                Client Messages
-              </Badge>
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent animate-pulse">
                 What Clients Say
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed transition-all duration-700 hover:text-foreground">
                 Real conversations with satisfied clients who trusted me with their projects.
               </p>
             </div>
 
-            {/* Chat Interface with enhanced smoothness */}
-            <div className="bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 transform-gpu hover:scale-[1.02] transition-all duration-700 hover:shadow-3xl">
-              {/* Chat Header Bar with enhanced effects */}
+            {/* Fixed Chat Interface */}
+            <div className="bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 transform-gpu hover:scale-[1.02] transition-all duration-700 hover:shadow-3xl sticky top-8 z-20">
+              {/* Fixed Chat Header Bar */}
               <div className="flex items-center justify-between pb-6 mb-6 border-b border-gray-200/50">
                 <div className="flex items-center gap-3">
                   <div className="flex gap-2">
