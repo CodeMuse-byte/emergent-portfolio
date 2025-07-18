@@ -177,9 +177,7 @@ const Cover = () => {
                 </div>
 
                 {/* Right Column - Profile Photo */}
-                <div className={`transform transition-all duration-1000 delay-300 ${
-                  isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-                }`}>
+                <ScrollReveal delay={700} direction="right">
                   <div className="relative max-w-md mx-auto lg:max-w-full">
                     {/* Profile Photo Container */}
                     <div className="relative">
@@ -204,7 +202,7 @@ const Cover = () => {
                       <div className="absolute top-1/2 -right-6 w-4 h-4 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full opacity-40 animate-pulse delay-3000"></div>
                     </div>
                   </div>
-                </div>
+                </ScrollReveal>
               </div>
             </div>
           </div>
