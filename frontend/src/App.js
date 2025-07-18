@@ -16,7 +16,7 @@ import './styles/scroll-reveal.css';
 
 function AppContent() {
   const location = useLocation();
-  const showNavigation = location.pathname !== '/';
+  const showNavigation = location.pathname !== '/' && location.pathname !== '/playground';
 
   return (
     <div className="min-h-screen bg-background text-foreground">
