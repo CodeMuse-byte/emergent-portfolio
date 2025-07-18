@@ -197,13 +197,6 @@ const Projects = () => {
                   <ExternalLink className="w-5 h-5 mr-2" />
                   View Live Demo
                 </Button>
-                
-                {/* Project Number */}
-                <div className={`text-6xl font-bold transition-all duration-300 ${
-                  isHovered ? 'text-blue-200' : 'text-gray-200'
-                }`}>
-                  {(index + 1).toString().padStart(2, '0')}
-                </div>
               </div>
             </div>
           </div>
