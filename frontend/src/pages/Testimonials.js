@@ -140,7 +140,29 @@ const Testimonials = () => {
 
   return (
     <div className="min-h-screen">
-      {/* 3D Chat Interface Section with Header */}
+      {/* Main Heading Section */}
+      <section className="py-16 bg-gradient-to-br from-slate-900 via-purple-900/20 to-blue-900/20 relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+        
+        {/* Floating Elements */}
+        <div className="absolute top-10 left-10 w-16 h-16 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute top-20 right-20 w-24 h-24 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full blur-xl animate-pulse delay-1000"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-5xl mx-auto text-center">
+            {/* Main Heading */}
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent animate-pulse transition-all duration-1000 hover:from-purple-500 hover:via-blue-500 hover:to-cyan-500 hover:scale-105 hover:tracking-wide">
+              What Clients Say
+            </h1>
+            <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed transition-all duration-1000 hover:text-foreground hover:scale-105 hover:tracking-wide font-light">
+              Real conversations with satisfied clients who trusted me with their projects.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 3D Chat Interface Section */}
       <section className="py-20 relative overflow-hidden">
         {/* 3D Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-blue-900/20"></div>
@@ -152,16 +174,7 @@ const Testimonials = () => {
         <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-xl animate-pulse delay-500"></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            {/* Main Header - What Client Say with ultra-smooth animations */}
-            <div className="text-center mb-12 transform-gpu transition-all duration-1000 hover:scale-105">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent animate-pulse transition-all duration-1000 hover:from-purple-500 hover:via-blue-500 hover:to-cyan-500 hover:scale-110 hover:tracking-wide">
-                What Clients Say
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed transition-all duration-1000 hover:text-foreground hover:scale-105 hover:tracking-wide">
-                Real conversations with satisfied clients who trusted me with their projects.
-              </p>
-            </div>
+          <div className="max-w-4xl mx-auto")
 
             {/* Sticky Chat Interface with scroll isolation */}
             <div className="bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 transform-gpu hover:scale-[1.02] transition-all duration-700 hover:shadow-3xl sticky top-8 z-20 testimonials-container">
