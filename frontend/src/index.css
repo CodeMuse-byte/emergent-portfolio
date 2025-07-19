@@ -103,7 +103,11 @@ code {
   animation: slideInFromRight 0.8s ease-out;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar with ultra-smooth behavior */
+.custom-scrollbar {
+  scroll-behavior: smooth;
+}
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
@@ -116,10 +120,42 @@ code {
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: linear-gradient(to bottom, #8b5cf6, #3b82f6);
   border-radius: 10px;
+  transition: all 0.3s ease;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(to bottom, #7c3aed, #2563eb);
+  transform: scale(1.1);
+}
+
+/* Smooth scroll behavior */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Testimonials container scroll isolation */
+.testimonials-container {
+  overscroll-behavior: contain;
+}
+
+.testimonials-container:hover {
+  overscroll-behavior: none;
+}
+
+.testimonials-scroll {
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+/* Prevent body scroll when hovering testimonials */
+body:has(.testimonials-container:hover) {
+  overflow: hidden;
+}
+
+/* Enhanced smooth transitions for all elements */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 3D perspective utilities */
