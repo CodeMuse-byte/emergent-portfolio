@@ -160,26 +160,26 @@ const Testimonials = () => {
               </p>
             </div>
 
-            {/* Fixed Chat Interface */}
-            <div className="bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 transform-gpu hover:scale-[1.02] transition-all duration-700 hover:shadow-3xl sticky top-8 z-20">
+            {/* Fixed Chat Interface with scroll isolation */}
+            <div className="bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 transform-gpu hover:scale-[1.02] transition-all duration-700 hover:shadow-3xl fixed top-24 left-1/2 transform -translate-x-1/2 w-full max-w-4xl z-30 testimonials-container">
               {/* Fixed Chat Header Bar */}
               <div className="flex items-center justify-between pb-6 mb-6 border-b border-gray-200/50">
                 <div className="flex items-center gap-3">
                   <div className="flex gap-2">
-                    <div className="w-3 h-3 bg-red-500 rounded-full transition-all duration-300 hover:scale-125"></div>
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full transition-all duration-300 hover:scale-125 delay-100"></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full transition-all duration-300 hover:scale-125 delay-200"></div>
+                    <div className="w-3 h-3 bg-red-500 rounded-full transition-all duration-500 hover:scale-125 hover:shadow-lg hover:shadow-red-500/50"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full transition-all duration-500 hover:scale-125 delay-100 hover:shadow-lg hover:shadow-yellow-500/50"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full transition-all duration-500 hover:scale-125 delay-200 hover:shadow-lg hover:shadow-green-500/50"></div>
                   </div>
-                  <h3 className="font-semibold text-gray-800 transition-all duration-300 hover:text-purple-600">Client Testimonials</h3>
+                  <h3 className="font-semibold text-gray-800 transition-all duration-500 hover:text-purple-600 hover:scale-105">Client Testimonials</h3>
                 </div>
                 <div className="flex items-center gap-2 text-green-600">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-sm font-medium transition-all duration-300 hover:text-green-700">Online</span>
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-lg shadow-green-500/50"></div>
+                  <span className="text-sm font-medium transition-all duration-500 hover:text-green-700 hover:scale-105">Online</span>
                 </div>
               </div>
 
-              {/* Chat Messages with enhanced scrolling */}
-              <div className="space-y-6 max-h-[600px] overflow-y-auto custom-scrollbar">
+              {/* Chat Messages with enhanced scrolling and scroll isolation */}
+              <div className="space-y-6 max-h-[500px] overflow-y-auto custom-scrollbar smooth-scroll testimonials-scroll">
                 {visibleTestimonials.map((testimonial, index) => (
                   <ChatBubble 
                     key={testimonial.id} 
@@ -192,12 +192,12 @@ const Testimonials = () => {
                 {/* Enhanced typing indicator */}
                 {visibleTestimonials.length < testimonials.length && (
                   <div className="flex items-center gap-4 opacity-60 animate-fadeIn">
-                    <Avatar className="w-12 h-12 animate-pulse">
+                    <Avatar className="w-12 h-12 animate-pulse transition-all duration-700 hover:scale-110">
                       <AvatarFallback className="bg-gradient-to-r from-purple-500 to-blue-500 text-white">
                         ...
                       </AvatarFallback>
                     </Avatar>
-                    <div className="bg-white rounded-2xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div className="bg-white rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105">
                       <div className="flex gap-1">
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
@@ -210,12 +210,12 @@ const Testimonials = () => {
 
               {/* Chat Input with enhanced interactivity */}
               <div className="mt-6 pt-6 border-t border-gray-200/50">
-                <div className="flex items-center gap-3 bg-gray-100/50 rounded-full p-3 transition-all duration-300 hover:bg-gray-100/70 hover:scale-[1.02]">
-                  <div className="flex-1 px-4 py-2 text-gray-500 text-sm transition-all duration-300 hover:text-gray-700">
+                <div className="flex items-center gap-3 bg-gray-100/50 rounded-full p-3 transition-all duration-500 hover:bg-gray-100/70 hover:scale-[1.02] hover:shadow-lg">
+                  <div className="flex-1 px-4 py-2 text-gray-500 text-sm transition-all duration-500 hover:text-gray-700">
                     Share your experience working with Alex...
                   </div>
-                  <Button size="sm" className="rounded-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 transition-all duration-500 hover:scale-110 hover:shadow-lg">
-                    <Send className="w-4 h-4 transition-transform duration-300 hover:translate-x-1" />
+                  <Button size="sm" className="rounded-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 transition-all duration-700 hover:scale-110 hover:shadow-lg hover:shadow-purple-500/30">
+                    <Send className="w-4 h-4 transition-transform duration-500 hover:translate-x-1 hover:rotate-12" />
                   </Button>
                 </div>
               </div>
