@@ -52,80 +52,83 @@ const Testimonials = () => {
 
   const currentTestimonial = testimonials[currentIndex];
 
-  // Chat bubble component with enhanced 3D effects and smoother animations
+  // Chat bubble component with ultra-smooth animations
   const ChatBubble = ({ testimonial, index, isLeft = false }) => {
-    const bubbleDelay = index * 0.3; // Reduced delay for smoother sequence
+    const bubbleDelay = index * 0.2; // Even faster sequence
     
     return (
       <div 
         className={`flex items-end gap-4 mb-8 ${isLeft ? 'flex-row' : 'flex-row-reverse'} 
-          transform-gpu animate-fadeInUp`}
+          transform-gpu animate-fadeInUp transition-all duration-700 hover:scale-[1.02]`}
         style={{
           animationDelay: `${bubbleDelay}s`,
-          animationDuration: '1s',
-          animationFillMode: 'both'
+          animationDuration: '1.2s',
+          animationFillMode: 'both',
+          willChange: 'transform, opacity'
         }}
       >
-        {/* Profile Avatar with enhanced 3D effect */}
+        {/* Profile Avatar with ultra-smooth effects */}
         <div className="flex-shrink-0 relative group">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full scale-110 opacity-0 group-hover:opacity-30 transition-all duration-500 blur-sm animate-pulse"></div>
-          <Avatar className="w-12 h-12 ring-2 ring-white/20 shadow-lg transform-gpu hover:scale-110 transition-all duration-500 relative z-10 hover:rotate-3">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full scale-110 opacity-0 group-hover:opacity-40 transition-all duration-700 blur-sm animate-pulse"></div>
+          <Avatar className="w-12 h-12 ring-2 ring-white/20 shadow-lg transform-gpu hover:scale-125 transition-all duration-700 relative z-10 hover:rotate-6 hover:shadow-xl hover:shadow-purple-500/30">
             <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
-            <AvatarFallback className="bg-gradient-to-r from-purple-500 to-blue-500 text-white">
+            <AvatarFallback className="bg-gradient-to-r from-purple-500 to-blue-500 text-white transition-all duration-700 hover:from-purple-600 hover:to-blue-600">
               {testimonial.name.split(' ').map(n => n[0]).join('')}
             </AvatarFallback>
           </Avatar>
-          {/* Enhanced online indicator */}
-          <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-lg animate-pulse"></div>
+          {/* Ultra-smooth online indicator */}
+          <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-lg animate-pulse transition-all duration-700 hover:scale-125 hover:shadow-green-500/50"></div>
         </div>
 
-        {/* Speech Bubble with enhanced 3D effect and smoother transitions */}
+        {/* Speech Bubble with ultra-smooth effects */}
         <div className={`relative max-w-md group ${isLeft ? 'mr-auto' : 'ml-auto'}`}>
-          {/* Enhanced 3D Shadow */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-2xl transform translate-x-1 translate-y-1 blur-sm opacity-60 transition-all duration-500 group-hover:translate-x-2 group-hover:translate-y-2"></div>
+          {/* Ultra-smooth 3D Shadow */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-2xl transform translate-x-1 translate-y-1 blur-sm opacity-60 transition-all duration-700 group-hover:translate-x-3 group-hover:translate-y-3 group-hover:opacity-80"></div>
           
-          {/* Main bubble with enhanced effects */}
+          {/* Main bubble with ultra-smooth effects */}
           <div className={`relative bg-gradient-to-br ${isLeft ? 'from-white to-gray-50' : 'from-purple-500 to-blue-500'} 
-            rounded-2xl p-6 shadow-xl transform-gpu hover:scale-105 transition-all duration-500 
-            backdrop-blur-sm border border-white/20 hover:shadow-2xl hover:rotate-1`}>
+            rounded-2xl p-6 shadow-xl transform-gpu hover:scale-110 transition-all duration-700 
+            backdrop-blur-sm border border-white/20 hover:shadow-2xl hover:rotate-1 hover:border-purple-300/30
+            ${!isLeft ? 'hover:from-purple-600 hover:to-blue-600' : 'hover:from-gray-50 hover:to-white'}`}>
             
-            {/* Bubble tail */}
+            {/* Bubble tail with smooth animation */}
             <div className={`absolute top-4 ${isLeft ? '-left-2' : '-right-2'} w-4 h-4 
               bg-gradient-to-br ${isLeft ? 'from-white to-gray-50' : 'from-purple-500 to-blue-500'} 
-              rotate-45 border-l border-t border-white/20 transition-all duration-500`}></div>
+              rotate-45 border-l border-t border-white/20 transition-all duration-700 group-hover:scale-125`}></div>
             
-            {/* Message content */}
+            {/* Message content with smooth transitions */}
             <div className="relative z-10">
-              <p className={`text-sm leading-relaxed ${isLeft ? 'text-gray-800' : 'text-white'} mb-3 transition-all duration-300`}>
+              <p className={`text-sm leading-relaxed ${isLeft ? 'text-gray-800' : 'text-white'} mb-3 transition-all duration-700 hover:scale-105`}>
                 {testimonial.content}
               </p>
               
-              {/* Enhanced rating stars */}
+              {/* Ultra-smooth rating stars */}
               <div className="flex items-center gap-1 mb-3">
                 {[...Array(5)].map((_, i) => (
                   <Star 
                     key={i} 
-                    className={`w-4 h-4 transition-all duration-300 hover:scale-125 ${i < testimonial.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`}
+                    className={`w-4 h-4 transition-all duration-700 hover:scale-150 hover:rotate-12 ${i < testimonial.rating ? 'fill-yellow-400 text-yellow-400 hover:fill-yellow-300 hover:text-yellow-300' : 'text-gray-300 hover:text-gray-400'}`}
                     style={{
-                      animationDelay: `${bubbleDelay + (i * 0.1)}s`
+                      animationDelay: `${bubbleDelay + (i * 0.1)}s`,
+                      willChange: 'transform'
                     }}
                   />
                 ))}
               </div>
               
-              {/* Sender info with enhanced transitions */}
+              {/* Sender info with ultra-smooth transitions */}
               <div className="flex items-center justify-between">
-                <div className="transition-all duration-300 hover:scale-105">
-                  <p className={`font-semibold text-sm ${isLeft ? 'text-gray-900' : 'text-white'}`}>
+                <div className="transition-all duration-700 hover:scale-110 hover:translate-x-1">
+                  <p className={`font-semibold text-sm ${isLeft ? 'text-gray-900' : 'text-white'} transition-all duration-500 hover:tracking-wide`}>
                     {testimonial.name}
                   </p>
-                  <p className={`text-xs ${isLeft ? 'text-gray-600' : 'text-white/80'}`}>
+                  <p className={`text-xs ${isLeft ? 'text-gray-600' : 'text-white/80'} transition-all duration-500 hover:text-opacity-100`}>
                     {testimonial.role} at {testimonial.company}
                   </p>
                 </div>
-                <div className="flex items-center gap-1 transition-all duration-300 hover:scale-110">
-                  <Clock className={`w-3 h-3 ${isLeft ? 'text-gray-400' : 'text-white/60'}`} />
-                  <CheckCheck className={`w-4 h-4 ${isLeft ? 'text-blue-500' : 'text-white/80'}`} />
+                <div className="flex items-center gap-1 transition-all duration-700 hover:scale-125 hover:rotate-12">
+                  <Clock className={`w-3 h-3 ${isLeft ? 'text-gray-400 hover:text-gray-600' : 'text-white/60 hover:text-white/80'} transition-all duration-500`} />
+                  <CheckCheck className={`w-4 h-4 ${isLeft ? 'text-blue-500 hover:text-blue-600' : 'text-white/80 hover:text-white'} transition-all duration-500`} />
                 </div>
               </div>
             </div>
