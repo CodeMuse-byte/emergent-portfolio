@@ -163,8 +163,8 @@ const Testimonials = () => {
               </p>
             </div>
 
-            {/* Fixed Chat Interface with scroll isolation */}
-            <div className="bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 transform-gpu hover:scale-[1.02] transition-all duration-700 hover:shadow-3xl fixed top-24 left-1/2 transform -translate-x-1/2 w-full max-w-4xl z-30 testimonials-container">
+            {/* Sticky Chat Interface with scroll isolation */}
+            <div className="bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 transform-gpu hover:scale-[1.02] transition-all duration-700 hover:shadow-3xl sticky top-8 z-20 testimonials-container">
               {/* Fixed Chat Header Bar */}
               <div className="flex items-center justify-between pb-6 mb-6 border-b border-gray-200/50">
                 <div className="flex items-center gap-3">
