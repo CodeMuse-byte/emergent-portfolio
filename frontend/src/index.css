@@ -134,24 +134,25 @@ code {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Testimonials container scroll isolation */
-.testimonials-container {
+/* Testimonials container scroll isolation - only for the white chat div */
+.testimonials-container:hover .testimonials-scroll {
   overscroll-behavior: contain;
-}
-
-.testimonials-container:hover {
-  overscroll-behavior: none;
 }
 
 .testimonials-scroll {
-  overscroll-behavior: contain;
   scroll-behavior: smooth;
+  overscroll-behavior: auto;
 }
 
-/* Prevent body scroll when hovering testimonials */
-body:has(.testimonials-container:hover) {
-  overflow: hidden;
+/* Prevent body scroll only when directly hovering the testimonials scroll area */
+.testimonials-scroll:hover {
+  overscroll-behavior: contain;
 }
+
+/* Remove the problematic body scroll prevention */
+/* body:has(.testimonials-container:hover) {
+  overflow: hidden;
+} */
 
 /* Enhanced smooth transitions for all elements */
 * {
