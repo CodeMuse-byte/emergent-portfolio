@@ -174,7 +174,7 @@ const Testimonials = () => {
         <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-xl animate-pulse delay-500"></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto")
+          <div className="max-w-4xl mx-auto">
 
             {/* Sticky Chat Interface with scroll isolation */}
             <div className="bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 transform-gpu hover:scale-[1.02] transition-all duration-700 hover:shadow-3xl sticky top-8 z-20 testimonials-container">
