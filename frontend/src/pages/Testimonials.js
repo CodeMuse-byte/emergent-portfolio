@@ -153,12 +153,12 @@ const Testimonials = () => {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
-            {/* Main Header - What Client Say */}
-            <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent animate-pulse">
+            {/* Main Header - What Client Say with ultra-smooth animations */}
+            <div className="text-center mb-12 transform-gpu transition-all duration-1000 hover:scale-105">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent animate-pulse transition-all duration-1000 hover:from-purple-500 hover:via-blue-500 hover:to-cyan-500 hover:scale-110 hover:tracking-wide">
                 What Clients Say
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed transition-all duration-700 hover:text-foreground">
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed transition-all duration-1000 hover:text-foreground hover:scale-105 hover:tracking-wide">
                 Real conversations with satisfied clients who trusted me with their projects.
               </p>
             </div>
