@@ -227,6 +227,9 @@ const Testimonials = () => {
         </div>
       </section>
 
+      {/* Spacer for better scrolling experience */}
+      <div className="h-screen"></div>
+
       {/* CTA Section with enhanced smoothness */}
       <section className="py-20 bg-accent/5">
         <div className="container mx-auto px-4">
