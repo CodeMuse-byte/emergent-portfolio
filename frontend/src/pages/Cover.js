@@ -130,7 +130,7 @@ const Cover = () => {
                           <div className="flex items-center space-x-3">
                             <Play className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             <span>Start Story</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-warm-cream/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-rose-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                           </div>
                         </Link>
                       </Button>
