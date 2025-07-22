@@ -194,7 +194,7 @@ const Projects = () => {
 
       {/* Search and Filter */}
       <ScrollReveal delay={300}>
-        <section className="py-8 bg-white shadow-sm">
+        <section className="py-8 bg-warm-cream shadow-sm">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <div className="flex flex-col md:flex-row gap-4">
