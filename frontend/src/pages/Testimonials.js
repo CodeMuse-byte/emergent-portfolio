@@ -213,7 +213,7 @@ const Testimonials = () => {
                         ...
                       </AvatarFallback>
                     </Avatar>
-                    <div className="bg-white rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105">
+                    <div className="bg-warm-cream rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105">
                       <div className="flex gap-1">
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
