@@ -240,11 +240,8 @@ const Testimonials = () => {
         </div>
       </section>
 
-      {/* Spacer for better scrolling experience */}
-      <div className="h-screen"></div>
-
       {/* CTA Section with enhanced smoothness */}
-      <section className="py-20 bg-accent/5">
+      <section className="py-16 bg-accent/5">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent transition-all duration-700 hover:scale-105">
