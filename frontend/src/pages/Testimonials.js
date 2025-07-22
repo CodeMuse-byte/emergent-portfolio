@@ -86,14 +86,14 @@ const Testimonials = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-2xl transform translate-x-1 translate-y-1 blur-sm opacity-60 transition-all duration-700 group-hover:translate-x-3 group-hover:translate-y-3 group-hover:opacity-80"></div>
           
           {/* Main bubble with ultra-smooth effects */}
-          <div className={`relative bg-gradient-to-br ${isLeft ? 'from-warm-cream to-gray-50' : 'from-purple-500 to-blue-500'} 
+          <div className={`relative bg-gradient-to-br ${isLeft ? 'from-rose-white to-gray-50' : 'from-purple-500 to-blue-500'} 
             rounded-2xl p-6 shadow-xl transform-gpu hover:scale-110 transition-all duration-700 
             backdrop-blur-sm border border-white/20 hover:shadow-2xl hover:rotate-1 hover:border-purple-300/30
-            ${!isLeft ? 'hover:from-purple-600 hover:to-blue-600' : 'hover:from-gray-50 hover:to-warm-cream'}`}>
+            ${!isLeft ? 'hover:from-purple-600 hover:to-blue-600' : 'hover:from-gray-50 hover:to-rose-white'}`}>
             
             {/* Bubble tail with smooth animation */}
             <div className={`absolute top-4 ${isLeft ? '-left-2' : '-right-2'} w-4 h-4 
-              bg-gradient-to-br ${isLeft ? 'from-warm-cream to-gray-50' : 'from-purple-500 to-blue-500'} 
+              bg-gradient-to-br ${isLeft ? 'from-rose-white to-gray-50' : 'from-purple-500 to-blue-500'} 
               rotate-45 border-l border-t border-white/20 transition-all duration-700 group-hover:scale-125`}></div>
             
             {/* Message content with smooth transitions */}
@@ -177,7 +177,7 @@ const Testimonials = () => {
           <div className="max-w-4xl mx-auto">
 
             {/* Sticky Chat Interface with scroll isolation */}
-            <div className="bg-gradient-to-br from-warm-cream/90 to-gray-50/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 transform-gpu hover:scale-[1.02] transition-all duration-700 hover:shadow-3xl sticky top-8 z-20 testimonials-container">
+            <div className="bg-gradient-to-br from-rose-white/90 to-gray-50/90 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/20 transform-gpu hover:scale-[1.02] transition-all duration-700 hover:shadow-3xl sticky top-8 z-20 testimonials-container">
               {/* Fixed Chat Header Bar */}
               <div className="flex items-center justify-between pb-6 mb-6">
                 <div className="flex items-center gap-3">
@@ -213,7 +213,7 @@ const Testimonials = () => {
                         ...
                       </AvatarFallback>
                     </Avatar>
-                    <div className="bg-warm-cream rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105">
+                    <div className="bg-rose-white rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105">
                       <div className="flex gap-1">
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>

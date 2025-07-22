@@ -50,13 +50,16 @@ const Skills = () => {
       name: "Other",
       color: "#4CAF50",
       skills: [
-        { name: "JavaScript", level: 95, x: 45, y: 50, connections: ['React', 'Node.js', 'TypeScript'] }
+        { name: "Git", level: 90, x: 60, y: 70, connections: ['GitHub', 'GitLab'] },
+        { name: "JavaScript", level: 88, x: 50, y: 50, connections: ['React', 'Node.js', 'TypeScript'] }
       ]
     }
   };
 
   const getAllSkills = () => {
-    return Object.values(skillsNetwork).flatMap(category => category.skills);
+    return Object.values(skillsNetwork).flatMap(category => 
+      category.skills.map(skill => ({...skill, category: category.name, categoryColor: category.color}))
+    );
   };
 
   const getSkillByName = (name) => {
@@ -65,15 +68,16 @@ const Skills = () => {
 
   const getSkillCategory = (skillName) => {
     for (const [key, category] of Object.entries(skillsNetwork)) {
-      if (category.skills.find(skill => skill.name === skillName)) {
-        return category;
+      const skill = category.skills.find(s => s.name === skillName);
+      if (skill) {
+        return { name: category.name, color: category.color };
       }
     }
-    return null;
+    return { name: "Unknown", color: "#666" };
   };
 
   const handleSkillClick = (skill) => {
-    setSelectedSkill(selectedSkill?.name === skill.name ? null : skill);
+    setSelectedSkill(skill);
   };
 
   const SkillNode = ({ skill }) => {
@@ -138,8 +142,10 @@ const Skills = () => {
           // Get the color of the target skill (the skill being connected to)
           const targetSkill = from.name === hoveredSkill ? to : from;
           const targetCategory = getSkillCategory(targetSkill.name);
-          const lineColor = isRelatedToHovered ? targetCategory.color : "#444444";
-          
+          const lineColor = isRelatedToHovered ? targetCategory.color : '#374151';
+          const lineWidth = isRelatedToHovered ? 3 : 1;
+          const opacity = isRelatedToHovered ? 1 : 0.3;
+
           return (
             <line
               key={key}
@@ -148,14 +154,13 @@ const Skills = () => {
               x2={`${to.x}%`}
               y2={`${to.y}%`}
               stroke={lineColor}
-              strokeWidth={isRelatedToHovered ? "3" : "1"}
-              strokeDasharray="3,3"
-              className={`transition-all duration-300 ${
-                isRelatedToHovered ? 'opacity-100' : 'opacity-60'
-              }`}
-              style={isRelatedToHovered ? {
-                filter: `drop-shadow(0 0 6px ${targetCategory.color})`
-              } : {}}
+              strokeWidth={lineWidth}
+              strokeDasharray="5,5"
+              opacity={opacity}
+              className="transition-all duration-300"
+              style={{
+                filter: isRelatedToHovered ? `drop-shadow(0 0 6px ${lineColor})` : 'none'
+              }}
             />
           );
         })}
@@ -163,12 +168,11 @@ const Skills = () => {
     );
   };
 
-  const CategoryLegend = () => {
-    return (
+  const CategoryLegend = () => (
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-900 bg-opacity-80 backdrop-blur-sm px-6 py-3 rounded-lg border border-gray-700">
-        <div className="flex items-center space-x-6 text-sm">
+        <div className="flex flex-wrap gap-4 text-sm">
           {Object.entries(skillsNetwork).map(([key, category]) => (
-            <div key={key} className="flex items-center space-x-2">
+            <div key={key} className="flex items-center gap-2">
               <div 
                 className="w-3 h-3 rounded-full"
                 style={{ backgroundColor: category.color }}
@@ -179,44 +183,34 @@ const Skills = () => {
         </div>
       </div>
     );
-  };
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-rose-white to-pink-50">
       {/* Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
-        <section className="container mx-auto px-4 py-12 lg:py-20">
+      <div className="relative overflow-hidden bg-gradient-to-br from-rose-white via-pink-50 to-purple-100">
+        <div className="container mx-auto px-4 py-16 lg:py-20">
           <div className="max-w-4xl mx-auto text-center">
-            <ScrollReveal delay={200}>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Interactive Skills Network
-              </h1>
-            </ScrollReveal>
-            <ScrollReveal delay={400}>
-              <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-                Click on any skill node to see detailed information and explore the connections between technologies.
-              </p>
-            </ScrollReveal>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              Interactive Skills Network
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Explore my technical skills in an interactive network map. Click on any skill to see detailed information and connections.
+            </p>
           </div>
-        </section>
+        </div>
       </div>
 
-      {/* Skills Network */}
-      <section className="py-20">
+      {/* Main Skills Network */}
+      <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <ScrollReveal delay={600}>
-              {/* Network Container */}
-              <div className="relative h-96 md:h-[600px] bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
-                {/* Connection lines */}
+          <div className="max-w-7xl mx-auto">
+            {/* Interactive Network Map */}
+            <ScrollReveal>
+              <div className="relative h-96 md:h-[600px] bg-gradient-to-br from-gray-900 to-gray-800 rounded-lg border border-gray-700 overflow-hidden">
                 <ConnectionLines />
-                
-                {/* Skills nodes */}
-                {getAllSkills().map(skill => (
-                  <SkillNode key={skill.name} skill={skill} />
+                {getAllSkills().map((skill, index) => (
+                  <SkillNode key={index} skill={skill} />
                 ))}
-                
-                {/* Category legend */}
                 <CategoryLegend />
               </div>
             </ScrollReveal>
@@ -226,13 +220,12 @@ const Skills = () => {
 
       {/* Selected Skill Details */}
       {selectedSkill && (
-        <ScrollReveal delay={200}>
-          <section className="py-16 bg-gray-800">
+        <ScrollReveal>
+          <section className="py-16 bg-gradient-to-br from-rose-white to-pink-50">
             <div className="container mx-auto px-4">
-              <div className="max-w-4xl mx-auto">
-                <Card className="bg-gray-900 border-gray-700">
+              <Card className="bg-gradient-to-br from-rose-white to-pink-50 border-gray-700">
                 <CardHeader>
-                  <CardTitle className="flex items-center space-x-3">
+                  <div className="flex items-center gap-4">
                     <div 
                       className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold"
                       style={{ backgroundColor: getSkillCategory(selectedSkill.name)?.color }}
@@ -240,47 +233,70 @@ const Skills = () => {
                       {selectedSkill.name.charAt(0)}
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-white">{selectedSkill.name}</h3>
-                      <p className="text-gray-300">Category: {getSkillCategory(selectedSkill.name)?.name}</p>
+                      <h3 className="text-2xl font-bold text-gray-900">{selectedSkill.name}</h3>
+                      <p className="text-gray-600">
+                        {getSkillCategory(selectedSkill.name)?.name} Technology
+                      </p>
                     </div>
-                  </CardTitle>
+                  </div>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center space-x-1">
+                <CardContent className="space-y-6">
+                  {/* Skill Level Display */}
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-medium text-gray-700">Proficiency Level</span>
+                      <span className="text-sm text-gray-500">{selectedSkill.level}%</span>
+                    </div>
+                    <div className="bg-gray-800 p-4 rounded-lg">
+                      <div className="flex items-center gap-1 mb-2">
                         {[...Array(5)].map((_, i) => (
-                          <Star 
-                            key={i} 
-                            className={`w-5 h-5 ${i < selectedSkill.level / 20 ? 'fill-yellow-400 text-yellow-400' : 'text-gray-600'}`} 
+                          <Star
+                            key={i}
+                            className={`w-5 h-5 ${
+                              i < Math.floor(selectedSkill.level / 20) 
+                                ? 'fill-yellow-400 text-yellow-400' 
+                                : 'text-gray-400'
+                            }`}
                           />
                         ))}
                       </div>
-                      <Badge variant="outline" className="text-sm border-gray-600 text-gray-300">
-                        {selectedSkill.level >= 90 ? 'Expert' : selectedSkill.level >= 80 ? 'Advanced' : 'Intermediate'}
-                      </Badge>
-                    </div>
-                    
-                    <div className="bg-gray-800 p-4 rounded-lg">
-                      <h4 className="font-semibold text-white mb-2">Connected Technologies:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedSkill.connections.map(connection => (
-                          <Badge 
-                            key={connection} 
-                            variant="secondary" 
-                            className="text-sm bg-gray-700 text-gray-300 border-gray-600"
-                          >
-                            {connection}
-                          </Badge>
-                        ))}
-                      </div>
+                      <Progress 
+                        value={selectedSkill.level} 
+                        className="text-sm bg-gray-700 text-gray-300 border-gray-600"
+                      />
                     </div>
                   </div>
+
+                  {/* Connected Skills */}
+                  {selectedSkill.connections && selectedSkill.connections.length > 0 && (
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-2">Connected Technologies:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedSkill.connections.map((connectionName, index) => {
+                          const connectedSkill = getSkillByName(connectionName);
+                          return (
+                            <Badge 
+                              key={index} 
+                              variant="secondary"
+                              className="cursor-pointer hover:scale-105 transition-transform"
+                              onClick={() => handleSkillClick(connectedSkill)}
+                              style={{ 
+                                backgroundColor: `${getSkillCategory(connectionName)?.color}20`,
+                                borderColor: getSkillCategory(connectionName)?.color,
+                                color: getSkillCategory(connectionName)?.color
+                              }}
+                            >
+                              {connectionName}
+                            </Badge>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </div>
-          </div>
-        </section>
+          </section>
         </ScrollReveal>
       )}
     </div>

@@ -53,7 +53,7 @@ module.exports = {
                                 '4': 'hsl(var(--chart-4))',
                                 '5': 'hsl(var(--chart-5))'
                         },
-                        'warm-cream': '#F0EFE7'
+                        'rose-white': '#FFFAFA'
                 },
                 keyframes: {
                         'accordion-down': {
