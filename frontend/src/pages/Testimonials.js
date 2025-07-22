@@ -163,7 +163,7 @@ const Testimonials = () => {
       </section>
 
       {/* 3D Chat Interface Section */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="pb-16 relative overflow-hidden">
         {/* 3D Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-blue-900/20"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
