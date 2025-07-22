@@ -86,10 +86,10 @@ const Testimonials = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-2xl transform translate-x-1 translate-y-1 blur-sm opacity-60 transition-all duration-700 group-hover:translate-x-3 group-hover:translate-y-3 group-hover:opacity-80"></div>
           
           {/* Main bubble with ultra-smooth effects */}
-          <div className={`relative bg-gradient-to-br ${isLeft ? 'from-white to-gray-50' : 'from-purple-500 to-blue-500'} 
+          <div className={`relative bg-gradient-to-br ${isLeft ? 'from-warm-cream to-gray-50' : 'from-purple-500 to-blue-500'} 
             rounded-2xl p-6 shadow-xl transform-gpu hover:scale-110 transition-all duration-700 
             backdrop-blur-sm border border-white/20 hover:shadow-2xl hover:rotate-1 hover:border-purple-300/30
-            ${!isLeft ? 'hover:from-purple-600 hover:to-blue-600' : 'hover:from-gray-50 hover:to-white'}`}>
+            ${!isLeft ? 'hover:from-purple-600 hover:to-blue-600' : 'hover:from-gray-50 hover:to-warm-cream'}`}>
             
             {/* Bubble tail with smooth animation */}
             <div className={`absolute top-4 ${isLeft ? '-left-2' : '-right-2'} w-4 h-4 
