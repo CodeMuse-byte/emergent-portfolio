@@ -93,7 +93,7 @@ const Testimonials = () => {
             
             {/* Bubble tail with smooth animation */}
             <div className={`absolute top-4 ${isLeft ? '-left-2' : '-right-2'} w-4 h-4 
-              bg-gradient-to-br ${isLeft ? 'from-white to-gray-50' : 'from-purple-500 to-blue-500'} 
+              bg-gradient-to-br ${isLeft ? 'from-warm-cream to-gray-50' : 'from-purple-500 to-blue-500'} 
               rotate-45 border-l border-t border-white/20 transition-all duration-700 group-hover:scale-125`}></div>
             
             {/* Message content with smooth transitions */}
