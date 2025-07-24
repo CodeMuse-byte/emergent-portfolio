@@ -57,7 +57,7 @@ const Home = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 animate-slideUp" style={{ animationDelay: '0.6s' }}>
-                <Button size="lg" asChild className="bg-gray-900 hover:bg-gray-800 text-white transform hover:scale-105 hover:shadow-lg transition-all duration-300 group">
+                <Button size="lg" asChild className="bg-gradient-to-r from-[#1e1a2e] via-[#5c4f6e] to-[#b3A8C9] hover:from-[#0f0a1a] hover:via-[#4a3f5e] hover:to-[#a398b9] text-white transform hover:scale-105 hover:shadow-lg transition-all duration-300 group">
                   <Link to="/projects">
                     <Code className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" />
                     View My Work
@@ -65,7 +65,7 @@ const Home = () => {
                   </Link>
                 </Button>
                 
-                <Button variant="outline" size="lg" className="border-2 border-gray-300 hover:border-gray-400 transform hover:scale-105 hover:shadow-lg transition-all duration-300 group">
+                <Button variant="outline" size="lg" className="border-2 border-[#5c4f6e] text-[#1e1a2e] hover:bg-[#5c4f6e] hover:text-white hover:border-[#1e1a2e] transform hover:scale-105 hover:shadow-lg transition-all duration-300 group">
                   <Download className="w-5 h-5 mr-2 group-hover:bounce transition-transform duration-300" />
                   Download Resume
                 </Button>
@@ -73,17 +73,17 @@ const Home = () => {
 
               {/* Social Links */}
               <div className="flex space-x-6 pt-4 animate-fadeIn" style={{ animationDelay: '0.7s' }}>
-                <Button variant="ghost" size="icon" asChild className="hover:bg-gray-100 transform hover:scale-110 hover:rotate-6 transition-all duration-300">
+                <Button variant="ghost" size="icon" asChild className="text-[#5c4f6e] hover:bg-[#b3A8C9]/20 hover:text-[#1e1a2e] transform hover:scale-110 hover:rotate-6 transition-all duration-300">
                   <a href={personalInfo.github} target="_blank" rel="noopener noreferrer">
                     <Github className="w-6 h-6" />
                   </a>
                 </Button>
-                <Button variant="ghost" size="icon" asChild className="hover:bg-gray-100 transform hover:scale-110 hover:rotate-6 transition-all duration-300">
+                <Button variant="ghost" size="icon" asChild className="text-[#5c4f6e] hover:bg-[#b3A8C9]/20 hover:text-[#1e1a2e] transform hover:scale-110 hover:rotate-6 transition-all duration-300">
                   <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer">
                     <Linkedin className="w-6 h-6" />
                   </a>
                 </Button>
-                <Button variant="ghost" size="icon" asChild className="hover:bg-gray-100 transform hover:scale-110 hover:rotate-6 transition-all duration-300">
+                <Button variant="ghost" size="icon" asChild className="text-[#5c4f6e] hover:bg-[#b3A8C9]/20 hover:text-[#1e1a2e] transform hover:scale-110 hover:rotate-6 transition-all duration-300">
                   <a href={personalInfo.twitter} target="_blank" rel="noopener noreferrer">
                     <Twitter className="w-6 h-6" />
                   </a>
