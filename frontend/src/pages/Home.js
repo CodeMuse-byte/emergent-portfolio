@@ -93,25 +93,25 @@ const Home = () => {
 
             {/* Right Column - Simple Visual Element */}
             <div className="relative animate-slideInFromRight">
-              <div className="bg-gray-100 rounded-2xl p-8 shadow-lg transform hover:scale-105 hover:rotate-1 transition-all duration-500">
-                <div className="bg-white rounded-xl p-6 shadow-sm">
+              <div className="bg-gradient-to-br from-[#b3A8C9]/20 to-[#5c4f6e]/10 rounded-2xl p-8 shadow-lg transform hover:scale-105 hover:rotate-1 transition-all duration-500">
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-[#b3A8C9]/30">
                   <div className="flex items-center space-x-3 mb-6">
-                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+                    <div className="w-3 h-3 bg-[#1e1a2e] rounded-full animate-pulse"></div>
+                    <div className="w-3 h-3 bg-[#5c4f6e] rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                    <div className="w-3 h-3 bg-[#b3A8C9] rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
                   </div>
                   <div className="space-y-4">
-                    <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/2 animate-pulse" style={{ animationDelay: '0.1s' }}></div>
-                    <div className="h-4 bg-gray-200 rounded w-2/3 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                    <div className="mt-6 p-4 bg-gray-50 rounded-lg transform hover:scale-105 transition-all duration-300">
+                    <div className="h-4 bg-gradient-to-r from-[#b3A8C9]/50 to-[#5c4f6e]/30 rounded w-3/4 animate-pulse"></div>
+                    <div className="h-4 bg-gradient-to-r from-[#5c4f6e]/50 to-[#1e1a2e]/30 rounded w-1/2 animate-pulse" style={{ animationDelay: '0.1s' }}></div>
+                    <div className="h-4 bg-gradient-to-r from-[#1e1a2e]/50 to-[#b3A8C9]/30 rounded w-2/3 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                    <div className="mt-6 p-4 bg-gradient-to-r from-[#b3A8C9]/10 to-[#5c4f6e]/10 rounded-lg transform hover:scale-105 transition-all duration-300 border border-[#5c4f6e]/20">
                       <div className="flex items-center space-x-2">
-                        <div className="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center animate-spin" style={{ animationDuration: '3s' }}>
+                        <div className="w-8 h-8 bg-gradient-to-r from-[#1e1a2e] to-[#5c4f6e] rounded-full flex items-center justify-center animate-spin" style={{ animationDuration: '3s' }}>
                           <Code className="w-4 h-4 text-white" />
                         </div>
                         <div className="flex-1">
-                          <div className="h-3 bg-gray-300 rounded w-4/5 mb-2 animate-pulse"></div>
-                          <div className="h-2 bg-gray-200 rounded w-3/5 animate-pulse" style={{ animationDelay: '0.3s' }}></div>
+                          <div className="h-3 bg-gradient-to-r from-[#5c4f6e]/60 to-[#b3A8C9]/40 rounded w-4/5 mb-2 animate-pulse"></div>
+                          <div className="h-2 bg-[#b3A8C9]/40 rounded w-3/5 animate-pulse" style={{ animationDelay: '0.3s' }}></div>
                         </div>
                       </div>
                     </div>
