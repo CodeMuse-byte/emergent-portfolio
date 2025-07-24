@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section - Clean Wireframe Design */}
-      <section className="bg-rose-white min-h-screen flex items-center">
+      <section className="bg-gradient-to-br from-[#f8f4f0] via-[#dddoc8] to-[#b0a89f] min-h-screen flex items-center">
         <div className="container mx-auto px-4 py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
             
