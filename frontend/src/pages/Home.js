@@ -39,18 +39,18 @@ const Home = () => {
                   Available for new projects
                 </Badge>
                 
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-gray-900 animate-fadeInUp">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-[#1e1a2e] via-[#5c4f6e] to-[#b3A8C9] bg-clip-text text-transparent animate-fadeInUp">
                   <span className="inline-block animate-wave" style={{ animationDelay: '0.1s' }}>Hello,</span>{' '}
                   <span className="inline-block animate-wave" style={{ animationDelay: '0.2s' }}>I'm</span>
                   <br />
-                  <span className="text-gray-900 inline-block animate-wave" style={{ animationDelay: '0.3s' }}>{personalInfo.name}</span>
+                  <span className="inline-block animate-wave" style={{ animationDelay: '0.3s' }}>{personalInfo.name}</span>
                 </h1>
                 
-                <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 animate-slideInFromLeft" style={{ animationDelay: '0.4s' }}>
+                <h2 className="text-2xl md:text-3xl font-semibold bg-gradient-to-r from-[#5c4f6e] to-[#b3A8C9] bg-clip-text text-transparent animate-slideInFromLeft" style={{ animationDelay: '0.4s' }}>
                   {personalInfo.title}
                 </h2>
                 
-                <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg animate-fadeIn" style={{ animationDelay: '0.5s' }}>
+                <p className="text-lg md:text-xl text-[#1e1a2e] leading-relaxed max-w-lg animate-fadeIn" style={{ animationDelay: '0.5s' }}>
                   {personalInfo.tagline}
                 </p>
               </div>
