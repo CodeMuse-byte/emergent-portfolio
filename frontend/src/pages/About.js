@@ -71,7 +71,7 @@ const About = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
               {/* Left Column - About Content */}
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-[#f5f3fc] via-[#d2cdb9] to-[#92a378] bg-clip-text text-transparent">
                   My Story
                 </h2>
                 <div className="prose prose-lg max-w-none text-muted-foreground mb-8">
