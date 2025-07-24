@@ -84,7 +84,7 @@ const Cover = () => {
                     
                     <ScrollReveal delay={400}>
                       <div className="relative mb-4">
-                        <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                        <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#1e1a2e] via-[#5c4f6e] to-[#b3A8C9] bg-clip-text text-transparent">
                           Hello
                         </h1>
                         {/* Playground Button positioned to the right corner of 'hello' */}
