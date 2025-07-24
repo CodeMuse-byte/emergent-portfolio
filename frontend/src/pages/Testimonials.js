@@ -244,7 +244,7 @@ const Testimonials = () => {
       <section className="py-16 bg-accent/5">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent transition-all duration-700 hover:scale-105">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#f5f3fc] via-[#d2cdb9] to-[#92a378] bg-clip-text text-transparent transition-all duration-700 hover:scale-105">
               Ready to Work Together?
             </h2>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto transition-all duration-500 hover:text-foreground">
