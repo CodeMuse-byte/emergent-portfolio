@@ -152,7 +152,7 @@ const Testimonials = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
             {/* Main Heading */}
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent animate-pulse transition-all duration-1000 hover:from-purple-500 hover:via-blue-500 hover:to-cyan-500 hover:scale-105 hover:tracking-wide">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 bg-gradient-to-r from-[#1e1a2e] via-[#5c4f6e] to-[#b3A8C9] bg-clip-text text-transparent animate-pulse transition-all duration-1000 hover:from-[#0f0a1a] hover:via-[#4a3f5e] hover:to-[#a398b9] hover:scale-105 hover:tracking-wide">
               What Clients Say
             </h1>
             <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed transition-all duration-1000 hover:text-foreground hover:scale-105 hover:tracking-wide font-light">
