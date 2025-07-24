@@ -32,57 +32,58 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
             
             {/* Left Column - Content */}
-            <div className="space-y-8">
+            <div className="space-y-8 animate-slideInFromLeft">
               <div className="space-y-6">
-                <Badge variant="outline" className="px-4 py-2 text-sm font-medium border-gray-300 w-fit">
+                <Badge variant="outline" className="px-4 py-2 text-sm font-medium border-gray-300 w-fit animate-bounce">
                   <Sparkles className="w-4 h-4 mr-2" />
                   Available for new projects
                 </Badge>
                 
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-gray-900">
-                  Hello, I'm
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-gray-900 animate-fadeInUp">
+                  <span className="inline-block animate-wave" style={{ animationDelay: '0.1s' }}>Hello,</span>{' '}
+                  <span className="inline-block animate-wave" style={{ animationDelay: '0.2s' }}>I'm</span>
                   <br />
-                  <span className="text-gray-900">{personalInfo.name}</span>
+                  <span className="text-gray-900 inline-block animate-wave" style={{ animationDelay: '0.3s' }}>{personalInfo.name}</span>
                 </h1>
                 
-                <h2 className="text-2xl md:text-3xl font-semibold text-gray-700">
+                <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 animate-slideInFromLeft" style={{ animationDelay: '0.4s' }}>
                   {personalInfo.title}
                 </h2>
                 
-                <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg">
+                <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg animate-fadeIn" style={{ animationDelay: '0.5s' }}>
                   {personalInfo.tagline}
                 </p>
               </div>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" asChild className="bg-gray-900 hover:bg-gray-800 text-white">
+              <div className="flex flex-col sm:flex-row gap-4 animate-slideUp" style={{ animationDelay: '0.6s' }}>
+                <Button size="lg" asChild className="bg-gray-900 hover:bg-gray-800 text-white transform hover:scale-105 hover:shadow-lg transition-all duration-300 group">
                   <Link to="/projects">
-                    <Code className="w-5 h-5 mr-2" />
+                    <Code className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300" />
                     View My Work
-                    <ArrowRight className="w-4 h-4 ml-2" />
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                   </Link>
                 </Button>
                 
-                <Button variant="outline" size="lg" className="border-2 border-gray-300 hover:border-gray-400">
-                  <Download className="w-5 h-5 mr-2" />
+                <Button variant="outline" size="lg" className="border-2 border-gray-300 hover:border-gray-400 transform hover:scale-105 hover:shadow-lg transition-all duration-300 group">
+                  <Download className="w-5 h-5 mr-2 group-hover:bounce transition-transform duration-300" />
                   Download Resume
                 </Button>
               </div>
 
               {/* Social Links */}
-              <div className="flex space-x-6 pt-4">
-                <Button variant="ghost" size="icon" asChild className="hover:bg-gray-100">
+              <div className="flex space-x-6 pt-4 animate-fadeIn" style={{ animationDelay: '0.7s' }}>
+                <Button variant="ghost" size="icon" asChild className="hover:bg-gray-100 transform hover:scale-110 hover:rotate-6 transition-all duration-300">
                   <a href={personalInfo.github} target="_blank" rel="noopener noreferrer">
                     <Github className="w-6 h-6" />
                   </a>
                 </Button>
-                <Button variant="ghost" size="icon" asChild className="hover:bg-gray-100">
+                <Button variant="ghost" size="icon" asChild className="hover:bg-gray-100 transform hover:scale-110 hover:rotate-6 transition-all duration-300">
                   <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer">
                     <Linkedin className="w-6 h-6" />
                   </a>
                 </Button>
-                <Button variant="ghost" size="icon" asChild className="hover:bg-gray-100">
+                <Button variant="ghost" size="icon" asChild className="hover:bg-gray-100 transform hover:scale-110 hover:rotate-6 transition-all duration-300">
                   <a href={personalInfo.twitter} target="_blank" rel="noopener noreferrer">
                     <Twitter className="w-6 h-6" />
                   </a>
@@ -91,26 +92,26 @@ const Home = () => {
             </div>
 
             {/* Right Column - Simple Visual Element */}
-            <div className="relative">
-              <div className="bg-gray-100 rounded-2xl p-8 shadow-lg">
+            <div className="relative animate-slideInFromRight">
+              <div className="bg-gray-100 rounded-2xl p-8 shadow-lg transform hover:scale-105 hover:rotate-1 transition-all duration-500">
                 <div className="bg-white rounded-xl p-6 shadow-sm">
                   <div className="flex items-center space-x-3 mb-6">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
                   </div>
                   <div className="space-y-4">
-                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-2/3"></div>
-                    <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                    <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse"></div>
+                    <div className="h-4 bg-gray-200 rounded w-1/2 animate-pulse" style={{ animationDelay: '0.1s' }}></div>
+                    <div className="h-4 bg-gray-200 rounded w-2/3 animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                    <div className="mt-6 p-4 bg-gray-50 rounded-lg transform hover:scale-105 transition-all duration-300">
                       <div className="flex items-center space-x-2">
-                        <div className="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center">
+                        <div className="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center animate-spin" style={{ animationDuration: '3s' }}>
                           <Code className="w-4 h-4 text-white" />
                         </div>
                         <div className="flex-1">
-                          <div className="h-3 bg-gray-300 rounded w-4/5 mb-2"></div>
-                          <div className="h-2 bg-gray-200 rounded w-3/5"></div>
+                          <div className="h-3 bg-gray-300 rounded w-4/5 mb-2 animate-pulse"></div>
+                          <div className="h-2 bg-gray-200 rounded w-3/5 animate-pulse" style={{ animationDelay: '0.3s' }}></div>
                         </div>
                       </div>
                     </div>
