@@ -34,8 +34,8 @@ const Home = () => {
             {/* Left Column - Content */}
             <div className="space-y-8 animate-slideInFromLeft">
               <div className="space-y-6">
-                <Badge variant="outline" className="px-4 py-2 text-sm font-medium border-gray-300 w-fit animate-bounce">
-                  <Sparkles className="w-4 h-4 mr-2" />
+                <Badge variant="outline" className="px-4 py-2 text-sm font-medium border-[#5c4f6e] text-[#1e1a2e] bg-[#b3A8C9]/10 w-fit animate-bounce">
+                  <Sparkles className="w-4 h-4 mr-2 text-[#5c4f6e]" />
                   Available for new projects
                 </Badge>
                 
