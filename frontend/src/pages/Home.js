@@ -26,7 +26,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section - Wireframe Design */}
+      {/* Hero Section - Clean Wireframe Design */}
       <section className="bg-rose-white min-h-screen flex items-center">
         <div className="container mx-auto px-4 py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
@@ -34,19 +34,15 @@ const Home = () => {
             {/* Left Column - Content */}
             <div className="space-y-8">
               <div className="space-y-6">
-                <Badge variant="outline" className="px-4 py-2 text-sm font-medium bg-gradient-to-r from-purple-500/10 to-blue-500/10 border-purple-500/20 w-fit">
+                <Badge variant="outline" className="px-4 py-2 text-sm font-medium border-gray-300 w-fit">
                   <Sparkles className="w-4 h-4 mr-2" />
                   Available for new projects
                 </Badge>
                 
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                  <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent">
-                    Hello, I'm
-                  </span>
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-gray-900">
+                  Hello, I'm
                   <br />
-                  <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                    {personalInfo.name}
-                  </span>
+                  <span className="text-gray-900">{personalInfo.name}</span>
                 </h1>
                 
                 <h2 className="text-2xl md:text-3xl font-semibold text-gray-700">
@@ -60,33 +56,33 @@ const Home = () => {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" asChild className="group hover:scale-105 transition-all duration-300 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+                <Button size="lg" asChild className="bg-gray-900 hover:bg-gray-800 text-white">
                   <Link to="/projects">
-                    <Code className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
+                    <Code className="w-5 h-5 mr-2" />
                     View My Work
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
                 
-                <Button variant="outline" size="lg" className="group hover:scale-105 transition-all duration-300 border-2 border-gray-300 hover:border-purple-500">
-                  <Download className="w-5 h-5 mr-2 group-hover:bounce transition-transform" />
+                <Button variant="outline" size="lg" className="border-2 border-gray-300 hover:border-gray-400">
+                  <Download className="w-5 h-5 mr-2" />
                   Download Resume
                 </Button>
               </div>
 
               {/* Social Links */}
               <div className="flex space-x-6 pt-4">
-                <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform duration-300 hover:bg-purple-100">
+                <Button variant="ghost" size="icon" asChild className="hover:bg-gray-100">
                   <a href={personalInfo.github} target="_blank" rel="noopener noreferrer">
                     <Github className="w-6 h-6" />
                   </a>
                 </Button>
-                <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform duration-300 hover:bg-blue-100">
+                <Button variant="ghost" size="icon" asChild className="hover:bg-gray-100">
                   <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer">
                     <Linkedin className="w-6 h-6" />
                   </a>
                 </Button>
-                <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform duration-300 hover:bg-cyan-100">
+                <Button variant="ghost" size="icon" asChild className="hover:bg-gray-100">
                   <a href={personalInfo.twitter} target="_blank" rel="noopener noreferrer">
                     <Twitter className="w-6 h-6" />
                   </a>
@@ -94,40 +90,32 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Right Column - Visual Element */}
+            {/* Right Column - Simple Visual Element */}
             <div className="relative">
-              {/* Hero Image/Visual */}
-              <div className="relative">
-                <div className="bg-gradient-to-br from-purple-100 via-blue-50 to-cyan-50 rounded-3xl p-8 shadow-2xl border border-purple-100">
-                  <div className="bg-white rounded-2xl p-6 shadow-lg">
-                    <div className="flex items-center space-x-3 mb-6">
-                      <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                      <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    </div>
-                    <div className="space-y-4">
-                      <div className="h-4 bg-gradient-to-r from-purple-200 to-blue-200 rounded-full w-3/4"></div>
-                      <div className="h-4 bg-gradient-to-r from-blue-200 to-cyan-200 rounded-full w-1/2"></div>
-                      <div className="h-4 bg-gradient-to-r from-cyan-200 to-purple-200 rounded-full w-2/3"></div>
-                      <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg">
-                        <div className="flex items-center space-x-2">
-                          <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
-                            <Code className="w-4 h-4 text-white" />
-                          </div>
-                          <div className="flex-1">
-                            <div className="h-3 bg-gradient-to-r from-purple-300 to-blue-300 rounded-full w-4/5 mb-2"></div>
-                            <div className="h-2 bg-gray-200 rounded-full w-3/5"></div>
-                          </div>
+              <div className="bg-gray-100 rounded-2xl p-8 shadow-lg">
+                <div className="bg-white rounded-xl p-6 shadow-sm">
+                  <div className="flex items-center space-x-3 mb-6">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                    <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center">
+                          <Code className="w-4 h-4 text-white" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="h-3 bg-gray-300 rounded w-4/5 mb-2"></div>
+                          <div className="h-2 bg-gray-200 rounded w-3/5"></div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                
-                {/* Floating Elements */}
-                <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full opacity-80 animate-bounce"></div>
-                <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-70 animate-pulse"></div>
-                <div className="absolute top-1/2 -right-8 w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full opacity-60 animate-float"></div>
               </div>
             </div>
           </div>
