@@ -233,7 +233,7 @@ const Skills = () => {
                       {selectedSkill.name.charAt(0)}
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-gray-900">{selectedSkill.name}</h3>
+                      <h3 className="text-2xl font-bold bg-gradient-to-r from-[#f5f3fc] via-[#d2cdb9] to-[#92a378] bg-clip-text text-transparent">{selectedSkill.name}</h3>
                       <p className="text-gray-600">
                         {getSkillCategory(selectedSkill.name)?.name} Technology
                       </p>
