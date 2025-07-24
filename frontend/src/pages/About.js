@@ -211,7 +211,7 @@ const About = () => {
       <section className="py-20 bg-accent/5">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center bg-gradient-to-r from-[#1e1a2e] via-[#5c4f6e] to-[#b3A8C9] bg-clip-text text-transparent">
               My Journey
             </h2>
             
