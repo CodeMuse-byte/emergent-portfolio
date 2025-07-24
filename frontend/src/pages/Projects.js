@@ -328,7 +328,7 @@ const Projects = () => {
               
               {/* Enhanced Game Header with 3D depth */}
               <div className="text-center mb-12 animate-blockBuildUp transform-gpu preserve-3d">
-                <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4 tracking-wider animate-pulse drop-shadow-2xl" 
+                <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#f5f3fc] via-[#d2cdb9] to-[#92a378] bg-clip-text text-transparent mb-4 tracking-wider animate-pulse drop-shadow-2xl" 
                     style={{ textShadow: '0 0 30px rgba(168, 85, 247, 0.8), 0 4px 8px rgba(0,0,0,0.8)' }}>
                   {selectedProject.title.toUpperCase()}
                 </h1>
