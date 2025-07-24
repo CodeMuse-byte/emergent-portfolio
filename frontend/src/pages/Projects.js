@@ -495,7 +495,7 @@ const Projects = () => {
       <div className="relative z-10">
         {/* Hero Section */}
         <section className="py-20 text-center relative">
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse drop-shadow-2xl" 
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-[#1e1a2e] via-[#5c4f6e] to-[#b3A8C9] bg-clip-text text-transparent animate-pulse drop-shadow-2xl" 
               style={{ textShadow: '0 0 30px rgba(168, 85, 247, 0.8)' }}>
             My Projects
           </h1>
