@@ -190,7 +190,7 @@ const Skills = () => {
       <div className="relative overflow-hidden bg-gradient-to-br from-rose-white via-pink-50 to-purple-100">
         <div className="container mx-auto px-4 py-16 lg:py-20">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-[#1e1a2e] via-[#5c4f6e] to-[#b3A8C9] bg-clip-text text-transparent">
               Interactive Skills Network
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
